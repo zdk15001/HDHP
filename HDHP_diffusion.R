@@ -204,7 +204,7 @@ ggplot(
 
 # Industry 7: Insurance carriers
 ggplot(
-  hHD_participate_percent_industry %>%
+  HD_participate_percent_industry %>%
     filter(industry == "Insurance carriers"),
   aes(x = year, y = estimate)
 ) +
