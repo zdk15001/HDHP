@@ -1,2 +1,2 @@
-# HDHP_diffusion_index
-Creation of diffusion index for HDHP plans across industry, occupation, wage, etc
+# HDHP
+Repo for work examinining the diffusion of high-deductible healthcare plans over time using data from the KFF.
