@@ -8,7 +8,7 @@
 ####################################################################################
 ############              Pre-Analysis: settings, packages, and data    ############
 ####################################################################################
-### NOTE: Cloned from Github
+### NOTE: Cloned from Github - data kept on google drive
 
 ### Settings + Packages
 setwd("G:/My Drive/EDU_SYNC/Research/Active/HDHP/work")
