@@ -11,8 +11,12 @@
 ### NOTE: Cloned from Github - data kept on google drive
 
 ### Settings + Packages
+# Kline's command to set WD
 setwd("G:/My Drive/EDU_SYNC/Research/Active/HDHP/work")
-# test if working directory is same for all collaborators on Github
+
+# Mina's command to set WD
+
+# Daniel's command to set WD
 
 #install.packages("dplyr")
 #install.packages("readxl")
