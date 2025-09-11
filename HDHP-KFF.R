@@ -28,11 +28,5 @@ library(readxl)
 library(janitor)
 library(ggplot2)
 
-#Mina and Daniel Test
-# Mina test 2
-#Daniel test 3
-
-ytdyuitgiyulfyuil
-
-
-# kline is testing
+# load the data
+kff <- read_excel("HDHP-KFF.xlsx") 
