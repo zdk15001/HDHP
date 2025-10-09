@@ -55,13 +55,103 @@ kff_2017 <- read_sav('health benefits 2017.sav')
 kff_2018 <- read_sav('health benefits 2018.sav')
 kff_2019 <- read_sav('health benefits 2019.sav')
 kff_2020 <- read_sav('health benefits 2020.sav')
-kff_2021 <- read.csv('health benefits 2021.sav')
-kff_2022 <- read.csv('2022-11-28 health benefits 2022.sav')
+kff_2021 <- read.csv('health benefits 2021.sav') 
+kff_2022 <- read.csv('2022-11-28 health benefits 2022.sav') 
 kff_2023 <- read.csv('2023-10-17 health benefits 2023.sav')
 kff_2024 <- read.csv('2022-10-10 health benefits 2024.sav')
 
 
+### IN the working directory, 2021 and forward are CSV files. Update or fix.
 
 
 
 
+
+
+####################################################################################
+############              Phase 1: variable Cleaning        ############
+####################################################################################
+
+# follow three steps of cleaning data for each variable for each year
+# step 1: examine the variable
+# Step 2: Clean the variable (always create a new variable!)
+# Step 3: Confirm cleaning was correct
+
+
+###### Clean Percent of Workers with Health Benefits Covered in HDHP
+
+### 2013
+# Step 1: Examine variable
+summary(kff_2013$b12e)
+# Step 2: Clean variable (always create new variable!)
+kff_2013$percent_hdhp <- kff_2013$b12e
+
+# step 3: Confirm correct cleaning
+kff_2013$test_percent_hdhp <- kff_2013$b12e - kff_2013$percent_hdhp
+summary(kff_2013$test_percent_hdhp)
+
+### 2014
+# Step 1: Examine variable
+summary(kff_2014$b12e)
+
+# Step 2: Clean variable (always create new variable!)
+kff_2014$percent_hdhp <- kff_2014$b12e
+
+# step 3: Confirm correct cleaning
+kff_2014$test_percent_hdhp <- kff_2014$b12e - kff_2014$percent_hdhp
+summary(kff_2014$test_percent_hdhp)
+
+
+
+
+
+
+
+
+
+
+###### Clean industry
+# Step 1: Examine variable
+table(kff_2014$industry, useNA = "ifany")
+
+# Step 2: Clean variable (always create new variable!)
+kff_2014$construction <- ifelse(kff_2014$industry == 2, 1, 0)
+kff_2014$manufacturing <- ifelse(kff_2014$industry == 3, 1, 0)
+kff_2014$transportation <- ifelse(kff_2014$industry == 4, 1, 0)
+kff_2014$wholesale <- ifelse(kff_2014$industry == 5, 1, 0)
+kff_2014$retail <- ifelse(kff_2014$industry == 6, 1, 0)
+kff_2014$financial <- ifelse(kff_2014$industry == 7, 1, 0)
+kff_2014$service <- ifelse(kff_2014$industry == 8, 1, 0)
+kff_2014$government <- ifelse(kff_2014$industry == 9, 1, 0)
+kff_2014$healthcare <- ifelse(kff_2014$industry == 10, 1, 0)
+  
+# step 3: Confirm correct cleaning
+table(kff_2014$industry, kff_2014$construction)
+table(kff_2014$industry, kff_2014$manufacturing)
+table(kff_2014$industry, kff_2014$transportation)
+table(kff_2014$industry, kff_2014$wholesale)
+table(kff_2014$industry, kff_2014$retail)
+table(kff_2014$industry, kff_2014$financial)
+table(kff_2014$industry, kff_2014$service)
+table(kff_2014$industry, kff_2014$government)
+table(kff_2014$industry, kff_2014$healthcare)
+
+
+
+
+
+####################################################################################
+############              Phase 2: Data Merging        ############
+####################################################################################
+
+# Step2 1: Complete case information for each year (drop all missing cases)
+
+
+
+
+# Step 2: Create Wide Dataset merging all years
+
+
+
+
+# Step 3: Create Long Dataset merging all years
