@@ -144,14 +144,29 @@ table(kff_2014$industry, kff_2014$healthcare)
 ############              Phase 2: Data Merging        ############
 ####################################################################################
 
-# Step2 1: Complete case information for each year (drop all missing cases)
+# Step1: Complete case information for each year (drop all missing cases)
+
+my_varlist <- c("percent_hdhp", "construction", "manufacturing", "transportation")
+
+
+### STEP 2: create a new dataset with only your variables and complete case
+my_kff_2014 <- kff_2014 %>%
+  select(all_of(my_varlist)) %>%
+  filter(complete.cases(.))
+
+my_kff_2015 <- kff_2015 %>%
+  select(all_of(my_varlist)) %>%
+  filter(complete.cases(.))
+
+### STEP 3: Gather Summary Statistics and confirm valid dataset construction
+describe(my_kff_2014)
+describe(my_kff_2015)
+
+
+
+# Step 4: Create Wide Dataset merging all years
 
 
 
 
-# Step 2: Create Wide Dataset merging all years
-
-
-
-
-# Step 3: Create Long Dataset merging all years
+# Step 5: Create Long Dataset merging all years
