@@ -15,7 +15,7 @@
 setwd("G:/My Drive/EDU_SYNC/Research/Active/HDHP/work")
 
 # Mina's command to set WD
-setwd("~/Google Drive/My Drive/HDHP MUSE 2025/KFF Data/Data")
+setwd("~/Library/CloudStorage/GoogleDrive-gugliem2@tcnj.edu/My Drive/HDHP")
 
 # Daniel's command to set WD
 setwd("G:/.shortcut-targets-by-id/14oLkrWtHW1NzX87aL0DxDGo_9Ysj-XBQ/HDHP/work")
