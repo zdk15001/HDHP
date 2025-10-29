@@ -79,7 +79,7 @@ kff_2024 <- read.csv('2022-10-10 health benefits 2024.csv')
 # Step 3: Confirm cleaning was correct
 
 
-###### Clean Percent of Workers with Health Benefits Covered in HDHP
+###### Clean Percent of Workers with Health Benefits Covered in HDHP #####
 
 ### 2013
 # Step 1: Examine variable
@@ -105,13 +105,191 @@ summary(kff_2014$test_percent_hdhp)
 
 
 
+###### Clean industry #####
+
+### 2003 ###
+##industry##
+# Step 1: Examine variable
+table(kff_2003$industry, useNA = "ifany")
+
+# Step 2: Clean variable (always create new variable!)
+kff_2003$mining <- ifelse(kff_2003$industry == 1, 1, 0)
+kff_2003$construction <- ifelse(kff_2003$industry == 2, 1, 0)
+kff_2003$manufacturing <- ifelse(kff_2003$industry == 3, 1, 0)
+kff_2003$transportation <- ifelse(kff_2003$industry == 4, 1, 0)
+kff_2003$wholesale <- ifelse(kff_2003$industry == 5, 1, 0)
+kff_2003$retail <- ifelse(kff_2003$industry == 6, 1, 0)
+kff_2003$financial <- ifelse(kff_2003$industry == 7, 1, 0)
+kff_2003$service <- ifelse(kff_2003$industry == 8, 1, 0)
+kff_2003$government <- ifelse(kff_2003$industry == 9, 1, 0)
+kff_2003$healthcare <- ifelse(kff_2003$industry == 10, 1, 0)
+
+# step 3: Confirm correct cleaning
+table(kff_2003$industry, kff_2003$mining)
+table(kff_2003$industry, kff_2003$construction)
+table(kff_2003$industry, kff_2003$manufacturing)
+table(kff_2003$industry, kff_2003$transportation)
+table(kff_2003$industry, kff_2003$wholesale)
+table(kff_2003$industry, kff_2003$retail)
+table(kff_2003$industry, kff_2003$financial)
+table(kff_2003$industry, kff_2003$service)
+table(kff_2003$industry, kff_2003$government)
+table(kff_2003$industry, kff_2003$healthcare)
+
+
+
+### 2004 ###
+##industry##
+# Step 1: Examine variable
+table(kff_2004$industry, useNA = "ifany")
+
+# Step 2: Clean variable (always create new variable!)
+kff_2004$mining <- ifelse(kff_2004$industry == 1, 1, 0)
+kff_2004$construction <- ifelse(kff_2004$industry == 2, 1, 0)
+kff_2004$manufacturing <- ifelse(kff_2004$industry == 3, 1, 0)
+kff_2004$transportation <- ifelse(kff_2004$industry == 4, 1, 0)
+kff_2004$wholesale <- ifelse(kff_2004$industry == 5, 1, 0)
+kff_2004$retail <- ifelse(kff_2004$industry == 6, 1, 0)
+kff_2004$financial <- ifelse(kff_2004$industry == 7, 1, 0)
+kff_2004$service <- ifelse(kff_2004$industry == 8, 1, 0)
+kff_2004$government <- ifelse(kff_2004$industry == 9, 1, 0)
+kff_2004$healthcare <- ifelse(kff_2004$industry == 10, 1, 0)
+
+# step 3: Confirm correct cleaning
+table(kff_2004$industry, kff_2004$mining)
+table(kff_2004$industry, kff_2004$construction)
+table(kff_2004$industry, kff_2004$manufacturing)
+table(kff_2004$industry, kff_2004$transportation)
+table(kff_2004$industry, kff_2004$wholesale)
+table(kff_2004$industry, kff_2004$retail)
+table(kff_2004$industry, kff_2004$financial)
+table(kff_2004$industry, kff_2004$service)
+table(kff_2004$industry, kff_2004$government)
+table(kff_2004$industry, kff_2004$healthcare)
+
+
+
+### 2005 ###
+##industry##
+# Step 1: Examine variable
+table(kff_2005$industry, useNA = "ifany")
+
+# Step 2: Clean variable (always create new variable!)
+kff_2005$mining <- ifelse(kff_2005$industry == 1, 1, 0)
+kff_2005$construction <- ifelse(kff_2005$industry == 2, 1, 0)
+kff_2005$manufacturing <- ifelse(kff_2005$industry == 3, 1, 0)
+kff_2005$transportation <- ifelse(kff_2005$industry == 4, 1, 0)
+kff_2005$wholesale <- ifelse(kff_2005$industry == 5, 1, 0)
+kff_2005$retail <- ifelse(kff_2005$industry == 6, 1, 0)
+kff_2005$financial <- ifelse(kff_2005$industry == 7, 1, 0)
+kff_2005$service <- ifelse(kff_2005$industry == 8, 1, 0)
+kff_2005$government <- ifelse(kff_2005$industry == 9, 1, 0)
+kff_2005$healthcare <- ifelse(kff_2005$industry == 10, 1, 0)
+
+# step 3: Confirm correct cleaning
+table(kff_2005$industry, kff_2005$mining)
+table(kff_2005$industry, kff_2005$construction)
+table(kff_2005$industry, kff_2005$manufacturing)
+table(kff_2005$industry, kff_2005$transportation)
+table(kff_2005$industry, kff_2005$wholesale)
+table(kff_2005$industry, kff_2005$retail)
+table(kff_2005$industry, kff_2005$financial)
+table(kff_2005$industry, kff_2005$service)
+table(kff_2005$industry, kff_2005$government)
+table(kff_2005$industry, kff_2005$healthcare)
+
+
+
+### 2006 ###
+# Step 1: Examine variable
+table(kff_2006$industry, useNA = "ifany")
+
+# Step 2: Clean variable (always create new variable!)
+kff_2006$mining <- ifelse(kff_2006$industry == 1, 1, 0)
+kff_2006$construction <- ifelse(kff_2006$industry == 2, 1, 0)
+kff_2006$manufacturing <- ifelse(kff_2006$industry == 3, 1, 0)
+kff_2006$transportation <- ifelse(kff_2006$industry == 4, 1, 0)
+kff_2006$wholesale <- ifelse(kff_2006$industry == 5, 1, 0)
+kff_2006$retail <- ifelse(kff_2006$industry == 6, 1, 0)
+kff_2006$financial <- ifelse(kff_2006$industry == 7, 1, 0)
+kff_2006$service <- ifelse(kff_2006$industry == 8, 1, 0)
+kff_2006$government <- ifelse(kff_2006$industry == 9, 1, 0)
+kff_2006$healthcare <- ifelse(kff_2006$industry == 10, 1, 0)
+
+# step 3: Confirm correct cleaning
+table(kff_2006$industry, kff_2006$mining)
+table(kff_2006$industry, kff_2006$construction)
+table(kff_2006$industry, kff_2006$manufacturing)
+table(kff_2006$industry, kff_2006$transportation)
+table(kff_2006$industry, kff_2006$wholesale)
+table(kff_2006$industry, kff_2006$retail)
+table(kff_2006$industry, kff_2006$financial)
+table(kff_2006$industry, kff_2006$service)
+table(kff_2006$industry, kff_2006$government)
+table(kff_2006$industry, kff_2006$healthcare)
+
+### 2007 ###
+# Step 1: Examine variable
+table(kff_2007$industry, useNA = "ifany")
+
+# Step 2: Clean variable (always create new variable!)
+kff_2007$mining <- ifelse(kff_2007$industry == 1, 1, 0)
+kff_2007$construction <- ifelse(kff_2007$industry == 2, 1, 0)
+kff_2007$manufacturing <- ifelse(kff_2007$industry == 3, 1, 0)
+kff_2007$transportation <- ifelse(kff_2007$industry == 4, 1, 0)
+kff_2007$wholesale <- ifelse(kff_2007$industry == 5, 1, 0)
+kff_2007$retail <- ifelse(kff_2007$industry == 6, 1, 0)
+kff_2007$financial <- ifelse(kff_2007$industry == 7, 1, 0)
+kff_2007$service <- ifelse(kff_2007$industry == 8, 1, 0)
+kff_2007$government <- ifelse(kff_2007$industry == 9, 1, 0)
+kff_2007$healthcare <- ifelse(kff_2007$industry == 10, 1, 0)
+
+# step 3: Confirm correct cleaning
+table(kff_2007$industry, kff_2007$mining)
+table(kff_2007$industry, kff_2007$construction)
+table(kff_2007$industry, kff_2007$manufacturing)
+table(kff_2007$industry, kff_2007$transportation)
+table(kff_2007$industry, kff_2007$wholesale)
+table(kff_2007$industry, kff_2007$retail)
+table(kff_2007$industry, kff_2007$financial)
+table(kff_2007$industry, kff_2007$service)
+table(kff_2007$industry, kff_2007$government)
+table(kff_2007$industry, kff_2007$healthcare)
+
+### 2008 ###
+# Step 1: Examine variable
+table(kff_2008$industry, useNA = "ifany")
+
+# Step 2: Clean variable (always create new variable!)
+kff_2008$mining <- ifelse(kff_2008$industry == 1, 1, 0)
+kff_2008$construction <- ifelse(kff_2008$industry == 2, 1, 0)
+kff_2008$manufacturing <- ifelse(kff_2008$industry == 3, 1, 0)
+kff_2008$transportation <- ifelse(kff_2008$industry == 4, 1, 0)
+kff_2008$wholesale <- ifelse(kff_2008$industry == 5, 1, 0)
+kff_2008$retail <- ifelse(kff_2008$industry == 6, 1, 0)
+kff_2008$financial <- ifelse(kff_2008$industry == 7, 1, 0)
+kff_2008$service <- ifelse(kff_2008$industry == 8, 1, 0)
+kff_2008$government <- ifelse(kff_2008$industry == 9, 1, 0)
+kff_2008$healthcare <- ifelse(kff_2008$industry == 10, 1, 0)
+
+# step 3: Confirm correct cleaning
+table(kff_2008$industry, kff_2008$mining)
+table(kff_2008$industry, kff_2008$construction)
+table(kff_2008$industry, kff_2008$manufacturing)
+table(kff_2008$industry, kff_2008$transportation)
+table(kff_2008$industry, kff_2008$wholesale)
+table(kff_2008$industry, kff_2008$retail)
+table(kff_2008$industry, kff_2008$financial)
+table(kff_2008$industry, kff_2008$service)
+table(kff_2008$industry, kff_2008$government)
+table(kff_2008$industry, kff_2008$healthcare)
 
 
 
 
 
 
-###### Clean industry
+## 2014 ##
 # Step 1: Examine variable
 table(kff_2014$industry, useNA = "ifany")
 
