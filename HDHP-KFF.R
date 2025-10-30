@@ -284,9 +284,144 @@ table(kff_2008$industry, kff_2008$service)
 table(kff_2008$industry, kff_2008$government)
 table(kff_2008$industry, kff_2008$healthcare)
 
+### 2009 ###
+# Step 1: Examine variable
+table(kff_2009$industry, useNA = "ifany")
+
+# Step 2: Clean variable (always create new variable!)
+kff_2009$mining <- ifelse(kff_2009$industry == 1, 1, 0)
+kff_2009$construction <- ifelse(kff_2009$industry == 2, 1, 0)
+kff_2009$manufacturing <- ifelse(kff_2009$industry == 3, 1, 0)
+kff_2009$transportation <- ifelse(kff_2009$industry == 4, 1, 0)
+kff_2009$wholesale <- ifelse(kff_2009$industry == 5, 1, 0)
+kff_2009$retail <- ifelse(kff_2009$industry == 6, 1, 0)
+kff_2009$financial <- ifelse(kff_2009$industry == 7, 1, 0)
+kff_2009$service <- ifelse(kff_2009$industry == 8, 1, 0)
+kff_2009$government <- ifelse(kff_2009$industry == 9, 1, 0)
+kff_2009$healthcare <- ifelse(kff_2009$industry == 10, 1, 0)
+
+# step 3: Confirm correct cleaning
+table(kff_2009$industry, kff_2009$mining)
+table(kff_2009$industry, kff_2009$construction)
+table(kff_2009$industry, kff_2009$manufacturing)
+table(kff_2009$industry, kff_2009$transportation)
+table(kff_2009$industry, kff_2009$wholesale)
+table(kff_2009$industry, kff_2009$retail)
+table(kff_2009$industry, kff_2009$financial)
+table(kff_2009$industry, kff_2009$service)
+table(kff_2009$industry, kff_2009$government)
+table(kff_2009$industry, kff_2009$healthcare)
 
 
+### 2010 ###
+# Step 1: Examine variable
+table(kff_2010$industry, useNA = "ifany")
 
+# Step 2: Clean variable (always create new variable!)
+kff_2010$mining <- ifelse(kff_2010$industry == 1, 1, 0)
+kff_2010$construction <- ifelse(kff_2010$industry == 2, 1, 0)
+kff_2010$manufacturing <- ifelse(kff_2010$industry == 3, 1, 0)
+kff_2010$transportation <- ifelse(kff_2010$industry == 4, 1, 0)
+kff_2010$wholesale <- ifelse(kff_2010$industry == 5, 1, 0)
+kff_2010$retail <- ifelse(kff_2010$industry == 6, 1, 0)
+kff_2010$financial <- ifelse(kff_2010$industry == 7, 1, 0)
+kff_2010$service <- ifelse(kff_2010$industry == 8, 1, 0)
+kff_2010$government <- ifelse(kff_2010$industry == 9, 1, 0)
+kff_2010$healthcare <- ifelse(kff_2010$industry == 10, 1, 0)
+
+# step 3: Confirm correct cleaning
+table(kff_2010$industry, kff_2010$mining)
+table(kff_2010$industry, kff_2010$construction)
+table(kff_2010$industry, kff_2010$manufacturing)
+table(kff_2010$industry, kff_2010$transportation)
+table(kff_2010$industry, kff_2010$wholesale)
+table(kff_2010$industry, kff_2010$retail)
+table(kff_2010$industry, kff_2010$financial)
+table(kff_2010$industry, kff_2010$service)
+table(kff_2010$industry, kff_2010$government)
+table(kff_2010$industry, kff_2010$healthcare)
+
+
+## 2011 ##
+# Step 1: Examine variable
+table(kff_2011$industry, useNA = "ifany")
+
+# Step 2: Clean variable (always create new variable!)
+kff_2011$mining <- ifelse(kff_2011$industry == 1, 1, 0)
+kff_2011$construction <- ifelse(kff_2011$industry == 2, 1, 0)
+kff_2011$manufacturing <- ifelse(kff_2011$industry == 3, 1, 0)
+kff_2011$transportation <- ifelse(kff_2011$industry == 4, 1, 0)
+kff_2011$wholesale <- ifelse(kff_2011$industry == 5, 1, 0)
+kff_2011$retail <- ifelse(kff_2011$industry == 6, 1, 0)
+kff_2011$financial <- ifelse(kff_2011$industry == 7, 1, 0)
+kff_2011$service <- ifelse(kff_2011$industry == 8, 1, 0)
+kff_2011$government <- ifelse(kff_2011$industry == 9, 1, 0)
+kff_2011$healthcare <- ifelse(kff_2011$industry == 10, 1, 0)
+
+# step 3: Confirm correct cleaning
+table(kff_2011$industry, kff_2011$mining)
+table(kff_2011$industry, kff_2011$construction)
+table(kff_2011$industry, kff_2011$manufacturing)
+table(kff_2011$industry, kff_2011$transportation)
+table(kff_2011$industry, kff_2011$wholesale)
+table(kff_2011$industry, kff_2011$retail)
+table(kff_2011$industry, kff_2011$financial)
+table(kff_2011$industry, kff_2011$service)
+table(kff_2011$industry, kff_2011$government)
+table(kff_2011$industry, kff_2011$healthcare)
+
+### 2012 ###
+# Step 1: Examine variable
+table(kff_2012$industry, useNA = "ifany")
+
+# Step 2: Clean variable (always create new variable!)
+kff_2012$AgriMinConst<- ifelse(kff_2012$industry == 2, 1, 0)
+kff_2012$manufacturing <- ifelse(kff_2012$industry == 3, 1, 0)
+kff_2012$transportutilcomms <- ifelse(kff_2012$industry == 4, 1, 0)
+kff_2012$wholesale <- ifelse(kff_2012$industry == 5, 1, 0)
+kff_2012$retail <- ifelse(kff_2012$industry == 6, 1, 0)
+kff_2012$financial <- ifelse(kff_2012$industry == 7, 1, 0)
+kff_2012$service <- ifelse(kff_2012$industry == 8, 1, 0)
+kff_2012$government <- ifelse(kff_2012$industry == 9, 1, 0)
+kff_2012$healthcare <- ifelse(kff_2012$industry == 10, 1, 0)
+
+# step 3: Confirm correct cleaning
+table(kff_2012$industry, kff_2012$AgriMinConst)
+table(kff_2012$industry, kff_2012$manufacturing)
+table(kff_2012$industry, kff_2012$transportutilcomms)
+table(kff_2012$industry, kff_2012$wholesale)
+table(kff_2012$industry, kff_2012$retail)
+table(kff_2012$industry, kff_2012$financial)
+table(kff_2012$industry, kff_2012$service)
+table(kff_2012$industry, kff_2012$government)
+table(kff_2012$industry, kff_2012$healthcare)
+
+
+### 2013 ###
+# Step 1: Examine variable
+table(kff_2013$industry, useNA = "ifany")
+
+# Step 2: Clean variable (always create new variable!)
+kff_2013$AgriMinConst<- ifelse(kff_2013$industry == 2, 1, 0)
+kff_2013$manufacturing <- ifelse(kff_2013$industry == 3, 1, 0)
+kff_2013$transportutilcomms <- ifelse(kff_2013$industry == 4, 1, 0)
+kff_2013$wholesale <- ifelse(kff_2013$industry == 5, 1, 0)
+kff_2013$retail <- ifelse(kff_2013$industry == 6, 1, 0)
+kff_2013$financial <- ifelse(kff_2013$industry == 7, 1, 0)
+kff_2013$service <- ifelse(kff_2013$industry == 8, 1, 0)
+kff_2013$government <- ifelse(kff_2013$industry == 9, 1, 0)
+kff_2013$healthcare <- ifelse(kff_2013$industry == 10, 1, 0)
+
+# step 3: Confirm correct cleaning
+table(kff_2013$industry, kff_2013$AgriMinConst)
+table(kff_2013$industry, kff_2013$manufacturing)
+table(kff_2013$industry, kff_2013$transportutilcomms)
+table(kff_2013$industry, kff_2013$wholesale)
+table(kff_2013$industry, kff_2013$retail)
+table(kff_2013$industry, kff_2013$financial)
+table(kff_2013$industry, kff_2013$service)
+table(kff_2013$industry, kff_2013$government)
+table(kff_2013$industry, kff_2013$healthcare)
 
 
 ## 2014 ##
@@ -316,6 +451,7 @@ table(kff_2014$industry, kff_2014$government)
 table(kff_2014$industry, kff_2014$healthcare)
 
 
+###### Clean for size (of industry) #####
 
 
 
