@@ -61,6 +61,8 @@ kff_2022 <- read.csv('2022-11-28 health benefits 2022.csv')
 kff_2023 <- read.csv('2023-10-17 health benefits 2023.csv')
 kff_2024 <- read.csv('2022-10-10 health benefits 2024.csv')
 
+#### ERROR ERROR ERROR: 2024 not loading
+
 
 ### IN the working directory, 2021 and forward are CSV files. Update or fix.
 
@@ -113,8 +115,7 @@ summary(kff_2014$test_percent_hdhp)
 table(kff_2003$industry, useNA = "ifany")
 
 # Step 2: Clean variable (always create new variable!)
-kff_2003$mining <- ifelse(kff_2003$industry == 1, 1, 0)
-kff_2003$construction <- ifelse(kff_2003$industry == 2, 1, 0)
+kff_2003$AgriMinConst <- ifelse(kff_2003$industry == 1 | kff_2003$industry == 2, 1, 0)
 kff_2003$manufacturing <- ifelse(kff_2003$industry == 3, 1, 0)
 kff_2003$transportation <- ifelse(kff_2003$industry == 4, 1, 0)
 kff_2003$wholesale <- ifelse(kff_2003$industry == 5, 1, 0)
@@ -125,8 +126,7 @@ kff_2003$government <- ifelse(kff_2003$industry == 9, 1, 0)
 kff_2003$healthcare <- ifelse(kff_2003$industry == 10, 1, 0)
 
 # step 3: Confirm correct cleaning
-table(kff_2003$industry, kff_2003$mining)
-table(kff_2003$industry, kff_2003$construction)
+table(kff_2003$industry, kff_2003$AgriMinConst)
 table(kff_2003$industry, kff_2003$manufacturing)
 table(kff_2003$industry, kff_2003$transportation)
 table(kff_2003$industry, kff_2003$wholesale)
@@ -429,15 +429,15 @@ table(kff_2013$industry, kff_2013$healthcare)
 table(kff_2014$industry, useNA = "ifany")
 
 # Step 2: Clean variable (always create new variable!)
-kff_2014$construction <- ifelse(kff_2014$industry == 2, 1, 0)
-kff_2014$manufacturing <- ifelse(kff_2014$industry == 3, 1, 0)
-kff_2014$transportation <- ifelse(kff_2014$industry == 4, 1, 0)
-kff_2014$wholesale <- ifelse(kff_2014$industry == 5, 1, 0)
-kff_2014$retail <- ifelse(kff_2014$industry == 6, 1, 0)
-kff_2014$financial <- ifelse(kff_2014$industry == 7, 1, 0)
-kff_2014$service <- ifelse(kff_2014$industry == 8, 1, 0)
-kff_2014$government <- ifelse(kff_2014$industry == 9, 1, 0)
-kff_2014$healthcare <- ifelse(kff_2014$industry == 10, 1, 0)
+kff_2014$construction    <- ifelse(kff_2014$industry == 2,  1, 0)
+kff_2014$manufacturing   <- ifelse(kff_2014$industry == 3,  1, 0)
+kff_2014$transportation  <- ifelse(kff_2014$industry == 4,  1, 0)
+kff_2014$wholesale       <- ifelse(kff_2014$industry == 5,  1, 0)
+kff_2014$retail          <- ifelse(kff_2014$industry == 6,  1, 0)
+kff_2014$financial       <- ifelse(kff_2014$industry == 7,  1, 0)
+kff_2014$service         <- ifelse(kff_2014$industry == 8,  1, 0)
+kff_2014$government      <- ifelse(kff_2014$industry == 9,  1, 0)
+kff_2014$healthcare      <- ifelse(kff_2014$industry == 10, 1, 0)
   
 # step 3: Confirm correct cleaning
 table(kff_2014$industry, kff_2014$construction)
@@ -452,6 +452,38 @@ table(kff_2014$industry, kff_2014$healthcare)
 
 
 ###### Clean for size (of industry) #####
+
+### 2003
+
+# Step 1: Examine the Variable
+table(kff_2003$size)
+
+# Step 2: Clean the variable to create small, medium, and large firms
+kff_2003$small_firm    <- ifelse(kff_2003$size <= 3,                      1, 0)
+kff_2003$medium_firm   <- ifelse(kff_2003$size >  3 & kff_2003$size < 6,  1, 0)
+kff_2003$large_firm    <- ifelse(kff_2003$size == 6,                      1, 0)
+
+# Combine dummies into a single ordered factor
+kff_2003$firm_size <- with(
+  kff_2003,
+  factor(
+    ifelse(small_firm         == 1,  "Small",
+           ifelse(medium_firm == 1,  "Medium",
+           ifelse(large_firm  == 1,  "Large", NA_character_))),
+    levels = c("Small", "Medium", "Large"),
+    ordered = TRUE
+  )
+)
+
+# Step 3: Confirm
+# dummy variables
+table(kff_2003$size, kff_2003$small_firm)
+table(kff_2003$size, kff_2003$medium_firm)
+table(kff_2003$size, kff_2003$large_firm)
+
+# categorical variable
+table(kff_2003$size, kff_2003$firm_size)
+
 
 
 
