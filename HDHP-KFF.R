@@ -81,6 +81,23 @@ kff_2024 <- read.csv('2022-10-10 health benefits 2024.csv')
 # Step 3: Confirm cleaning was correct
 
 
+###### Firm Offers High Deductible Health Plans #####
+### 2003
+#Step 1: Examine variable
+summary(kff_2003$j3) 
+
+# Step 2: Clean variable (always create new variable!)
+kff_2003$offers <- ifelse(kff_2003$j3 == 1, 1, 0)
+kff_2003$doesnt_offer <- ifelse(kff_2003$j3 == 2,1,0)
+kff_2003$unsure_of_offer <- ifelse(kff_2003$j3 ==3,1,0)
+
+# step 3: Confirm correct cleaning
+table(kff_2003$j3, kff_2003$offers)
+table(kff_2003$j3, kff_2003$doesnt_offer)
+table(kff_2003$j3, kff_2003$unsure_of_offer)
+
+
+
 ###### Clean Percent of Workers with Health Benefits Covered in HDHP #####
 
 ### 2013
