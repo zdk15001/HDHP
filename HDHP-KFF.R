@@ -97,8 +97,103 @@ table(kff_2003$j3, kff_2003$doesnt_offer)
 table(kff_2003$j3, kff_2003$unsure_of_offer)
 
 
+### 2004
+#Step 1: Examine variable
+summary(kff_2004$j3) 
+
+# Step 2: Clean variable (always create new variable!)
+kff_2004$offers <- ifelse(kff_2004$j3 == 1, 1, 0)
+kff_2004$doesnt_offer <- ifelse(kff_2004$j3 == 2,1,0)
+kff_2004$unsure_of_offer <- ifelse(kff_2004$j3 ==3,1,0)
+
+# step 3: Confirm correct cleaning
+table(kff_2004$j3, kff_2004$offers)
+table(kff_2004$j3, kff_2004$doesnt_offer)
+table(kff_2004$j3, kff_2004$unsure_of_offer)
+
+### 2005
+#Step 1: Examine variable
+summary(kff_2005$b8e) 
+
+# Step 2: Clean variable (always create new variable!)
+kff_2005$offers <- ifelse(kff_2005$b8e == 1, 1, 0)
+kff_2005$doesnt_offer <- ifelse(kff_2005$b8e == 2,1,0)
+
+# step 3: Confirm correct cleaning
+table(kff_2005$b8e, kff_2005$offers)
+table(kff_2005$b8e, kff_2005$doesnt_offer)
+
+
+###2006
+#Step 1: Examine variable
+summary(kff_2006$b8e) 
+
+# Step 2: Clean variable (always create new variable!)
+kff_2006$offers <- ifelse(kff_2006$b8e == 1, 1, 0)
+kff_2006$doesnt_offer <- ifelse(kff_2006$b8e == 2,1,0)
+
+# step 3: Confirm correct cleaning
+table(kff_2006$b8e, kff_2006$offers)
+table(kff_2006$b8e, kff_2006$doesnt_offer)
+
+
+
+
+
+
+###### Likelihood of Making a Change in the Next Year: Offer High Deductible Health Plan #####
+
+###2004 (Note: defined as a deductible of more than $1000.)
+#step 1: examine variable
+summary(kff_2004$k11h)
+
+#step 2: clean variable by creating a new variable
+kff_2004$very_likely_next_year <- ifelse(kff_2004$k11h == 1,1,0)
+kff_2004$sm_likely_next_year <- ifelse(kff_2004$k11h == 2,1,0)
+kff_2004$not_too_likely_next_year <- ifelse(kff_2004$k11h == 3,1,0)
+kff_2004$not_at_all_likely_next_year <- ifelse(kff_2004$k11h == 4,1,0)
+kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
+
+#confirm correct cleaning
+table(kff_2004$k11h, kff_2004$very_likely_next_year)
+table(kff_2004$k11h, kff_2004$sm_likely_next_year)
+table(kff_2004$k11h, Kff_2004$not_too_likely_next_year)
+table(kff_2004$k11h, kff_2004$not_at_all_likely_next_year)
+table(kff_2004$k11h, kff_2004$dk_how_likely_next_year)
+
+
+###2005 (Note: defined as an annual deductible of at least $1,000 for single coverage and $2,000 for family coverage, with a health reimbursement arrangement in the next year?)
+#step 1: examine variable
+summary(kff_2004$k11h)
+
+#step 2: clean variable by creating a new variable
+kff_2004$very_likely_next_year <- ifelse(kff_2004$k11h == 1,1,0)
+kff_2004$sm_likely_next_year <- ifelse(kff_2004$k11h == 2,1,0)
+kff_2004$not_too_likely_next_year <- ifelse(kff_2004$k11h == 3,1,0)
+kff_2004$not_at_all_likely_next_year <- ifelse(kff_2004$k11h == 4,1,0)
+kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
+
+#confirm correct cleaning
+table(kff_2004$k11h, kff_2004$very_likely_next_year)
+table(kff_2004$k11h, kff_2004$sm_likely_next_year)
+table(kff_2004$k11h, Kff_2004$not_too_likely_next_year)
+table(kff_2004$k11h, kff_2004$not_at_all_likely_next_year)
+table(kff_2004$k11h, kff_2004$dk_how_likely_next_year)
+
+
 
 ###### Clean Percent of Workers with Health Benefits Covered in HDHP #####
+
+### 2006
+#examine variable by showing summary stats (min, 1st quartile, median, mean, 3rd quartile, max, and number of missing values (NA))
+summary(kff_2006$b12e)
+
+kff_2006$percent_hdhp <- kff_2006$b12e #clean data by creating new variable 
+
+#confirm correct cleaning by checking that the new variable matches the original (difference should be 0 for all observations)
+kff_2006$test_percent_hdhp <- kff_2006$b12e - kff_2006$percent_hdhp
+summary(kff_2006$test_percent_hdhp) #print summary stats
+
 
 ### 2013
 # Step 1: Examine variable
