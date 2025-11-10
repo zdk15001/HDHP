@@ -85,7 +85,6 @@ kff_2024 <- read.csv('2022-10-10 health benefits 2024.csv')
 ### 2003
 #Step 1: Examine variable
 summary(kff_2003$j3) 
-table(kff_2003$j3, useNA = "ifany") 
 
 # Step 2: Clean variable (always create new variable!)
 kff_2003$offers <- ifelse(kff_2003$j3 == 1, 1, 0)
@@ -114,7 +113,7 @@ table(kff_2004$j3, kff_2004$unsure_of_offer)
 
 ### 2005
 #Step 1: Examine variable
-summary(kff_2005$b8e) 
+table(kff_2005$b8e) 
 
 # Step 2: Clean variable (always create new variable!)
 kff_2005$offers <- ifelse(kff_2005$b8e == 1, 1, 0)
@@ -137,17 +136,69 @@ kff_2006$doesnt_offer <- ifelse(kff_2006$b8e == 2,1,0)
 table(kff_2006$b8e, kff_2006$offers)
 table(kff_2006$b8e, kff_2006$doesnt_offer)
 
+##2007
+table(kff_2007$hdhp)
+
+# Step 2: Clean variable (always create new variable!)
+kff_2007$offers <- ifelse(kff_2007$hdhp == 1| kff_2007$hdhp == 2, 1, 0) #where 1 is HDHP with HRA and 2 is HDHP with HSA
+kff_2007$doesnt_offer <- ifelse(kff_2007$hdhp == 3,1,0)
+
+# step 3: Confirm correct cleaning
+table(kff_2007$hdhp, kff_2007$offers)
+table(kff_2007$hdhp, kff_2007$doesnt_offer)
+
+#2008
+table(kff_2008$b8e)
+
+# Step 2: Clean variable (always create new variable!)
+kff_2008$offers <- ifelse(kff_2008$b8e == 1, 1, 0)
+kff_2008$doesnt_offer <- ifelse(kff_2008$b8e == 2,1,0)
+
+# step 3: Confirm correct cleaning
+table(kff_2008$b8e, kff_2008$offers)
+table(kff_2008$b8e, kff_2008$doesnt_offer)
+
+##2009
+table(kff_2009$b8e)
+kff_2009$offers <- ifelse(kff_2009$b8e == 1, 1, 0)
+kff_2009$doesnt_offer <- ifelse(kff_2009$b8e == 2,1,0)
+table(kff_2009$b8e, kff_2009$offers)
+table(kff_2009$b8e, kff_2009$doesnt_offer)
 
 
+##2010
+table(kff_2010$b8e)
+kff_2010$offers <- ifelse(kff_2010$b8e == 1, 1, 0)
+kff_2010$doesnt_offer <- ifelse(kff_2010$b8e == 2,1,0)
+table(kff_2010$b8e, kff_2010$offers)
+table(kff_2010$b8e, kff_2010$doesnt_offer)
 
+##2011
+table(kff_2011$b8e)
+kff_2011$offers <- ifelse(kff_2011$b8e == 1, 1, 0)
+kff_2011$doesnt_offer <- ifelse(kff_2011$b8e == 2,1,0)
+table(kff_2011$b8e, kff_2011$offers)
+table(kff_2011$b8e, kff_2011$doesnt_offer)
 
+##2012
+table(kff_2012$b8e)
+kff_2012$offers <- ifelse(kff_2012$b8e == 1, 1, 0)
+kff_2012$doesnt_offer <- ifelse(kff_2012$b8e == 2,1,0)
+table(kff_2012$b8e, kff_2012$offers)
+table(kff_2012$b8e, kff_2012$doesnt_offer)
+
+##2013
+table(kff_2013$b8e)
+kff_2013$offers <- ifelse(kff_2013$b8e == 1, 1, 0)
+kff_2013$doesnt_offer <- ifelse(kff_2013$b8e == 2,1,0)
+table(kff_2013$b8e, kff_2013$offers)
+table(kff_2013$b8e, kff_2013$doesnt_offer)
 
 ###### Likelihood of Making a Change in the Next Year: Offer High Deductible Health Plan #####
 
 ###2004 (Note: defined as a deductible of more than $1000.)
 #step 1: examine variable
 summary(kff_2004$k11h)
-table(kff_2004$k11h, useNA = "ifany")
 
 #step 2: clean variable by creating a new variable
 kff_2004$very_likely_next_year <- ifelse(kff_2004$k11h == 1,1,0)
@@ -159,14 +210,16 @@ kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
 #confirm correct cleaning
 table(kff_2004$k11h, kff_2004$very_likely_next_year)
 table(kff_2004$k11h, kff_2004$sm_likely_next_year)
-table(kff_2004$k11h, kff_2004$not_too_likely_next_year)
+table(kff_2004$k11h, Kff_2004$not_too_likely_next_year)
 table(kff_2004$k11h, kff_2004$not_at_all_likely_next_year)
 table(kff_2004$k11h, kff_2004$dk_how_likely_next_year)
 
 
+
+
 ###2005 (Note: defined as an annual deductible of at least $1,000 for single coverage and $2,000 for family coverage, with a health reimbursement arrangement in the next year?)
 #step 1: examine variable
-summary(kff_2004$k11h)
+summary(kff_2005$k11h)
 
 #step 2: clean variable by creating a new variable
 kff_2004$very_likely_next_year <- ifelse(kff_2004$k11h == 1,1,0)
@@ -178,7 +231,7 @@ kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
 #confirm correct cleaning
 table(kff_2004$k11h, kff_2004$very_likely_next_year)
 table(kff_2004$k11h, kff_2004$sm_likely_next_year)
-table(kff_2004$k11h, kff_2004$not_too_likely_next_year)
+table(kff_2004$k11h, Kff_2004$not_too_likely_next_year)
 table(kff_2004$k11h, kff_2004$not_at_all_likely_next_year)
 table(kff_2004$k11h, kff_2004$dk_how_likely_next_year)
 
@@ -196,6 +249,51 @@ kff_2006$percent_hdhp <- kff_2006$b12e #clean data by creating new variable
 kff_2006$test_percent_hdhp <- kff_2006$b12e - kff_2006$percent_hdhp
 summary(kff_2006$test_percent_hdhp) #print summary stats
 
+##2007
+summary(kff_2007$b12e)
+
+kff_2007$percent_hdhp <- kff_2007$b12e #clean data by creating new variable 
+
+#confirm correct cleaning by checking that the new variable matches the original (difference should be 0 for all observations)
+kff_2007$test_percent_hdhp <- kff_2007$b12e - kff_2007$percent_hdhp
+summary(kff_2007$test_percent_hdhp) #print summary stats
+
+##2008
+summary(kff_2008$b12e)
+
+kff_2008$percent_hdhp <- kff_2008$b12e #clean data by creating new variable 
+
+#confirm correct cleaning by checking that the new variable matches the original (difference should be 0 for all observations)
+kff_2008$test_percent_hdhp <- kff_2008$b12e - kff_2008$percent_hdhp
+summary(kff_2008$test_percent_hdhp) #print summary stats
+
+##2009
+summary(kff_2009$b12e)
+kff_2009$percent_hdhp <- kff_2009$b12e #clean data by creating new variable
+#confirm correct cleaning by checking that the new variable matches the original (difference should be 0 for all observations)
+kff_2009$test_percent_hdhp <- kff_2009$b12e - kff_2009$percent_hdhp
+summary(kff_2009$test_percent_hdhp) #print summary stats)
+
+##2010
+summary(kff_2010$b12e)
+kff_2010$percent_hdhp <- kff_2010$b12e #clean data by creating new variable
+#confirm correct cleaning by checking that the new variable matches the original (difference should be 0 for all observations)
+kff_2010$test_percent_hdhp <- kff_2010$b12e - kff_2010$percent_hdhp
+summary(kff_2010$test_percent_hdhp) #print summary stats)
+
+##2011
+summary(kff_2011$b12e)
+kff_2011$percent_hdhp <- kff_2011$b12e #clean data by creating new variable
+#confirm correct cleaning by checking that the new variable matches the original (difference should be 0 for all observations)
+kff_2011$test_percent_hdhp <- kff_2011$b12e - kff_2011$percent_hdhp
+summary(kff_2011$test_percent_hdhp) #print summary stats)
+
+##2012
+summary(kff_2012$b12e)
+kff_2012$percent_hdhp <- kff_2012$b12e #clean data by creating new variable
+#confirm correct cleaning by checking that the new variable matches the original (difference should be 0 for all observations)
+kff_2012$test_percent_hdhp <- kff_2012$b12e - kff_2012$percent_hdhp
+summary(kff_2012$test_percent_hdhp) #print summary stats)
 
 ### 2013
 # Step 1: Examine variable
@@ -538,7 +636,7 @@ kff_2014$financial       <- ifelse(kff_2014$industry == 7,  1, 0)
 kff_2014$service         <- ifelse(kff_2014$industry == 8,  1, 0)
 kff_2014$government      <- ifelse(kff_2014$industry == 9,  1, 0)
 kff_2014$healthcare      <- ifelse(kff_2014$industry == 10, 1, 0)
-  
+
 # step 3: Confirm correct cleaning
 table(kff_2014$industry, kff_2014$construction)
 table(kff_2014$industry, kff_2014$manufacturing)
@@ -569,7 +667,7 @@ kff_2003$firm_size <- with(
   factor(
     ifelse(small_firm         == 1,  "Small",
            ifelse(medium_firm == 1,  "Medium",
-           ifelse(large_firm  == 1,  "Large", NA_character_))),
+                  ifelse(large_firm  == 1,  "Large", NA_character_))),
     levels = c("Small", "Medium", "Large"),
     ordered = TRUE
   )
@@ -713,79 +811,14 @@ table(kff_2013$size, kff_2013$large_firm)
 ############              Phase 2: Data Merging        ############
 ####################################################################################
 
-# Step 1: Create variable list that is consistent across all years 
-my_varlist <- c("small_firm", "medium_firm", "large_firm",
-                "MinConst", "manufacturing", "transportutilcomms",
-                "wholesale", "retail", "financial", "service",
-                "government", "healthcare", "offers", "doesnt_offer", "unsure_of_offer")
+# Step2 1: Complete case information for each year (drop all missing cases)
 
 
 
-# Step 2: Complete case information for all variables in varlsit in 2004
-kff_complete_case_2003 <- kff_2003 %>%
-  select(all_of(my_varlist)) %>%
-  filter(complete.cases(.))
 
-kff_complete_case_2004 <- kff_2004 %>%
-  select(all_of(my_varlist)) %>%
-  filter(complete.cases(.))
-
-kff_complete_case_2005 <- kff_2005 %>%
-  select(all_of(my_varlist)) %>%
-  filter(complete.cases(.))
-
-kff_complete_case_2006 <- kff_2006 %>%
-  select(all_of(my_varlist)) %>%
-  filter(complete.cases(.))
-
-kff_complete_case_2007 <- kff_2007 %>%
-  select(all_of(my_varlist)) %>%
-  filter(complete.cases(.))
-
-kff_complete_case_2008 <- kff_2008 %>%
-  select(all_of(my_varlist)) %>%
-  filter(complete.cases(.))
-
-kff_complete_case_2009 <- kff_2009 %>%
-  select(all_of(my_varlist)) %>%
-  filter(complete.cases(.))
-
-kff_complete_case_2010 <- kff_2010 %>%
-  select(all_of(my_varlist)) %>%
-  filter(complete.cases(.))
-
-kff_complete_case_2011 <- kff_2011 %>%
-  select(all_of(my_varlist)) %>%
-  filter(complete.cases(.))
-
-kff_complete_case_2012 <- kff_2012 %>%
-  select(all_of(my_varlist)) %>%
-  filter(complete.cases(.))
-
-kff_complete_case_2013 <- kff_2013 %>%
-  select(all_of(my_varlist)) %>%
-  filter(complete.cases(.))
-
-kff_complete_case_2014 <- kff_2014 %>%
-  select(all_of(my_varlist)) %>%
-  filter(complete.cases(.))
-
+# Step 2: Create Wide Dataset merging all years
 
 
 
 
 # Step 3: Create Long Dataset merging all years
-kff_wide_all_years <- bind_rows(
-  kff_complete_case_2003 %>% mutate(year = 2003),
-  kff_complete_case_2004 %>% mutate(year = 2004),
-  kff_complete_case_2005 %>% mutate(year = 2005),
-  kff_complete_case_2006 %>% mutate(year = 2006),
-  kff_complete_case_2007 %>% mutate(year = 2007),
-  kff_complete_case_2008 %>% mutate(year = 2008),
-  kff_complete_case_2009 %>% mutate(year = 2009),
-  kff_complete_case_2010 %>% mutate(year = 2010),
-  kff_complete_case_2011 %>% mutate(year = 2011),
-  kff_complete_case_2012 %>% mutate(year = 2012),
-  kff_complete_case_2013 %>% mutate(year = 2013),
-  kff_complete_case_2014 %>% mutate(year = 2014)
-)
