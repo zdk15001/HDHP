@@ -15,7 +15,7 @@
 setwd("G:/My Drive/EDU_SYNC/Research/Active/HDHP/work")
 
 # Mina's command to set WD
-setwd("~/Library/CloudStorage/GoogleDrive-gugliem2@tcnj.edu/.shortcut-targets-by-id/14oLkrWtHW1NzX87aL0DxDGo_9Ysj-XBQ/HDHP/resources/KFF Data/Data")
+setwd("~/Library/CloudStorage/GoogleDrive-gugliem2@tcnj.edu/.shortcut-targets-by-id/14oLkrWtHW1NzX87aL0DxDGo_9Ysj-XBQ/HDHP/work")
 
 # Daniel's command to set WD
 setwd("G:/.shortcut-targets-by-id/14oLkrWtHW1NzX87aL0DxDGo_9Ysj-XBQ/HDHP/work")
@@ -59,15 +59,7 @@ kff_2020 <- read_sav('health benefits 2020.sav')
 kff_2021 <- read.csv('health benefits 2021.csv') 
 kff_2022 <- read.csv('2022-11-28 health benefits 2022.csv') 
 kff_2023 <- read.csv('2023-10-17 health benefits 2023.csv')
-kff_2024 <- read.csv('2022-10-10 health benefits 2024.csv')
-
-#### ERROR ERROR ERROR: 2024 not loading
-
-
-### IN the working directory, 2021 and forward are CSV files. Update or fix.
-
-
-
+kff_2024 <- read.csv('2024-10-10 health benefits 2024.csv')
 
 
 
