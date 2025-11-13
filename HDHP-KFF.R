@@ -137,6 +137,17 @@ kff_2006$doesnt_offer <- ifelse(kff_2006$b8e == 2,1,0)
 table(kff_2006$b8e, kff_2006$offers)
 table(kff_2006$b8e, kff_2006$doesnt_offer)
 
+###2007
+#Step 1: Examine variable
+summary(kff_2007$b8e)
+# Step 2: Clean variable (always create new variable!)
+kff_2007$offers <- ifelse(kff_2007$b8e == 1, 1, 0)
+kff_2007$doesnt_offer <- ifelse(kff_2007$b8e == 2,1,0)
+# step 3: Confirm correct cleaning
+table(kff_2007$b8e, kff_2007$offers)
+table(kff_2007$b8e, kff_2007$doesnt_offer)
+
+
 
 
 
