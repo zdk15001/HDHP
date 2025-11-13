@@ -178,7 +178,33 @@ kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
 #confirm correct cleaning
 table(kff_2004$k11h, kff_2004$very_likely_next_year)
 table(kff_2004$k11h, kff_2004$sm_likely_next_year)
+<<<<<<< Updated upstream
 table(kff_2004$k11h, kff_2004$not_too_likely_next_year)
+=======
+<<<<<<< HEAD
+table(kff_2004$k11h, Kff_2004$not_too_likely_next_year)
+table(kff_2004$k11h, kff_2004$not_at_all_likely_next_year)
+table(kff_2004$k11h, kff_2004$dk_how_likely_next_year)
+
+###2005 (Note: defined as an annual deductible of at least $1,000 for single coverage and $2,000 for family coverage, with a health reimbursement arrangement in the next year?)
+#step 1: examine variable
+summary(kff_2005$k11h)
+
+#step 2: clean variable by creating a new variable
+kff_2004$very_likely_next_year <- ifelse(kff_2004$k11h == 1,1,0)
+kff_2004$sm_likely_next_year <- ifelse(kff_2004$k11h == 2,1,0)
+kff_2004$not_too_likely_next_year <- ifelse(kff_2004$k11h == 3,1,0)
+kff_2004$not_at_all_likely_next_year <- ifelse(kff_2004$k11h == 4,1,0)
+kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
+
+#confirm correct cleaning
+table(kff_2004$k11h, kff_2004$very_likely_next_year)
+table(kff_2004$k11h, kff_2004$sm_likely_next_year)
+table(kff_2004$k11h, Kff_2004$not_too_likely_next_year)
+=======
+table(kff_2004$k11h, kff_2004$not_too_likely_next_year)
+>>>>>>> ed7d427559ee523afbb6328f1a8a4a599527dcdb
+>>>>>>> Stashed changes
 table(kff_2004$k11h, kff_2004$not_at_all_likely_next_year)
 table(kff_2004$k11h, kff_2004$dk_how_likely_next_year)
 
@@ -551,6 +577,170 @@ table(kff_2014$industry, kff_2014$government)
 table(kff_2014$industry, kff_2014$healthcare)
 
 
+###### Categorized Percent of Workforce Earning $20,000 or Less #####
+
+### 2003
+table(kff_2003$loincome, useNA = "ifany") #examine variable
+
+#cleaning variable
+kff_2003$mostly_low_wage  <- ifelse(kff_2003$loincome == 2, 1, 0) #35% or more earn $20k or less per year
+kff_2003$some_low_wage    <- ifelse(kff_2003$loincome == 1, 1, 0) #Less than 35% earn $20k or less per year
+
+#confirm cleaning
+table(kff_2003$loincome, kff_2003$mostly_low_wage)
+table(kff_2003$loincome, kff_2003$some_low_wage)
+
+### 2004
+table(kff_2004$loincome,useNA = "ifany") #examine variable
+kff_2004$mostly_low_wage  <- ifelse(kff_2004$loincome == 2, 1, 0) #35% or more earn $20k or less per year
+kff_2004$some_low_wage    <- ifelse(kff_2004$loincome == 1, 1, 0) #Less than 35% earn $20k or less per year
+table(kff_2004$loincome, kff_2004$mostly_low_wage)
+table(kff_2004$loincome, kff_2004$some_low_wage)
+
+### 2005
+table(kff_2005$loincome,useNA = "ifany") #examine variable
+kff_2005$mostly_low_wage  <- ifelse(kff_2005$loincome == 2, 1, 0) #35% or more earn $20k or less per year
+kff_2005$some_low_wage    <- ifelse(kff_2005$loincome == 1, 1, 0) #Less than 35% earn $20k or less per year
+table(kff_2005$loincome, kff_2005$mostly_low_wage)
+table(kff_2005$loincome, kff_2005$some_low_wage)
+
+### 2006
+table(kff_2006$loincome,useNA = "ifany") #examine variable
+kff_2006$mostly_low_wage  <- ifelse(kff_2006$loincome == 2, 1, 0) #35% or more earn $20k or less per year
+kff_2006$some_low_wage    <- ifelse(kff_2006$loincome == 1, 1, 0) #Less than 35% earn $20k or less per year
+table(kff_2006$loincome, kff_2006$mostly_low_wage)
+table(kff_2006$loincome, kff_2006$some_low_wage)
+
+### 2007
+table(kff_2007$loincome,useNA = "ifany") #examine variable
+kff_2007$mostly_low_wage  <- ifelse(kff_2007$loincome == 2, 1, 0) #35% or more earn $21k or less per year
+kff_2007$some_low_wage    <- ifelse(kff_2007$loincome == 1, 1, 0) #Less than 35% earn $21k or less per year
+table(kff_2007$loincome, kff_2007$mostly_low_wage)
+table(kff_2007$loincome, kff_2007$some_low_wage)
+
+### 2008
+table(kff_2008$loincome,useNA = "ifany") #examine variable
+kff_2008$mostly_low_wage  <- ifelse(kff_2008$loincome == 2, 1, 0) #35% or more earn $22k or less per year
+kff_2008$some_low_wage    <- ifelse(kff_2008$loincome == 1, 1, 0) #Less than 35% earn $22k or less per year
+table(kff_2008$loincome, kff_2008$mostly_low_wage)
+table(kff_2008$loincome, kff_2008$some_low_wage)
+
+### 2009
+table(kff_2009$loincome,useNA = "ifany") #examine variable
+kff_2009$mostly_low_wage  <- ifelse(kff_2009$loincome == 2, 1, 0) #35% or more earn $21k or less per year
+kff_2009$some_low_wage    <- ifelse(kff_2009$loincome == 1, 1, 0) #Less than 35% earn $21k or less per year
+table(kff_2009$loincome, kff_2009$mostly_low_wage)
+table(kff_2009$loincome, kff_2009$some_low_wage)
+
+### 2010
+table(kff_2010$loincome,useNA = "ifany") #examine variable
+kff_2010$mostly_low_wage  <- ifelse(kff_2010$loincome == 2, 1, 0) #35% or more earn $23k or less per year
+kff_2010$some_low_wage    <- ifelse(kff_2010$loincome == 1, 1, 0) #Less than 35% earn $23k or less per year
+table(kff_2010$loincome, kff_2010$mostly_low_wage)
+table(kff_2010$loincome, kff_2010$some_low_wage)
+
+### 2011
+table(kff_2011$loincome,useNA = "ifany") #examine variable
+kff_2011$mostly_low_wage  <- ifelse(kff_2011$loincome == 2, 1, 0) #35% or more earn $23k or less per year
+kff_2011$some_low_wage    <- ifelse(kff_2011$loincome == 1, 1, 0) #Less than 35% earn $23k or less per year
+table(kff_2011$loincome, kff_2011$mostly_low_wage)
+table(kff_2011$loincome, kff_2011$some_low_wage)
+
+### 2012
+table(kff_2012$loincome,useNA = "ifany") #examine
+kff_2012$mostly_low_wage  <- ifelse(kff_2012$loincome == 2, 1, 0) #35% or more earn $24k or less per year
+kff_2012$some_low_wage    <- ifelse(kff_2012$loincome == 1, 1, 0) #Less than 35% earn $24k or less per year
+table(kff_2012$loincome, kff_2012$mostly_low_wage)
+table(kff_2012$loincome, kff_2012$some_low_wage)
+
+### 2013
+table(kff_2013$loincome,useNA = "ifany") #examine
+kff_2013$mostly_low_wage  <- ifelse(kff_2013$loincome == 2, 1, 0) #35% or more earn $24k or less per year
+kff_2013$some_low_wage    <- ifelse(kff_2013$loincome == 1, 1, 0) #Less than 35% earn $24k or less per year
+table(kff_2013$loincome, kff_2013$mostly_low_wage)
+table(kff_2013$loincome, kff_2013$some_low_wage)
+
+###### Categorized Percent of Workforce With High Incomes #####
+### 2007
+table(kff_2007$hiincome, useNA = "ifany") #examine variable
+kff_2007$mostly_high_wage <- ifelse(kff_2007$hiincome == 2, 1, 0) #35% or more earn $50k or more per year
+kff_2007$some_high_wage   <- ifelse(kff_2007$hiincome == 1, 1, 0) #Less than 35% earn $50k or more per year
+table(kff_2007$hiincome, kff_2007$mostly_high_wage)
+table(kff_2007$hiincome, kff_2007$some_high_wage)
+
+### 2008
+table(kff_2008$hiincome, useNA = "ifany") #examine variable
+kff_2008$mostly_high_wage <- ifelse(kff_2008$hiincome == 2, 1, 0) #35% or more earn $50k or more per year
+kff_2008$some_high_wage   <- ifelse(kff_2008$hiincome == 1, 1, 0) #Less than 35% earn $50k or more per year
+table(kff_2008$hiincome, kff_2008$mostly_high_wage)
+table(kff_2008$hiincome, kff_2008$some_high_wage)
+
+### 2012
+table(kff_2012$hiincome, useNA = "ifany") #examine variable
+kff_2012$mostly_high_wage <- ifelse(kff_2012$hiincome == 2, 1, 0) #35% or more earn $55k or more per year
+kff_2012$some_high_wage   <- ifelse(kff_2012$hiincome == 1, 1, 0) #Less than 35% earn $55k or more per year
+table(kff_2012$hiincome, kff_2012$mostly_high_wage)
+table(kff_2012$hiincome, kff_2012$some_high_wage)
+
+### 2013
+table(kff_2013$hiincome, useNA = "ifany") #examine variable
+kff_2013$mostly_high_wage <- ifelse(kff_2013$hiincome == 2, 1, 0) #35% or more earn $55k or more per year
+kff_2013$some_high_wage   <- ifelse(kff_2013$hiincome == 1, 1, 0) #Less than 35% earn $55k or more per year
+table(kff_2013$hiincome, kff_2013$mostly_high_wage)
+table(kff_2013$hiincome, kff_2013$some_high_wage)
+
+###### Categorized Percent of Workforce Age 26 or Younger #####
+### 2007
+table(kff_2007$age26, useNA = "ifany") #examine variable
+kff_2007$mostly_young_workers <- ifelse(kff_2007$age26 == 2, 1, 0) #35% or more are age 26 or younger
+kff_2007$some_young_workers   <- ifelse(kff_2007$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
+table(kff_2007$age26, kff_2007$mostly_young_workers)
+table(kff_2007$age26, kff_2007$some_young_workers)
+
+### 2008
+table(kff_2008$age26, useNA = "ifany") #examine variable
+kff_2008$mostly_young_workers <- ifelse(kff_2008$age26 == 2, 1, 0) #35% or more are age 26 or younger
+kff_2008$some_young_workers   <- ifelse(kff_2008$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
+table(kff_2008$age26, kff_2008$mostly_young_workers)
+table(kff_2008$age26, kff_2008$some_young_workers)
+
+#### 2009
+table(kff_2009$age26, useNA = "ifany") #examine variable
+kff_2009$mostly_young_workers <- ifelse(kff_2009$age26 == 2, 1, 0) #35% or more are age 26 or younger
+kff_2009$some_young_workers   <- ifelse(kff_2009$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
+table(kff_2009$age26, kff_2009$mostly_young_workers)
+table(kff_2009$age26, kff_2009$some_young_workers)
+
+### 2010
+table(kff_2010$age26, useNA = "ifany") #examine variable
+kff_2010$mostly_young_workers <- ifelse(kff_2010$age26 == 2, 1, 0) #35% or more are age 26 or younger
+kff_2010$some_young_workers   <- ifelse(kff_2010$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
+table(kff_2010$age26, kff_2010$mostly_young_workers)
+table(kff_2010$age26, kff_2010$some_young_workers)
+
+### 2011
+table(kff_2011$age26, useNA = "ifany") #examine variable
+kff_2011$mostly_young_workers <- ifelse(kff_2011$age26 == 2, 1, 0) #35% or more are age 26 or younger
+kff_2011$some_young_workers   <- ifelse(kff_2011$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
+table(kff_2011$age26, kff_2011$mostly_young_workers)
+table(kff_2011$age26, kff_2011$some_young_workers)
+
+### 2012
+table(kff_2012$age26, useNA = "ifany") #examine variable
+kff_2012$mostly_young_workers <- ifelse(kff_2012$age26 == 2, 1, 0) #35% or more are age 26 or younger
+kff_2012$some_young_workers   <- ifelse(kff_2012$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
+table(kff_2012$age26, kff_2012$mostly_young_workers)
+table(kff_2012$age26, kff_2012$some_young_workers)
+
+### 2013
+table(kff_2013$age26, useNA = "ifany") #examine variable
+kff_2013$mostly_young_workers <- ifelse(kff_2013$age26 == 2, 1, 0) #35% or more are age 26 or younger
+kff_2013$some_young_workers   <- ifelse(kff_2013$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
+table(kff_2013$age26, kff_2013$mostly_young_workers)
+table(kff_2013$age26, kff_2013$some_young_workers)
+
+
+
 ###### Clean for size (of industry) #####
 
 ### 2003
@@ -709,6 +899,7 @@ table(kff_2013$size, kff_2013$large_firm)
 
 
 
+
 ####################################################################################
 ############              Phase 2: Data Merging        ############
 ####################################################################################
@@ -789,3 +980,7 @@ kff_wide_all_years <- bind_rows(
   kff_complete_case_2013 %>% mutate(year = 2013),
   kff_complete_case_2014 %>% mutate(year = 2014)
 )
+
+
+
+
