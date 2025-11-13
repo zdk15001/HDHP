@@ -178,10 +178,10 @@ kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
 #confirm correct cleaning
 table(kff_2004$k11h, kff_2004$very_likely_next_year)
 table(kff_2004$k11h, kff_2004$sm_likely_next_year)
-<<<<<<< Updated upstream
+#<<<<<<< Updated upstream
 table(kff_2004$k11h, kff_2004$not_too_likely_next_year)
-=======
-<<<<<<< HEAD
+#=======
+#<<<<<<< HEAD
 table(kff_2004$k11h, Kff_2004$not_too_likely_next_year)
 table(kff_2004$k11h, kff_2004$not_at_all_likely_next_year)
 table(kff_2004$k11h, kff_2004$dk_how_likely_next_year)
@@ -201,10 +201,10 @@ kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
 table(kff_2004$k11h, kff_2004$very_likely_next_year)
 table(kff_2004$k11h, kff_2004$sm_likely_next_year)
 table(kff_2004$k11h, Kff_2004$not_too_likely_next_year)
-=======
+#=======
 table(kff_2004$k11h, kff_2004$not_too_likely_next_year)
->>>>>>> ed7d427559ee523afbb6328f1a8a4a599527dcdb
->>>>>>> Stashed changes
+#>>>>>>> ed7d427559ee523afbb6328f1a8a4a599527dcdb
+#>>>>>>> Stashed changes
 table(kff_2004$k11h, kff_2004$not_at_all_likely_next_year)
 table(kff_2004$k11h, kff_2004$dk_how_likely_next_year)
 
@@ -596,6 +596,8 @@ kff_2004$mostly_low_wage  <- ifelse(kff_2004$loincome == 2, 1, 0) #35% or more e
 kff_2004$some_low_wage    <- ifelse(kff_2004$loincome == 1, 1, 0) #Less than 35% earn $20k or less per year
 table(kff_2004$loincome, kff_2004$mostly_low_wage)
 table(kff_2004$loincome, kff_2004$some_low_wage)
+
+#### NOTE: SOME FIRMS OVER 100%! DROP DROP DROP!!!
 
 ### 2005
 table(kff_2005$loincome,useNA = "ifany") #examine variable
