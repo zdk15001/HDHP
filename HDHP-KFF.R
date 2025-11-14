@@ -135,62 +135,105 @@ table(kff_2006$b8e, kff_2006$doesnt_offer, useNA = "ifany")
 ###2007
 #Step 1: Examine variable
 summary(kff_2007$b8e)
+
 # Step 2: Clean variable (always create new variable!)
 kff_2007$offers <- ifelse(kff_2007$b8e == 1, 1, 0)
 kff_2007$doesnt_offer <- ifelse(kff_2007$b8e == 2,1,0)
+
 # step 3: Confirm correct cleaning
 table(kff_2007$b8e, kff_2007$offers, useNA = "ifany")
 table(kff_2007$b8e, kff_2007$doesnt_offer, useNA = "ifany")
 
+###2008
+summary(kff_2008$b8e)
+
+kff_2008$offers <- ifelse(kff_2008$b8e == 1, 1, 0)
+kff_2008$doesnt_offer <- ifelse(kff_2008$b8e == 2,1,0)
+
+table(kff_2008$b8e, kff_2008$offers, useNA = "ifany")
+table(kff_2008$b8e, kff_2008$doesnt_offer, useNA = "ifany")
 
 
+###2009
+summary(kff_2009$b8e)
+
+kff_2009$offers <- ifelse(kff_2009$b8e == 1, 1, 0)
+kff_2009$doesnt_offer <- ifelse(kff_2009$b8e == 2,1,0)
+
+table(kff_2009$b8e, kff_2009$offers, useNA = "ifany")
+table(kff_2009$b8e, kff_2009$doesnt_offer, useNA = "ifany")
 
 
+###2010
+summary(kff_2010$b8e)
+
+kff_2010$offers <- ifelse(kff_2010$b8e == 1, 1, 0)
+kff_2010$doesnt_offer <- ifelse(kff_2010$b8e == 2,1,0)
+
+table(kff_2010$b8e, kff_2010$offers, useNA = "ifany")
+table(kff_2010$b8e, kff_2010$doesnt_offer, useNA = "ifany")
 
 
-###### Likelihood of Making a Change in the Next Year: Offer High Deductible Health Plan #####
+###2011
+summary(kff_2011$b8e)
 
-###2004 (Note: defined as a deductible of more than $1000.)
-#step 1: examine variable
-summary(kff_2004$k11h)
-table(kff_2004$k11h, useNA = "ifany")
+kff_2011$offers <- ifelse(kff_2011$b8e == 1, 1, 0)
+kff_2011$doesnt_offer <- ifelse(kff_2011$b8e == 2,1,0)
 
-#step 2: clean variable by creating a new variable
-kff_2004$very_likely_next_year <- ifelse(kff_2004$k11h == 1,1,0)
-kff_2004$sm_likely_next_year <- ifelse(kff_2004$k11h == 2,1,0)
-kff_2004$not_too_likely_next_year <- ifelse(kff_2004$k11h == 3,1,0)
-kff_2004$not_at_all_likely_next_year <- ifelse(kff_2004$k11h == 4,1,0)
-kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
-
-#confirm correct cleaning
-table(kff_2004$k11h, kff_2004$very_likely_next_year, useNA = "ifany")
-table(kff_2004$k11h, kff_2004$sm_likely_next_year, useNA = "ifany")
-table(kff_2004$k11h, kff_2004$not_too_likely_next_year, useNA = "ifany")
-table(kff_2004$k11h, kff_2004$not_at_all_likely_next_year, useNA = "ifany")
-table(kff_2004$k11h, kff_2004$dk_how_likely_next_year, useNA = "ifany")
+table(kff_2011$b8e, kff_2011$offers, useNA = "ifany")
+table(kff_2011$b8e, kff_2011$doesnt_offer, useNA = "ifany")
 
 
-###2005 (Note: defined as an annual deductible of at least $1,000 for single coverage and $2,000 for family coverage, with a health reimbursement arrangement in the next year?)
-#step 1: examine variable
-summary(kff_2005$k11h)
+###2012
+##ERROR ERROR: NO b8e IN 2012 DATASET (there is b8e in 2012 codebook though)
+summary(kff_2012$b8e)
 
-#step 2: clean variable by creating a new variable
-kff_2004$very_likely_next_year <- ifelse(kff_2004$k11h == 1,1,0)
-kff_2004$sm_likely_next_year <- ifelse(kff_2004$k11h == 2,1,0)
-kff_2004$not_too_likely_next_year <- ifelse(kff_2004$k11h == 3,1,0)
-kff_2004$not_at_all_likely_next_year <- ifelse(kff_2004$k11h == 4,1,0)
-kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
 
-#confirm correct cleaning
-table(kff_2004$k11h, kff_2004$very_likely_next_year, useNA = "ifany")
-table(kff_2004$k11h, kff_2004$sm_likely_next_year, useNA = "ifany")
-table(kff_2004$k11h, Kff_2004$not_too_likely_next_year, useNA = "ifany")
-#=======
-table(kff_2004$k11h, kff_2004$not_too_likely_next_year, useNA = "ifany")
-#>>>>>>> ed7d427559ee523afbb6328f1a8a4a599527dcdb
-#>>>>>>> Stashed changes
-table(kff_2004$k11h, kff_2004$not_at_all_likely_next_year, useNA = "ifany")
-table(kff_2004$k11h, kff_2004$dk_how_likely_next_year, useNA = "ifany")
+###2013
+summary(kff_2013$b8e)
+
+kff_2013$offers <- ifelse(kff_2013$b8e == 1, 1, 0)
+kff_2013$doesnt_offer <- ifelse(kff_2013$b8e == 2,1,0)
+kff_2013$unsure_of_offer <- ifelse(kff_2013$b8e ==3,1,0)
+
+table(kff_2013$b8e, kff_2013$offers, useNA = "ifany")
+table(kff_2013$b8e, kff_2013$doesnt_offer, useNA = "ifany")
+table(kff_2013$b8e, kff_2013$unsure_of_offer, useNA = "ifany")
+
+
+####2014
+summary(kff_2014$b8e)
+
+kff_2014$offers <- ifelse(kff_2014$b8e == 1, 1, 0)
+kff_2014$doesnt_offer <- ifelse(kff_2014$b8e == 2,1,0)
+kff_2014$unsure_of_offer <- ifelse(kff_2014$b8e ==3,1,0)
+
+table(kff_2014$b8e, kff_2014$offers, useNA = "ifany")
+table(kff_2014$b8e, kff_2014$doesnt_offer, useNA = "ifany")
+table(kff_2014$b8e, kff_2014$unsure_of_offer, useNA = "ifany")
+
+
+###2015
+summary(kff_2015$b8e)
+
+kff_2015$offers <- ifelse(kff_2015$b8e == 1, 1, 0)
+kff_2015$doesnt_offer <- ifelse(kff_2015$b8e == 2,1,0)
+
+table(kff_2015$b8e, kff_2015$offers, useNA = "ifany")
+table(kff_2015$b8e, kff_2015$doesnt_offer, useNA = "ifany")
+
+
+###2016
+summary(kff_2016$b8e)
+
+kff_2016$offers <- ifelse(kff_2016$b8e == 1, 1, 0)
+kff_2016$doesnt_offer <- ifelse(kff_2016$b8e == 2,1,0)
+kff_2016$unsure_of_offer <- ifelse(kff_2016$b8e ==3,1,0)
+
+table(kff_2016$b8e, kff_2016$offers, useNA = "ifany")
+table(kff_2016$b8e, kff_2016$doesnt_offer, useNA = "ifany")
+table(kff_2016$b8e, kff_2016$unsure_of_offer, useNA = "ifany")
+
 
 
 
@@ -578,8 +621,10 @@ table(kff_2003$loincome, kff_2003$some_low_wage, useNA = "ifany")
 
 ### 2004
 table(kff_2004$loincome,useNA = "ifany") #examine variable
+
 kff_2004$mostly_low_wage  <- ifelse(kff_2004$loincome == 2, 1, 0) #35% or more earn $20k or less per year
 kff_2004$some_low_wage    <- ifelse(kff_2004$loincome == 1, 1, 0) #Less than 35% earn $20k or less per year
+
 table(kff_2004$loincome, kff_2004$mostly_low_wage, useNA = "ifany")
 table(kff_2004$loincome, kff_2004$some_low_wage, useNA = "ifany")
 
@@ -587,72 +632,90 @@ table(kff_2004$loincome, kff_2004$some_low_wage, useNA = "ifany")
 
 ### 2005
 table(kff_2005$loincome,useNA = "ifany") #examine variable
+
 kff_2005$mostly_low_wage  <- ifelse(kff_2005$loincome == 2, 1, 0) #35% or more earn $20k or less per year
 kff_2005$some_low_wage    <- ifelse(kff_2005$loincome == 1, 1, 0) #Less than 35% earn $20k or less per year
+
 table(kff_2005$loincome, kff_2005$mostly_low_wage, useNA = "ifany")
 table(kff_2005$loincome, kff_2005$some_low_wage, useNA = "ifany")
 
 
 ### 2006
 table(kff_2006$loincome,useNA = "ifany") #examine variable
+
 kff_2006$mostly_low_wage  <- ifelse(kff_2006$loincome == 2, 1, 0) #35% or more earn $20k or less per year
 kff_2006$some_low_wage    <- ifelse(kff_2006$loincome == 1, 1, 0) #Less than 35% earn $20k or less per year
+
 table(kff_2006$loincome, kff_2006$mostly_low_wage, useNA = "ifany")
 table(kff_2006$loincome, kff_2006$some_low_wage, useNA = "ifany")
 
 
 ### 2007
 table(kff_2007$loincome,useNA = "ifany") #examine variable
+
 kff_2007$mostly_low_wage  <- ifelse(kff_2007$loincome == 2, 1, 0) #35% or more earn $21k or less per year
 kff_2007$some_low_wage    <- ifelse(kff_2007$loincome == 1, 1, 0) #Less than 35% earn $21k or less per year
+
 table(kff_2007$loincome, kff_2007$mostly_low_wage, useNA = "ifany")
 table(kff_2007$loincome, kff_2007$some_low_wage, useNA = "ifany")
 
 
 ### 2008
 table(kff_2008$loincome,useNA = "ifany") #examine variable
+
 kff_2008$mostly_low_wage  <- ifelse(kff_2008$loincome == 2, 1, 0) #35% or more earn $22k or less per year
 kff_2008$some_low_wage    <- ifelse(kff_2008$loincome == 1, 1, 0) #Less than 35% earn $22k or less per year
+
 table(kff_2008$loincome, kff_2008$mostly_low_wage, useNA = "ifany")
 table(kff_2008$loincome, kff_2008$some_low_wage, useNA = "ifany")
 
 
 ### 2009
 table(kff_2009$loincome,useNA = "ifany") #examine variable
+
 kff_2009$mostly_low_wage  <- ifelse(kff_2009$loincome == 2, 1, 0) #35% or more earn $21k or less per year
 kff_2009$some_low_wage    <- ifelse(kff_2009$loincome == 1, 1, 0) #Less than 35% earn $21k or less per year
+
 table(kff_2009$loincome, kff_2009$mostly_low_wage, useNA = "ifany")
 table(kff_2009$loincome, kff_2009$some_low_wage, useNA = "ifany")
 
 
 ### 2010
 table(kff_2010$loincome,useNA = "ifany") #examine variable
+
 kff_2010$mostly_low_wage  <- ifelse(kff_2010$loincome == 2, 1, 0) #35% or more earn $23k or less per year
 kff_2010$some_low_wage    <- ifelse(kff_2010$loincome == 1, 1, 0) #Less than 35% earn $23k or less per year
+
 table(kff_2010$loincome, kff_2010$mostly_low_wage, useNA = "ifany")
 table(kff_2010$loincome, kff_2010$some_low_wage, useNA = "ifany")
 
 
 ### 2011
 table(kff_2011$loincome,useNA = "ifany") #examine variable
+
 kff_2011$mostly_low_wage  <- ifelse(kff_2011$loincome == 2, 1, 0) #35% or more earn $23k or less per year
 kff_2011$some_low_wage    <- ifelse(kff_2011$loincome == 1, 1, 0) #Less than 35% earn $23k or less per year
+
 table(kff_2011$loincome, kff_2011$mostly_low_wage, useNA = "ifany")
 table(kff_2011$loincome, kff_2011$some_low_wage, useNA = "ifany")
 
 
 ### 2012
 table(kff_2012$loincome,useNA = "ifany") #examine
+
 kff_2012$mostly_low_wage  <- ifelse(kff_2012$loincome == 2, 1, 0) #35% or more earn $24k or less per year
 kff_2012$some_low_wage    <- ifelse(kff_2012$loincome == 1, 1, 0) #Less than 35% earn $24k or less per year
+
 table(kff_2012$loincome, kff_2012$mostly_low_wage, useNA = "ifany")
 table(kff_2012$loincome, kff_2012$some_low_wage, useNA = "ifany")
 
 
 ### 2013
 table(kff_2013$loincome,useNA = "ifany") #examine
+
 kff_2013$mostly_low_wage  <- ifelse(kff_2013$loincome == 2, 1, 0) #35% or more earn $24k or less per year
 kff_2013$some_low_wage    <- ifelse(kff_2013$loincome == 1, 1, 0) #Less than 35% earn $24k or less per year
+
 table(kff_2013$loincome, kff_2013$mostly_low_wage, useNA = "ifany")
 table(kff_2013$loincome, kff_2013$some_low_wage, useNA = "ifany")
 
@@ -661,32 +724,40 @@ table(kff_2013$loincome, kff_2013$some_low_wage, useNA = "ifany")
 ###### Categorized Percent of Workforce With High Incomes #####
 ### 2007
 table(kff_2007$hiincome, useNA = "ifany") #examine variable
+
 kff_2007$mostly_high_wage <- ifelse(kff_2007$hiincome == 2, 1, 0) #35% or more earn $50k or more per year
 kff_2007$some_high_wage   <- ifelse(kff_2007$hiincome == 1, 1, 0) #Less than 35% earn $50k or more per year
+
 table(kff_2007$hiincome, kff_2007$mostly_high_wage, useNA = "ifany")
 table(kff_2007$hiincome, kff_2007$some_high_wage, useNA = "ifany")
 
 
 ### 2008
 table(kff_2008$hiincome, useNA = "ifany") #examine variable
+
 kff_2008$mostly_high_wage <- ifelse(kff_2008$hiincome == 2, 1, 0) #35% or more earn $50k or more per year
 kff_2008$some_high_wage   <- ifelse(kff_2008$hiincome == 1, 1, 0) #Less than 35% earn $50k or more per year
+
 table(kff_2008$hiincome, kff_2008$mostly_high_wage, useNA = "ifany")
 table(kff_2008$hiincome, kff_2008$some_high_wage, useNA = "ifany")
 
 
 ### 2012
 table(kff_2012$hiincome, useNA = "ifany") #examine variable
+
 kff_2012$mostly_high_wage <- ifelse(kff_2012$hiincome == 2, 1, 0) #35% or more earn $55k or more per year
 kff_2012$some_high_wage   <- ifelse(kff_2012$hiincome == 1, 1, 0) #Less than 35% earn $55k or more per year
+
 table(kff_2012$hiincome, kff_2012$mostly_high_wage, useNA = "ifany")
 table(kff_2012$hiincome, kff_2012$some_high_wage, useNA = "ifany")
 
 
 ### 2013
 table(kff_2013$hiincome, useNA = "ifany") #examine variable
+
 kff_2013$mostly_high_wage <- ifelse(kff_2013$hiincome == 2, 1, 0) #35% or more earn $55k or more per year
 kff_2013$some_high_wage   <- ifelse(kff_2013$hiincome == 1, 1, 0) #Less than 35% earn $55k or more per year
+
 table(kff_2013$hiincome, kff_2013$mostly_high_wage, useNA = "ifany")
 table(kff_2013$hiincome, kff_2013$some_high_wage, useNA = "ifany")
 
@@ -696,62 +767,76 @@ table(kff_2013$hiincome, kff_2013$some_high_wage, useNA = "ifany")
 ###### Categorized Percent of Workforce Age 26 or Younger #####
 ### 2007
 table(kff_2007$age26, useNA = "ifany") #examine variable
+
 kff_2007$mostly_young_workers <- ifelse(kff_2007$age26 == 2, 1, 0) #35% or more are age 26 or younger
 kff_2007$some_young_workers   <- ifelse(kff_2007$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
+
 table(kff_2007$age26, kff_2007$mostly_young_workers, useNA = "ifany")
 table(kff_2007$age26, kff_2007$some_young_workers, useNA = "ifany")
 
 
 ### 2008
 table(kff_2008$age26, useNA = "ifany") #examine variable
+
 kff_2008$mostly_young_workers <- ifelse(kff_2008$age26 == 2, 1, 0) #35% or more are age 26 or younger
 kff_2008$some_young_workers   <- ifelse(kff_2008$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
+
 table(kff_2008$age26, kff_2008$mostly_young_workers, useNA = "ifany")
 table(kff_2008$age26, kff_2008$some_young_workers, useNA = "ifany")
 
 
 #### 2009
 table(kff_2009$age26, useNA = "ifany") #examine variable
+
 kff_2009$mostly_young_workers <- ifelse(kff_2009$age26 == 2, 1, 0) #35% or more are age 26 or younger
 kff_2009$some_young_workers   <- ifelse(kff_2009$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
+
 table(kff_2009$age26, kff_2009$mostly_young_workers, useNA = "ifany")
 table(kff_2009$age26, kff_2009$some_young_workers, useNA = "ifany")
 
 
 ### 2010
 table(kff_2010$age26, useNA = "ifany") #examine variable
+
 kff_2010$mostly_young_workers <- ifelse(kff_2010$age26 == 2, 1, 0) #35% or more are age 26 or younger
 kff_2010$some_young_workers   <- ifelse(kff_2010$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
+
 table(kff_2010$age26, kff_2010$mostly_young_workers, useNA = "ifany")
 table(kff_2010$age26, kff_2010$some_young_workers, useNA = "ifany")
 
 
 ### 2011
 table(kff_2011$age26, useNA = "ifany") #examine variable
+
 kff_2011$mostly_young_workers <- ifelse(kff_2011$age26 == 2, 1, 0) #35% or more are age 26 or younger
 kff_2011$some_young_workers   <- ifelse(kff_2011$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
+
 table(kff_2011$age26, kff_2011$mostly_young_workers, useNA = "ifany")
 table(kff_2011$age26, kff_2011$some_young_workers, useNA = "ifany")
 
 
 ### 2012
 table(kff_2012$age26, useNA = "ifany") #examine variable
+
 kff_2012$mostly_young_workers <- ifelse(kff_2012$age26 == 2, 1, 0) #35% or more are age 26 or younger
 kff_2012$some_young_workers   <- ifelse(kff_2012$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
+
 table(kff_2012$age26, kff_2012$mostly_young_workers, useNA = "ifany")
 table(kff_2012$age26, kff_2012$some_young_workers, useNA = "ifany")
 
 
 ### 2013
 table(kff_2013$age26, useNA = "ifany") #examine variable
+
 kff_2013$mostly_young_workers <- ifelse(kff_2013$age26 == 2, 1, 0) #35% or more are age 26 or younger
 kff_2013$some_young_workers   <- ifelse(kff_2013$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
+
 table(kff_2013$age26, kff_2013$mostly_young_workers)
 table(kff_2013$age26, kff_2013$some_young_workers)
 
 
 
-###### Clean for size (of industry) #####
+###### size (of firm) #####
 
 ### 2003
 # Step 1: Examine the Variable
@@ -904,6 +989,53 @@ kff_2013$large_firm    <- ifelse(kff_2013$size == 6,                      1, 0)
 table(kff_2013$size, kff_2013$small_firm, useNA = "ifany")
 table(kff_2013$size, kff_2013$medium_firm, useNA = "ifany")
 table(kff_2013$size, kff_2013$large_firm, useNA = "ifany")
+
+
+
+
+###### Likelihood of Making a Change in the Next Year: Offer High Deductible Health Plan #####
+
+###2004 (Note: defined as a deductible of more than $1000.)
+#step 1: examine variable
+summary(kff_2004$k11h)
+table(kff_2004$k11h, useNA = "ifany")
+
+#step 2: clean variable by creating a new variable
+kff_2004$very_likely_next_year <- ifelse(kff_2004$k11h == 1,1,0)
+kff_2004$sm_likely_next_year <- ifelse(kff_2004$k11h == 2,1,0)
+kff_2004$not_too_likely_next_year <- ifelse(kff_2004$k11h == 3,1,0)
+kff_2004$not_at_all_likely_next_year <- ifelse(kff_2004$k11h == 4,1,0)
+kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
+
+#confirm correct cleaning
+table(kff_2004$k11h, kff_2004$very_likely_next_year, useNA = "ifany")
+table(kff_2004$k11h, kff_2004$sm_likely_next_year, useNA = "ifany")
+table(kff_2004$k11h, kff_2004$not_too_likely_next_year, useNA = "ifany")
+table(kff_2004$k11h, kff_2004$not_at_all_likely_next_year, useNA = "ifany")
+table(kff_2004$k11h, kff_2004$dk_how_likely_next_year, useNA = "ifany")
+
+
+###2005 (Note: defined as an annual deductible of at least $1,000 for single coverage and $2,000 for family coverage, with a health reimbursement arrangement in the next year?)
+#step 1: examine variable
+summary(kff_2005$k11h)
+
+#step 2: clean variable by creating a new variable
+kff_2004$very_likely_next_year <- ifelse(kff_2004$k11h == 1,1,0)
+kff_2004$sm_likely_next_year <- ifelse(kff_2004$k11h == 2,1,0)
+kff_2004$not_too_likely_next_year <- ifelse(kff_2004$k11h == 3,1,0)
+kff_2004$not_at_all_likely_next_year <- ifelse(kff_2004$k11h == 4,1,0)
+kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
+
+#confirm correct cleaning
+table(kff_2004$k11h, kff_2004$very_likely_next_year, useNA = "ifany")
+table(kff_2004$k11h, kff_2004$sm_likely_next_year, useNA = "ifany")
+table(kff_2004$k11h, Kff_2004$not_too_likely_next_year, useNA = "ifany")
+#=======
+table(kff_2004$k11h, kff_2004$not_too_likely_next_year, useNA = "ifany")
+#>>>>>>> ed7d427559ee523afbb6328f1a8a4a599527dcdb
+#>>>>>>> Stashed changes
+table(kff_2004$k11h, kff_2004$not_at_all_likely_next_year, useNA = "ifany")
+table(kff_2004$k11h, kff_2004$dk_how_likely_next_year, useNA = "ifany")
 
 
 
