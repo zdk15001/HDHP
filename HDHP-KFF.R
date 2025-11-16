@@ -235,6 +235,95 @@ table(kff_2016$b8e, kff_2016$doesnt_offer, useNA = "ifany")
 table(kff_2016$b8e, kff_2016$unsure_of_offer, useNA = "ifany")
 
 
+###2017
+summary(kff_2017$b8e)
+
+kff_2017$offers <- ifelse(kff_2017$b8e == 1, 1, 0)
+kff_2017$doesnt_offer <- ifelse(kff_2017$b8e == 2,1,0)
+kff_2017$unsure_of_offer <- ifelse(kff_2017$b8e ==3,1,0)
+
+table(kff_2017$b8e, kff_2017$offers, useNA = "ifany")
+table(kff_2017$b8e, kff_2017$doesnt_offer, useNA = "ifany")
+table(kff_2017$b8e, kff_2017$unsure_of_offer, useNA = "ifany")
+
+
+###2018
+summary(kff_2018$b8e)
+
+kff_2018$offers <- ifelse(kff_2018$b8e == 1, 1, 0)
+kff_2018$doesnt_offer <- ifelse(kff_2018$b8e == 2,1,0)
+kff_2018$unsure_of_offer <- ifelse(kff_2018$b8e ==3,1,0)
+
+table(kff_2018$b8e, kff_2018$offers, useNA = "ifany")
+table(kff_2018$b8e, kff_2018$doesnt_offer, useNA = "ifany")
+table(kff_2018$b8e, kff_2018$unsure_of_offer, useNA = "ifany")
+
+###2019
+table(kff_2019$b8e,useNA = "ifany")
+
+kff_2019$offers <- ifelse(kff_2019$b8e == 1, 1, 0)
+kff_2019$doesnt_offer <- ifelse(kff_2019$b8e == 2,1,0)
+kff_2019$unsure_of_offer <- ifelse(kff_2019$b8e ==3,1,0)
+
+table(kff_2019$b8e, kff_2019$offers, useNA = "ifany")
+table(kff_2019$b8e, kff_2019$doesnt_offer, useNA = "ifany")
+table(kff_2019$b8e, kff_2019$unsure_of_offer, useNA = "ifany")
+
+###2020
+table(kff_2020$b8e,useNA = "ifany")
+
+#NOTE: 2020 has 3, unsure if they offer HDHP in the dataset but not in the codebook/data dictionary
+kff_2020$offers <- ifelse(kff_2020$b8e == 1, 1, 0)
+kff_2020$doesnt_offer <- ifelse(kff_2020$b8e == 2,1,0)
+kff_2020$unsure_of_offer <- ifelse(kff_2020$b8e ==3,1,0)
+
+table(kff_2020$b8e, kff_2020$offers, useNA = "ifany")
+table(kff_2020$b8e, kff_2020$doesnt_offer, useNA = "ifany")
+table(kff_2020$b8e, kff_2020$unsure_of_offer, useNA = "ifany")
+
+###2021
+table(kff_2021$b8e,useNA = "ifany")
+
+kff_2021$offers <- ifelse(kff_2021$b8e == 1, 1, 0)
+kff_2021$doesnt_offer <- ifelse(kff_2021$b8e == 2,1,0)
+kff_2021$unsure_of_offer <- ifelse(kff_2021$b8e ==3,1,0)
+
+table(kff_2021$b8e, kff_2021$offers, useNA = "ifany")
+table(kff_2021$b8e, kff_2021$doesnt_offer, useNA = "ifany")
+table(kff_2021$b8e, kff_2021$unsure_of_offer, useNA = "ifany")
+
+###2022
+table(kff_2022$b8e,useNA = "ifany")
+
+kff_2022$offers <- ifelse(kff_2022$b8e == 1, 1, 0)
+kff_2022$doesnt_offer <- ifelse(kff_2022$b8e == 2,1,0)
+kff_2022$unsure_of_offer <- ifelse(kff_2022$b8e ==3,1,0)
+
+table(kff_2022$b8e, kff_2022$offers, useNA = "ifany")
+table(kff_2022$b8e, kff_2022$doesnt_offer, useNA = "ifany")
+table(kff_2022$b8e, kff_2022$unsure_of_offer, useNA = "ifany")
+
+###2023
+table(kff_2023$b8e,useNA = "ifany")
+
+kff_2023$offers <- ifelse(kff_2023$b8e == 1, 1, 0)
+kff_2023$doesnt_offer <- ifelse(kff_2023$b8e == 2,1,0)
+kff_2023$unsure_of_offer <- ifelse(kff_2023$b8e ==3,1,0)
+
+table(kff_2023$b8e, kff_2023$offers, useNA = "ifany")
+table(kff_2023$b8e, kff_2023$doesnt_offer, useNA = "ifany")
+table(kff_2023$b8e, kff_2023$unsure_of_offer, useNA = "ifany")
+
+###2024
+table(kff_2024$b8e,useNA = "ifany")
+
+kff_2024$offers <- ifelse(kff_2024$b8e == 1, 1, 0)
+kff_2024$doesnt_offer <- ifelse(kff_2024$b8e == 2,1,0)
+kff_2024$unsure_of_offer <- ifelse(kff_2024$b8e ==3,1,0)
+
+table(kff_2024$b8e, kff_2024$offers, useNA = "ifany")
+table(kff_2024$b8e, kff_2024$doesnt_offer, useNA = "ifany")
+table(kff_2024$b8e, kff_2024$unsure_of_offer, useNA = "ifany")
 
 
 ###### Percent of Workers with Health Benefits Covered in HDHP #####
@@ -248,6 +337,59 @@ kff_2006$percent_hdhp <- kff_2006$b12e #clean data by creating new variable
 #confirm correct cleaning by checking that the new variable matches the original (difference should be 0 for all observations)
 kff_2006$test_percent_hdhp <- kff_2006$b12e - kff_2006$percent_hdhp
 summary(kff_2006$test_percent_hdhp) #print summary stats
+
+### 2007
+# Step 1: Examine variable
+summary(kff_2007$b12e)
+
+# Step 2: Clean variable (always create new variable!)
+kff_2007$percent_hdhp <- kff_2007$b12e
+
+# step 3: Confirm correct cleaning
+kff_2007$test_percent_hdhp <- kff_2007$b12e - kff_2007$percent_hdhp
+summary(kff_2007$test_percent_hdhp)
+
+### 2008
+summary(kff_2008$b12e)
+
+kff_2008$percent_hdhp <- kff_2008$b12e
+
+kff_2008$test_percent_hdhp <- kff_2008$b12e - kff_2008$percent_hdhp
+summary(kff_2008$test_percent_hdhp)
+
+### 2009
+summary(kff_2009$b12e)
+
+kff_2009$percent_hdhp <- kff_2009$b12e
+
+kff_2009$test_percent_hdhp <- kff_2009$b12e - kff_2009$percent_hdhp
+summary(kff_2009$test_percent_hdhp)
+
+### 2010
+summary(kff_2010$b12e)
+
+kff_2010$percent_hdhp <- kff_2010$b12e
+
+kff_2010$test_percent_hdhp <- kff_2010$b12e - kff_2010$percent_hdhp
+summary(kff_2010$test_percent_hdhp)
+
+#NOTE:mean increases from 2010 to 2011, from 0.0725 to 0.155
+
+### 2011
+summary(kff_2011$b12e)
+
+kff_2011$percent_hdhp <- kff_2011$b12e
+
+kff_2011$test_percent_hdhp <- kff_2011$b12e - kff_2011$percent_hdhp
+summary(kff_2011$test_percent_hdhp)
+
+### 2012
+summary(kff_2012$b12e)
+
+kff_2012$percent_hdhp <- kff_2012$b12e
+
+kff_2012$test_percent_hdhp <- kff_2012$b12e - kff_2012$percent_hdhp
+summary(kff_2012$test_percent_hdhp)
 
 
 ### 2013
@@ -273,6 +415,71 @@ kff_2014$percent_hdhp <- kff_2014$b12e
 kff_2014$test_percent_hdhp <- kff_2014$b12e - kff_2014$percent_hdhp
 summary(kff_2014$test_percent_hdhp)
 
+### 2015
+summary(kff_2015$b12e)
+
+kff_2015$percent_hdhp <- kff_2015$b12e
+
+kff_2015$test_percent_hdhp <- kff_2015$b12e - kff_2015$percent_hdhp
+summary(kff_2015$test_percent_hdhp)
+
+### 2016
+summary(kff_2016$b12e)
+
+kff_2016$percent_hdhp <- kff_2016$b12e
+
+kff_2016$test_percent_hdhp <- kff_2016$b12e - kff_2016$percent_hdhp
+summary(kff_2016$test_percent_hdhp)
+
+### 2017
+summary(kff_2017$b12e)
+
+kff_2017$percent_hdhp <- kff_2017$b12e
+
+kff_2017$test_percent_hdhp <- kff_2017$b12e - kff_2017$percent_hdhp
+summary(kff_2017$test_percent_hdhp)
+
+### 2018
+summary(kff_2018$b12e)
+
+kff_2018$percent_hdhp <- kff_2018$b12e
+
+kff_2018$test_percent_hdhp <- kff_2018$b12e - kff_2018$percent_hdhp
+summary(kff_2018$test_percent_hdhp)
+
+#NOTE: b12e not tracked in 2019 and 2020 datasets according to codebooks
+
+###2021
+summary(kff_2021$b12e_pct)
+
+kff_2021$percent_hdhp <- kff_2021$b12e_pct
+
+kff_2021$test_percent_hdhp <- kff_2021$b12e_pct - kff_2021$percent_hdhp
+summary(kff_2021$test_percent_hdhp)
+
+###2022
+summary(kff_2022$b12e_pct)
+
+kff_2022$percent_hdhp <- kff_2022$b12e_pct
+
+kff_2022$test_percent_hdhp <- kff_2022$b12e_pct - kff_2022$percent_hdhp
+summary(kff_2022$test_percent_hdhp)
+
+###2023
+summary(kff_2023$b12e_pct)
+
+kff_2023$percent_hdhp <- kff_2023$b12e_pct
+
+kff_2023$test_percent_hdhp <- kff_2023$b12e_pct - kff_2023$percent_hdhp
+summary(kff_2023$test_percent_hdhp)
+
+###2024
+summary(kff_2024$b12e_pct)
+
+kff_2024$percent_hdhp <- kff_2024$b12e_pct
+
+kff_2024$test_percent_hdhp <- kff_2024$b12e_pct - kff_2024$percent_hdhp
+summary(kff_2024$test_percent_hdhp)
 
 
 
@@ -582,7 +789,7 @@ table(kff_2013$industry, kff_2013$healthcare, useNA = "ifany")
 table(kff_2014$industry, useNA = "ifany")
 
 # Step 2: Clean variable (always create new variable!)
-kff_2014$construction    <- ifelse(kff_2014$industry == 2,  1, 0)
+kff_2014$AgriMinConst<- ifelse(kff_2014$industry == 2, 1, 0)
 kff_2014$manufacturing   <- ifelse(kff_2014$industry == 3,  1, 0)
 kff_2014$transportutilcomms  <- ifelse(kff_2014$industry == 4,  1, 0)
 kff_2014$wholesale       <- ifelse(kff_2014$industry == 5,  1, 0)
@@ -593,7 +800,7 @@ kff_2014$government      <- ifelse(kff_2014$industry == 9,  1, 0)
 kff_2014$healthcare      <- ifelse(kff_2014$industry == 10, 1, 0)
   
 # step 3: Confirm correct cleaning
-table(kff_2014$industry, kff_2014$construction, useNA = "ifany")
+table(kff_2014$industry, kff_2014$$AgriMinConst, useNA = "ifany")
 table(kff_2014$industry, kff_2014$manufacturing, useNA = "ifany")
 table(kff_2014$industry, kff_2014$transportutilcomms, useNA = "ifany")
 table(kff_2014$industry, kff_2014$wholesale, useNA = "ifany")
@@ -603,9 +810,247 @@ table(kff_2014$industry, kff_2014$service, useNA = "ifany")
 table(kff_2014$industry, kff_2014$government, useNA = "ifany")
 table(kff_2014$industry, kff_2014$healthcare, useNA = "ifany")
 
+### 2015 ###
+table(kff_2015$industry, useNA = "ifany")
+
+kff_2015$AgriMinConst<- ifelse(kff_2015$industry == 2, 1, 0)
+kff_2015$manufacturing   <- ifelse(kff_2015$industry == 3,  1, 0)
+kff_2015$transportutilcomms  <- ifelse(kff_2015$industry == 4,  1, 0)
+kff_2015$wholesale       <- ifelse(kff_2015$industry == 5,  1, 0)
+kff_2015$retail          <- ifelse(kff_2015$industry == 6,  1, 0)
+kff_2015$financial       <- ifelse(kff_2015$industry == 7,  1, 0)
+kff_2015$service         <- ifelse(kff_2015$industry == 8,  1, 0)
+kff_2015$government      <- ifelse(kff_2015$industry == 9,  1, 0)
+kff_2015$healthcare      <- ifelse(kff_2015$industry == 10, 1, 0)
+
+table(kff_2015$industry, kff_2015$AgriMinConst, useNA = "ifany")
+table(kff_2015$industry, kff_2015$manufacturing, useNA = "ifany")
+table(kff_2015$industry, kff_2015$transportutilcomms, useNA = "ifany")
+table(kff_2015$industry, kff_2015$wholesale, useNA = "ifany")
+table(kff_2015$industry, kff_2015$retail, useNA = "ifany")
+table(kff_2015$industry, kff_2015$financial, useNA = "ifany")
+table(kff_2015$industry, kff_2015$service, useNA = "ifany")
+table(kff_2015$industry, kff_2015$government, useNA = "ifany")
+table(kff_2015$industry, kff_2015$healthcare, useNA = "ifany")
+
+### 2016 ###
+table(kff_2016$industry, useNA = "ifany")
+
+kff_2016$AgriMinConst<- ifelse(kff_2016$industry == 2, 1, 0)
+kff_2016$manufacturing   <- ifelse(kff_2016$industry == 3,  1, 0)
+kff_2016$transportutilcomms  <- ifelse(kff_2016$industry == 4,  1, 0)
+kff_2016$wholesale       <- ifelse(kff_2016$industry == 5,  1, 0)
+kff_2016$retail          <- ifelse(kff_2016$industry == 6,  1, 0)
+kff_2016$financial       <- ifelse(kff_2016$industry == 7,  1, 0)
+kff_2016$service         <- ifelse(kff_2016$industry == 8,  1, 0)
+kff_2016$government      <- ifelse(kff_2016$industry == 9,  1, 0)
+kff_2016$healthcare      <- ifelse(kff_2016$industry == 10, 1, 0)
+
+table(kff_2016$industry, kff_2016$AgriMinConst, useNA = "ifany")
+table(kff_2016$industry, kff_2016$manufacturing, useNA = "ifany")
+table(kff_2016$industry, kff_2016$transportutilcomms, useNA = "ifany")
+table(kff_2016$industry, kff_2016$wholesale, useNA = "ifany")
+table(kff_2016$industry, kff_2016$retail, useNA = "ifany")
+table(kff_2016$industry, kff_2016$financial, useNA = "ifany")
+table(kff_2016$industry, kff_2016$service, useNA = "ifany")
+table(kff_2016$industry, kff_2016$government, useNA = "ifany")
+table(kff_2016$industry, kff_2016$healthcare, useNA = "ifany")
+
+
+### 2017 ###
+table(kff_2017$industry, useNA = "ifany")
+
+kff_2017$AgriMinConst<- ifelse(kff_2017$industry == 2, 1, 0)
+kff_2017$manufacturing   <- ifelse(kff_2017$industry == 3,  1, 0)
+kff_2017$transportutilcomms  <- ifelse(kff_2017$industry == 4,  1, 0)
+kff_2017$wholesale       <- ifelse(kff_2017$industry == 5,  1, 0)
+kff_2017$retail          <- ifelse(kff_2017$industry == 6,  1, 0)
+kff_2017$financial       <- ifelse(kff_2017$industry == 7,  1, 0)
+kff_2017$service         <- ifelse(kff_2017$industry == 8,  1, 0)
+kff_2017$government      <- ifelse(kff_2017$industry == 9,  1, 0)
+kff_2017$healthcare      <- ifelse(kff_2017$industry == 10, 1, 0)
+
+table(kff_2017$industry, kff_2017$AgriMinConst, useNA = "ifany")
+table(kff_2017$industry, kff_2017$manufacturing, useNA = "ifany")
+table(kff_2017$industry, kff_2017$transportutilcomms, useNA = "ifany")
+table(kff_2017$industry, kff_2017$wholesale, useNA = "ifany")
+table(kff_2017$industry, kff_2017$retail, useNA = "ifany")
+table(kff_2017$industry, kff_2017$financial, useNA = "ifany")
+table(kff_2017$industry, kff_2017$service, useNA = "ifany")
+table(kff_2017$industry, kff_2017$government, useNA = "ifany")
+table(kff_2017$industry, kff_2017$healthcare, useNA = "ifany")
+
+### 2018 ###
+table(kff_2018$industry, useNA = "ifany")
+
+kff_2018$AgriMinConst<- ifelse(kff_2018$industry == 2, 1, 0)
+kff_2018$manufacturing   <- ifelse(kff_2018$industry == 3,  1, 0)
+kff_2018$transportutilcomms  <- ifelse(kff_2018$industry == 4,  1, 0)
+kff_2018$wholesale       <- ifelse(kff_2018$industry == 5,  1, 0)
+kff_2018$retail          <- ifelse(kff_2018$industry == 6,  1, 0)
+kff_2018$financial       <- ifelse(kff_2018$industry == 7,  1, 0)
+kff_2018$service         <- ifelse(kff_2018$industry == 8,  1, 0)
+kff_2018$government      <- ifelse(kff_2018$industry == 9,  1, 0)
+kff_2018$healthcare      <- ifelse(kff_2018$industry == 10, 1, 0)
+                                   
+table(kff_2018$industry, kff_2018$AgriMinConst, useNA = "ifany")
+table(kff_2018$industry, kff_2018$manufacturing, useNA = "ifany")
+table(kff_2018$industry, kff_2018$transportutilcomms, useNA = "ifany")
+table(kff_2018$industry, kff_2018$wholesale, useNA = "ifany")
+table(kff_2018$industry, kff_2018$retail, useNA = "ifany")
+table(kff_2018$industry, kff_2018$financial, useNA = "ifany")
+table(kff_2018$industry, kff_2018$service, useNA = "ifany")
+table(kff_2018$industry, kff_2018$government, useNA = "ifany")
+table(kff_2018$industry, kff_2018$healthcare, useNA = "ifany")
+
+### 2019 ###
+table(kff_2019$industry, useNA = "ifany")  
+
+#10 (finance) not mentioned in codebook but is in dataset
+
+kff_2019$AgriMinConst<- ifelse(kff_2019$industry == 2, 1, 0)
+kff_2019$manufacturing   <- ifelse(kff_2019$industry == 3,  1, 0)
+kff_2019$transportutilcomms  <- ifelse(kff_2019$industry == 4,  1, 0)
+kff_2019$wholesale       <- ifelse(kff_2019$industry == 5,  1, 0)
+kff_2019$retail          <- ifelse(kff_2019$industry == 6,  1, 0)
+kff_2019$financial       <- ifelse(kff_2019$industry == 7,  1, 0)
+kff_2019$service         <- ifelse(kff_2019$industry == 8,  1, 0)
+kff_2019$government      <- ifelse(kff_2019$industry == 9,  1, 0)
+kff_2019$healthcare      <- ifelse(kff_2019$industry == 10, 1, 0)
+
+table(kff_2019$industry, kff_2019$AgriMinConst, useNA = "ifany")
+table(kff_2019$industry, kff_2019$manufacturing, useNA = "ifany")
+table(kff_2019$industry, kff_2019$transportutilcomms, useNA = "ifany")
+table(kff_2019$industry, kff_2019$wholesale, useNA = "ifany")
+table(kff_2019$industry, kff_2019$retail, useNA = "ifany")
+table(kff_2019$industry, kff_2019$financial, useNA = "ifany")
+table(kff_2019$industry, kff_2019$service, useNA = "ifany")
+table(kff_2019$industry, kff_2019$government, useNA = "ifany")
+table(kff_2019$industry, kff_2019$healthcare, useNA = "ifany")
+
+### 2020 ###
+table(kff_2020$industry, useNA = "ifany")
+#10 (finance) not mentioned in codebook but is in dataset
+
+kff_2020$AgriMinConst<- ifelse(kff_2020$industry == 2, 1, 0)
+kff_2020$manufacturing   <- ifelse(kff_2020$industry == 3,  1, 0)
+kff_2020$transportutilcomms  <- ifelse(kff_2020$industry == 4,  1, 0)
+kff_2020$wholesale       <- ifelse(kff_2020$industry == 5,  1, 0)
+kff_2020$retail          <- ifelse(kff_2020$industry == 6,  1, 0)
+kff_2020$financial       <- ifelse(kff_2020$industry == 7,  1, 0)
+kff_2020$service         <- ifelse(kff_2020$industry == 8,  1, 0)
+kff_2020$government      <- ifelse(kff_2020$industry == 9,  1, 0)
+kff_2020$healthcare      <- ifelse(kff_2020$industry == 10, 1, 0)
+
+table(kff_2020$industry, kff_2020$AgriMinConst, useNA = "ifany")
+table(kff_2020$industry, kff_2020$manufacturing, useNA = "ifany")
+table(kff_2020$industry, kff_2020$transportutilcomms, useNA = "ifany")
+table(kff_2020$industry, kff_2020$wholesale, useNA = "ifany")
+table(kff_2020$industry, kff_2020$retail, useNA = "ifany")
+table(kff_2020$industry, kff_2020$financial, useNA = "ifany")
+table(kff_2020$industry, kff_2020$service, useNA = "ifany")
+table(kff_2020$industry, kff_2020$government, useNA = "ifany")
+table(kff_2020$industry, kff_2020$healthcare, useNA = "ifany")
 
 
 
+### 2021 ###
+table(kff_2021$industry, useNA = "ifany")
+#10 (finance) not mentioned in codebook but is in dataset
+
+kff_2021$AgriMinConst<- ifelse(kff_2021$industry == 2, 1, 0)
+kff_2021$manufacturing   <- ifelse(kff_2021$industry == 3,  1, 0)
+kff_2021$transportutilcomms  <- ifelse(kff_2021$industry == 4,  1, 0)
+kff_2021$wholesale       <- ifelse(kff_2021$industry == 5,  1, 0)
+kff_2021$retail          <- ifelse(kff_2021$industry == 6,  1, 0)
+kff_2021$financial       <- ifelse(kff_2021$industry == 7,  1, 0)
+kff_2021$service         <- ifelse(kff_2021$industry == 8,  1, 0)
+kff_2021$government      <- ifelse(kff_2021$industry == 9,  1, 0)
+kff_2021$healthcare      <- ifelse(kff_2021$industry == 10, 1, 0)
+
+table(kff_2021$industry, kff_2021$AgriMinConst, useNA = "ifany")
+table(kff_2021$industry, kff_2021$manufacturing, useNA = "ifany")
+table(kff_2021$industry, kff_2021$transportutilcomms, useNA = "ifany")
+table(kff_2021$industry, kff_2021$wholesale, useNA = "ifany")
+table(kff_2021$industry, kff_2021$retail, useNA = "ifany")
+table(kff_2021$industry, kff_2021$financial, useNA = "ifany")
+table(kff_2021$industry, kff_2021$service, useNA = "ifany")
+table(kff_2021$industry, kff_2021$government, useNA = "ifany")
+table(kff_2021$industry, kff_2021$healthcare, useNA = "ifany")
+
+
+### 2022 ###
+table(kff_2022$industry, useNA = "ifany")
+
+kff_2022$AgriMinConst<- ifelse(kff_2022$industry == 2, 1, 0)
+kff_2022$manufacturing   <- ifelse(kff_2022$industry == 3,  1, 0)
+kff_2022$transportutilcomms  <- ifelse(kff_2022$industry == 4,  1, 0)
+kff_2022$wholesale       <- ifelse(kff_2022$industry == 5,  1, 0)
+kff_2022$retail          <- ifelse(kff_2022$industry == 6,  1, 0)
+kff_2022$financial       <- ifelse(kff_2022$industry == 7,  1, 0)
+kff_2022$service         <- ifelse(kff_2022$industry == 8,  1, 0)
+kff_2022$government      <- ifelse(kff_2022$industry == 9,  1, 0)
+kff_2022$healthcare      <- ifelse(kff_2022$industry == 10, 1, 0)
+
+table(kff_2022$industry, kff_2022$AgriMinConst, useNA = "ifany")
+table(kff_2022$industry, kff_2022$manufacturing, useNA = "ifany")
+table(kff_2022$industry, kff_2022$transportutilcomms, useNA = "ifany")
+table(kff_2022$industry, kff_2022$wholesale, useNA = "ifany")
+table(kff_2022$industry, kff_2022$retail, useNA = "ifany")
+table(kff_2022$industry, kff_2022$financial, useNA = "ifany")
+table(kff_2022$industry, kff_2022$service, useNA = "ifany")
+table(kff_2022$industry, kff_2022$government, useNA = "ifany")
+table(kff_2022$industry, kff_2022$healthcare, useNA = "ifany")
+
+### 2023 ###
+table(kff_2023$industry, useNA = "ifany")
+
+kff_2023$AgriMinConst<- ifelse(kff_2023$industry == 2, 1, 0)
+kff_2023$manufacturing   <- ifelse(kff_2023$industry == 3,  1, 0)
+kff_2023$transportutilcomms  <- ifelse(kff_2023$industry == 4,  1, 0)
+kff_2023$wholesale       <- ifelse(kff_2023$industry == 5,  1, 0)
+kff_2023$retail          <- ifelse(kff_2023$industry == 6,  1, 0)
+kff_2023$financial       <- ifelse(kff_2023$industry == 7,  1, 0)
+kff_2023$service         <- ifelse(kff_2023$industry == 8,  1, 0)
+kff_2023$government      <- ifelse(kff_2023$industry == 9,  1, 0)
+kff_2023$healthcare      <- ifelse(kff_2023$industry == 10, 1, 0)
+
+table(kff_2023$industry, kff_2023$AgriMinConst, useNA = "ifany")
+table(kff_2023$industry, kff_2023$manufacturing, useNA = "ifany")
+table(kff_2023$industry, kff_2023$transportutilcomms, useNA = "ifany")
+table(kff_2023$industry, kff_2023$wholesale, useNA = "ifany")
+table(kff_2023$industry, kff_2023$retail, useNA = "ifany")
+table(kff_2023$industry, kff_2023$financial, useNA = "ifany")
+table(kff_2023$industry, kff_2023$service, useNA = "ifany")
+table(kff_2023$industry, kff_2023$government, useNA = "ifany")
+table(kff_2023$industry, kff_2023$healthcare, useNA = "ifany")
+
+### 2024 ###
+table(kff_2024$industry, useNA = "ifany")
+
+kff_2024$AgriMinConst<- ifelse(kff_2024$industry == 2, 1, 0)
+kff_2024$manufacturing   <- ifelse(kff_2024$industry == 3,  1, 0)
+kff_2024$transportutilcomms  <- ifelse(kff_2024$industry == 4,  1, 0)
+kff_2024$wholesale       <- ifelse(kff_2024$industry == 5,  1, 0)
+kff_2024$retail          <- ifelse(kff_2024$industry == 6,  1, 0)
+kff_2024$financial       <- ifelse(kff_2024$industry == 7,  1, 0)
+kff_2024$service         <- ifelse(kff_2024$industry == 8,  1, 0)
+kff_2024$government      <- ifelse(kff_2024$industry == 9,  1, 0)
+kff_2024$healthcare      <- ifelse(kff_2024$industry == 10, 1, 0)
+
+table(kff_2024$industry, kff_2024$AgriMinConst, useNA = "ifany")
+table(kff_2024$industry, kff_2024$manufacturing, useNA = "ifany")
+table(kff_2024$industry, kff_2024$transportutilcomms, useNA = "ifany")
+table(kff_2024$industry, kff_2024$wholesale, useNA = "ifany")
+table(kff_2024$industry, kff_2024$retail, useNA = "ifany")
+table(kff_2024$industry, kff_2024$financial, useNA = "ifany")
+table(kff_2024$industry, kff_2024$service, useNA = "ifany")
+table(kff_2024$industry, kff_2024$government, useNA = "ifany")
+table(kff_2024$industry, kff_2024$healthcare, useNA = "ifany")
+
+
+                                     
+                                     
 ###### Categorized Percent of Workforce Earning $20,000 or Less #####
 ### 2003
 table(kff_2003$loincome, useNA = "ifany") #examine variable
