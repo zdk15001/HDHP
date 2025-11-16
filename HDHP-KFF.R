@@ -447,7 +447,23 @@ kff_2018$percent_hdhp <- kff_2018$b12e
 kff_2018$test_percent_hdhp <- kff_2018$b12e - kff_2018$percent_hdhp
 summary(kff_2018$test_percent_hdhp)
 
-#NOTE: b12e not tracked in 2019 and 2020 datasets according to codebooks
+#NOTE: variable are tracked in 2019 and 2020 datasets but not mentioned in codebooks/dictionaries
+
+### 2019
+summary(kff_2019$b12e_pct)
+
+kff_2019$percent_hdhp <- kff_2019$b12e_pct
+
+kff_2019$test_percent_hdhp <- kff_2019$b12e_pct - kff_2019$percent_hdhp
+summary(kff_2019$test_percent_hdhp)
+
+### 2020
+summary(kff_2020$b12e_pct)
+
+kff_2020$percent_hdhp <- kff_2020$b12e_pct
+
+kff_2020$test_percent_hdhp <- kff_2020$b12e_pct - kff_2020$percent_hdhp
+summary(kff_2020$test_percent_hdhp)
 
 ###2021
 summary(kff_2021$b12e_pct)
