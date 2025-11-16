@@ -741,6 +741,8 @@ kff_2008$some_high_wage   <- ifelse(kff_2008$hiincome == 1, 1, 0) #Less than 35%
 table(kff_2008$hiincome, kff_2008$mostly_high_wage, useNA = "ifany")
 table(kff_2008$hiincome, kff_2008$some_high_wage, useNA = "ifany")
 
+### NOTE: 2009-2011,hiincome variable is missing/no measured
+
 
 ### 2012
 table(kff_2012$hiincome, useNA = "ifany") #examine variable
