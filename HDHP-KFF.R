@@ -816,7 +816,7 @@ kff_2014$government      <- ifelse(kff_2014$industry == 9,  1, 0)
 kff_2014$healthcare      <- ifelse(kff_2014$industry == 10, 1, 0)
   
 # step 3: Confirm correct cleaning
-table(kff_2014$industry, kff_2014$$AgriMinConst, useNA = "ifany")
+table(kff_2014$industry, kff_2014$AgriMinConst, useNA = "ifany")
 table(kff_2014$industry, kff_2014$manufacturing, useNA = "ifany")
 table(kff_2014$industry, kff_2014$transportutilcomms, useNA = "ifany")
 table(kff_2014$industry, kff_2014$wholesale, useNA = "ifany")
@@ -1492,7 +1492,7 @@ kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
 #confirm correct cleaning
 table(kff_2004$k11h, kff_2004$very_likely_next_year, useNA = "ifany")
 table(kff_2004$k11h, kff_2004$sm_likely_next_year, useNA = "ifany")
-table(kff_2004$k11h, Kff_2004$not_too_likely_next_year, useNA = "ifany")
+table(kff_2004$k11h, kff_2004$not_too_likely_next_year, useNA = "ifany")
 #=======
 table(kff_2004$k11h, kff_2004$not_too_likely_next_year, useNA = "ifany")
 #>>>>>>> ed7d427559ee523afbb6328f1a8a4a599527dcdb
@@ -1512,7 +1512,7 @@ table(kff_2004$k11h, kff_2004$dk_how_likely_next_year, useNA = "ifany")
 my_varlist <- c("small_firm", "medium_firm", "large_firm",
                 "MinConst", "manufacturing", "transportutilcomms",
                 "wholesale", "retail", "financial", "service",
-                "government", "healthcare", "offers", "doesnt_offer", "unsure_of_offer")
+                "government", "healthcare", "offers", "doesnt_offer")
 
 
 
