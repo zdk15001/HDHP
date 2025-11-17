@@ -15,7 +15,7 @@
 setwd("G:/My Drive/EDU_SYNC/Research/Active/HDHP/work")
 
 # Mina's command to set WD
-setwd("~/Library/CloudStorage/GoogleDrive-gugliem2@tcnj.edu/.shortcut-targets-by-id/14oLkrWtHW1NzX87aL0DxDGo_9Ysj-XBQ/HDHP/resources/KFF Data/Data")
+setwd("~/Library/CloudStorage/GoogleDrive-gugliem2@tcnj.edu/.shortcut-targets-by-id/14oLkrWtHW1NzX87aL0DxDGo_9Ysj-XBQ/HDHP/work")
 
 # Daniel's command to set WD
 setwd("G:/.shortcut-targets-by-id/14oLkrWtHW1NzX87aL0DxDGo_9Ysj-XBQ/HDHP/work")
@@ -59,14 +59,7 @@ kff_2020 <- read_sav('health benefits 2020.sav')
 kff_2021 <- read.csv('health benefits 2021.csv') 
 kff_2022 <- read.csv('2022-11-28 health benefits 2022.csv') 
 kff_2023 <- read.csv('2023-10-17 health benefits 2023.csv')
-kff_2024 <- read.csv('2022-10-10 health benefits 2024.csv')
-
-#### ERROR ERROR ERROR: 2024 not loading
-
-
-### IN the working directory, 2021 and forward are CSV files. Update or fix.
-
-
+kff_2024 <- read.csv('2024-10-10 health benefits 2024.csv')
 
 
 
@@ -93,14 +86,14 @@ kff_2003$doesnt_offer <- ifelse(kff_2003$j3 == 2,1,0)
 kff_2003$unsure_of_offer <- ifelse(kff_2003$j3 ==3,1,0)
 
 # step 3: Confirm correct cleaning
-table(kff_2003$j3, kff_2003$offers)
-table(kff_2003$j3, kff_2003$doesnt_offer)
-table(kff_2003$j3, kff_2003$unsure_of_offer)
+table(kff_2003$j3, kff_2003$offers, useNA = "ifany")
+table(kff_2003$j3, kff_2003$doesnt_offer, useNA = "ifany")
+table(kff_2003$j3, kff_2003$unsure_of_offer, useNA = "ifany")
 
 
 ### 2004
 #Step 1: Examine variable
-summary(kff_2004$j3) 
+summary(kff_2004$j3)
 
 # Step 2: Clean variable (always create new variable!)
 kff_2004$offers <- ifelse(kff_2004$j3 == 1, 1, 0)
@@ -108,9 +101,10 @@ kff_2004$doesnt_offer <- ifelse(kff_2004$j3 == 2,1,0)
 kff_2004$unsure_of_offer <- ifelse(kff_2004$j3 ==3,1,0)
 
 # step 3: Confirm correct cleaning
-table(kff_2004$j3, kff_2004$offers)
-table(kff_2004$j3, kff_2004$doesnt_offer)
-table(kff_2004$j3, kff_2004$unsure_of_offer)
+table(kff_2004$j3, kff_2004$offers, useNA = "ifany")
+table(kff_2004$j3, kff_2004$doesnt_offer, useNA = "ifany")
+table(kff_2004$j3, kff_2004$unsure_of_offer, useNA = "ifany")
+
 
 ### 2005
 #Step 1: Examine variable
@@ -121,8 +115,8 @@ kff_2005$offers <- ifelse(kff_2005$b8e == 1, 1, 0)
 kff_2005$doesnt_offer <- ifelse(kff_2005$b8e == 2,1,0)
 
 # step 3: Confirm correct cleaning
-table(kff_2005$b8e, kff_2005$offers)
-table(kff_2005$b8e, kff_2005$doesnt_offer)
+table(kff_2005$b8e, kff_2005$offers, useNA = "ifany")
+table(kff_2005$b8e, kff_2005$doesnt_offer, useNA = "ifany")
 
 
 ###2006
@@ -134,83 +128,205 @@ kff_2006$offers <- ifelse(kff_2006$b8e == 1, 1, 0)
 kff_2006$doesnt_offer <- ifelse(kff_2006$b8e == 2,1,0)
 
 # step 3: Confirm correct cleaning
-table(kff_2006$b8e, kff_2006$offers)
-table(kff_2006$b8e, kff_2006$doesnt_offer)
+table(kff_2006$b8e, kff_2006$offers, useNA = "ifany")
+table(kff_2006$b8e, kff_2006$doesnt_offer, useNA = "ifany")
 
 
+###2007
+#Step 1: Examine variable
+summary(kff_2007$b8e)
+
+# Step 2: Clean variable (always create new variable!)
+kff_2007$offers <- ifelse(kff_2007$b8e == 1, 1, 0)
+kff_2007$doesnt_offer <- ifelse(kff_2007$b8e == 2,1,0)
+
+# step 3: Confirm correct cleaning
+table(kff_2007$b8e, kff_2007$offers, useNA = "ifany")
+table(kff_2007$b8e, kff_2007$doesnt_offer, useNA = "ifany")
+
+###2008
+summary(kff_2008$b8e)
+
+kff_2008$offers <- ifelse(kff_2008$b8e == 1, 1, 0)
+kff_2008$doesnt_offer <- ifelse(kff_2008$b8e == 2,1,0)
+
+table(kff_2008$b8e, kff_2008$offers, useNA = "ifany")
+table(kff_2008$b8e, kff_2008$doesnt_offer, useNA = "ifany")
 
 
+###2009
+summary(kff_2009$b8e)
+
+kff_2009$offers <- ifelse(kff_2009$b8e == 1, 1, 0)
+kff_2009$doesnt_offer <- ifelse(kff_2009$b8e == 2,1,0)
+
+table(kff_2009$b8e, kff_2009$offers, useNA = "ifany")
+table(kff_2009$b8e, kff_2009$doesnt_offer, useNA = "ifany")
 
 
-###### Likelihood of Making a Change in the Next Year: Offer High Deductible Health Plan #####
+###2010
+summary(kff_2010$b8e)
 
-###2004 (Note: defined as a deductible of more than $1000.)
-#step 1: examine variable
-summary(kff_2004$k11h)
-table(kff_2004$k11h, useNA = "ifany")
+kff_2010$offers <- ifelse(kff_2010$b8e == 1, 1, 0)
+kff_2010$doesnt_offer <- ifelse(kff_2010$b8e == 2,1,0)
 
-#step 2: clean variable by creating a new variable
-kff_2004$very_likely_next_year <- ifelse(kff_2004$k11h == 1,1,0)
-kff_2004$sm_likely_next_year <- ifelse(kff_2004$k11h == 2,1,0)
-kff_2004$not_too_likely_next_year <- ifelse(kff_2004$k11h == 3,1,0)
-kff_2004$not_at_all_likely_next_year <- ifelse(kff_2004$k11h == 4,1,0)
-kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
-
-#confirm correct cleaning
-table(kff_2004$k11h, kff_2004$very_likely_next_year)
-table(kff_2004$k11h, kff_2004$sm_likely_next_year)
-table(kff_2004$k11h, kff_2004$not_too_likely_next_year)
-table(kff_2004$k11h, kff_2004$not_at_all_likely_next_year)
-table(kff_2004$k11h, kff_2004$dk_how_likely_next_year)
+table(kff_2010$b8e, kff_2010$offers, useNA = "ifany")
+table(kff_2010$b8e, kff_2010$doesnt_offer, useNA = "ifany")
 
 
-###2005 (Note: defined as an annual deductible of at least $1,000 for single coverage and $2,000 for family coverage, with a health reimbursement arrangement in the next year?)
-#step 1: examine variable
-summary(kff_2004$k11h)
+###2011
+summary(kff_2011$b8e)
 
-#step 2: clean variable by creating a new variable
-kff_2004$very_likely_next_year <- ifelse(kff_2004$k11h == 1,1,0)
-kff_2004$sm_likely_next_year <- ifelse(kff_2004$k11h == 2,1,0)
-kff_2004$not_too_likely_next_year <- ifelse(kff_2004$k11h == 3,1,0)
-kff_2004$not_at_all_likely_next_year <- ifelse(kff_2004$k11h == 4,1,0)
-kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
+kff_2011$offers <- ifelse(kff_2011$b8e == 1, 1, 0)
+kff_2011$doesnt_offer <- ifelse(kff_2011$b8e == 2,1,0)
 
-#confirm correct cleaning
-table(kff_2004$k11h, kff_2004$very_likely_next_year)
-table(kff_2004$k11h, kff_2004$sm_likely_next_year)
-#<<<<<<< Updated upstream
-table(kff_2004$k11h, kff_2004$not_too_likely_next_year)
-#=======
-#<<<<<<< HEAD
-table(kff_2004$k11h, Kff_2004$not_too_likely_next_year)
-table(kff_2004$k11h, kff_2004$not_at_all_likely_next_year)
-table(kff_2004$k11h, kff_2004$dk_how_likely_next_year)
-
-###2005 (Note: defined as an annual deductible of at least $1,000 for single coverage and $2,000 for family coverage, with a health reimbursement arrangement in the next year?)
-#step 1: examine variable
-summary(kff_2005$k11h)
-
-#step 2: clean variable by creating a new variable
-kff_2004$very_likely_next_year <- ifelse(kff_2004$k11h == 1,1,0)
-kff_2004$sm_likely_next_year <- ifelse(kff_2004$k11h == 2,1,0)
-kff_2004$not_too_likely_next_year <- ifelse(kff_2004$k11h == 3,1,0)
-kff_2004$not_at_all_likely_next_year <- ifelse(kff_2004$k11h == 4,1,0)
-kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
-
-#confirm correct cleaning
-table(kff_2004$k11h, kff_2004$very_likely_next_year)
-table(kff_2004$k11h, kff_2004$sm_likely_next_year)
-table(kff_2004$k11h, Kff_2004$not_too_likely_next_year)
-#=======
-table(kff_2004$k11h, kff_2004$not_too_likely_next_year)
-#>>>>>>> ed7d427559ee523afbb6328f1a8a4a599527dcdb
-#>>>>>>> Stashed changes
-table(kff_2004$k11h, kff_2004$not_at_all_likely_next_year)
-table(kff_2004$k11h, kff_2004$dk_how_likely_next_year)
+table(kff_2011$b8e, kff_2011$offers, useNA = "ifany")
+table(kff_2011$b8e, kff_2011$doesnt_offer, useNA = "ifany")
 
 
+###2012
+##ERROR ERROR: NO b8e IN 2012 DATASET (there is b8e in 2012 codebook though)
+summary(kff_2012$b8e)
 
-###### Clean Percent of Workers with Health Benefits Covered in HDHP #####
+
+###2013
+summary(kff_2013$b8e)
+
+kff_2013$offers <- ifelse(kff_2013$b8e == 1, 1, 0)
+kff_2013$doesnt_offer <- ifelse(kff_2013$b8e == 2,1,0)
+kff_2013$unsure_of_offer <- ifelse(kff_2013$b8e ==3,1,0)
+
+table(kff_2013$b8e, kff_2013$offers, useNA = "ifany")
+table(kff_2013$b8e, kff_2013$doesnt_offer, useNA = "ifany")
+table(kff_2013$b8e, kff_2013$unsure_of_offer, useNA = "ifany")
+
+
+####2014
+summary(kff_2014$b8e)
+
+kff_2014$offers <- ifelse(kff_2014$b8e == 1, 1, 0)
+kff_2014$doesnt_offer <- ifelse(kff_2014$b8e == 2,1,0)
+kff_2014$unsure_of_offer <- ifelse(kff_2014$b8e ==3,1,0)
+
+table(kff_2014$b8e, kff_2014$offers, useNA = "ifany")
+table(kff_2014$b8e, kff_2014$doesnt_offer, useNA = "ifany")
+table(kff_2014$b8e, kff_2014$unsure_of_offer, useNA = "ifany")
+
+
+###2015
+summary(kff_2015$b8e)
+
+kff_2015$offers <- ifelse(kff_2015$b8e == 1, 1, 0)
+kff_2015$doesnt_offer <- ifelse(kff_2015$b8e == 2,1,0)
+
+table(kff_2015$b8e, kff_2015$offers, useNA = "ifany")
+table(kff_2015$b8e, kff_2015$doesnt_offer, useNA = "ifany")
+
+
+###2016
+summary(kff_2016$b8e)
+
+kff_2016$offers <- ifelse(kff_2016$b8e == 1, 1, 0)
+kff_2016$doesnt_offer <- ifelse(kff_2016$b8e == 2,1,0)
+kff_2016$unsure_of_offer <- ifelse(kff_2016$b8e ==3,1,0)
+
+table(kff_2016$b8e, kff_2016$offers, useNA = "ifany")
+table(kff_2016$b8e, kff_2016$doesnt_offer, useNA = "ifany")
+table(kff_2016$b8e, kff_2016$unsure_of_offer, useNA = "ifany")
+
+
+###2017
+summary(kff_2017$b8e)
+
+kff_2017$offers <- ifelse(kff_2017$b8e == 1, 1, 0)
+kff_2017$doesnt_offer <- ifelse(kff_2017$b8e == 2,1,0)
+kff_2017$unsure_of_offer <- ifelse(kff_2017$b8e ==3,1,0)
+
+table(kff_2017$b8e, kff_2017$offers, useNA = "ifany")
+table(kff_2017$b8e, kff_2017$doesnt_offer, useNA = "ifany")
+table(kff_2017$b8e, kff_2017$unsure_of_offer, useNA = "ifany")
+
+
+###2018
+summary(kff_2018$b8e)
+
+kff_2018$offers <- ifelse(kff_2018$b8e == 1, 1, 0)
+kff_2018$doesnt_offer <- ifelse(kff_2018$b8e == 2,1,0)
+kff_2018$unsure_of_offer <- ifelse(kff_2018$b8e ==3,1,0)
+
+table(kff_2018$b8e, kff_2018$offers, useNA = "ifany")
+table(kff_2018$b8e, kff_2018$doesnt_offer, useNA = "ifany")
+table(kff_2018$b8e, kff_2018$unsure_of_offer, useNA = "ifany")
+
+###2019
+table(kff_2019$b8e,useNA = "ifany")
+
+kff_2019$offers <- ifelse(kff_2019$b8e == 1, 1, 0)
+kff_2019$doesnt_offer <- ifelse(kff_2019$b8e == 2,1,0)
+kff_2019$unsure_of_offer <- ifelse(kff_2019$b8e ==3,1,0)
+
+table(kff_2019$b8e, kff_2019$offers, useNA = "ifany")
+table(kff_2019$b8e, kff_2019$doesnt_offer, useNA = "ifany")
+table(kff_2019$b8e, kff_2019$unsure_of_offer, useNA = "ifany")
+
+###2020
+table(kff_2020$b8e,useNA = "ifany")
+
+#NOTE: 2020 has 3, unsure if they offer HDHP in the dataset but not in the codebook/data dictionary
+kff_2020$offers <- ifelse(kff_2020$b8e == 1, 1, 0)
+kff_2020$doesnt_offer <- ifelse(kff_2020$b8e == 2,1,0)
+kff_2020$unsure_of_offer <- ifelse(kff_2020$b8e ==3,1,0)
+
+table(kff_2020$b8e, kff_2020$offers, useNA = "ifany")
+table(kff_2020$b8e, kff_2020$doesnt_offer, useNA = "ifany")
+table(kff_2020$b8e, kff_2020$unsure_of_offer, useNA = "ifany")
+
+###2021
+table(kff_2021$b8e,useNA = "ifany")
+
+kff_2021$offers <- ifelse(kff_2021$b8e == 1, 1, 0)
+kff_2021$doesnt_offer <- ifelse(kff_2021$b8e == 2,1,0)
+kff_2021$unsure_of_offer <- ifelse(kff_2021$b8e ==3,1,0)
+
+table(kff_2021$b8e, kff_2021$offers, useNA = "ifany")
+table(kff_2021$b8e, kff_2021$doesnt_offer, useNA = "ifany")
+table(kff_2021$b8e, kff_2021$unsure_of_offer, useNA = "ifany")
+
+###2022
+table(kff_2022$b8e,useNA = "ifany")
+
+kff_2022$offers <- ifelse(kff_2022$b8e == 1, 1, 0)
+kff_2022$doesnt_offer <- ifelse(kff_2022$b8e == 2,1,0)
+kff_2022$unsure_of_offer <- ifelse(kff_2022$b8e ==3,1,0)
+
+table(kff_2022$b8e, kff_2022$offers, useNA = "ifany")
+table(kff_2022$b8e, kff_2022$doesnt_offer, useNA = "ifany")
+table(kff_2022$b8e, kff_2022$unsure_of_offer, useNA = "ifany")
+
+###2023
+table(kff_2023$b8e,useNA = "ifany")
+
+kff_2023$offers <- ifelse(kff_2023$b8e == 1, 1, 0)
+kff_2023$doesnt_offer <- ifelse(kff_2023$b8e == 2,1,0)
+kff_2023$unsure_of_offer <- ifelse(kff_2023$b8e ==3,1,0)
+
+table(kff_2023$b8e, kff_2023$offers, useNA = "ifany")
+table(kff_2023$b8e, kff_2023$doesnt_offer, useNA = "ifany")
+table(kff_2023$b8e, kff_2023$unsure_of_offer, useNA = "ifany")
+
+###2024
+table(kff_2024$b8e,useNA = "ifany")
+
+kff_2024$offers <- ifelse(kff_2024$b8e == 1, 1, 0)
+kff_2024$doesnt_offer <- ifelse(kff_2024$b8e == 2,1,0)
+kff_2024$unsure_of_offer <- ifelse(kff_2024$b8e ==3,1,0)
+
+table(kff_2024$b8e, kff_2024$offers, useNA = "ifany")
+table(kff_2024$b8e, kff_2024$doesnt_offer, useNA = "ifany")
+table(kff_2024$b8e, kff_2024$unsure_of_offer, useNA = "ifany")
+
+
+###### Percent of Workers with Health Benefits Covered in HDHP #####
 
 ### 2006
 #examine variable by showing summary stats (min, 1st quartile, median, mean, 3rd quartile, max, and number of missing values (NA))
@@ -222,16 +338,71 @@ kff_2006$percent_hdhp <- kff_2006$b12e #clean data by creating new variable
 kff_2006$test_percent_hdhp <- kff_2006$b12e - kff_2006$percent_hdhp
 summary(kff_2006$test_percent_hdhp) #print summary stats
 
+### 2007
+# Step 1: Examine variable
+summary(kff_2007$b12e)
+
+# Step 2: Clean variable (always create new variable!)
+kff_2007$percent_hdhp <- kff_2007$b12e
+
+# step 3: Confirm correct cleaning
+kff_2007$test_percent_hdhp <- kff_2007$b12e - kff_2007$percent_hdhp
+summary(kff_2007$test_percent_hdhp)
+
+### 2008
+summary(kff_2008$b12e)
+
+kff_2008$percent_hdhp <- kff_2008$b12e
+
+kff_2008$test_percent_hdhp <- kff_2008$b12e - kff_2008$percent_hdhp
+summary(kff_2008$test_percent_hdhp)
+
+### 2009
+summary(kff_2009$b12e)
+
+kff_2009$percent_hdhp <- kff_2009$b12e
+
+kff_2009$test_percent_hdhp <- kff_2009$b12e - kff_2009$percent_hdhp
+summary(kff_2009$test_percent_hdhp)
+
+### 2010
+summary(kff_2010$b12e)
+
+kff_2010$percent_hdhp <- kff_2010$b12e
+
+kff_2010$test_percent_hdhp <- kff_2010$b12e - kff_2010$percent_hdhp
+summary(kff_2010$test_percent_hdhp)
+
+#NOTE:mean increases from 2010 to 2011, from 0.0725 to 0.155
+
+### 2011
+summary(kff_2011$b12e)
+
+kff_2011$percent_hdhp <- kff_2011$b12e
+
+kff_2011$test_percent_hdhp <- kff_2011$b12e - kff_2011$percent_hdhp
+summary(kff_2011$test_percent_hdhp)
+
+### 2012
+summary(kff_2012$b12e)
+
+kff_2012$percent_hdhp <- kff_2012$b12e
+
+kff_2012$test_percent_hdhp <- kff_2012$b12e - kff_2012$percent_hdhp
+summary(kff_2012$test_percent_hdhp)
+
 
 ### 2013
 # Step 1: Examine variable
 summary(kff_2013$b12e)
+
 # Step 2: Clean variable (always create new variable!)
 kff_2013$percent_hdhp <- kff_2013$b12e
 
 # step 3: Confirm correct cleaning
 kff_2013$test_percent_hdhp <- kff_2013$b12e - kff_2013$percent_hdhp
 summary(kff_2013$test_percent_hdhp)
+
 
 ### 2014
 # Step 1: Examine variable
@@ -244,13 +415,93 @@ kff_2014$percent_hdhp <- kff_2014$b12e
 kff_2014$test_percent_hdhp <- kff_2014$b12e - kff_2014$percent_hdhp
 summary(kff_2014$test_percent_hdhp)
 
+### 2015
+summary(kff_2015$b12e)
+
+kff_2015$percent_hdhp <- kff_2015$b12e
+
+kff_2015$test_percent_hdhp <- kff_2015$b12e - kff_2015$percent_hdhp
+summary(kff_2015$test_percent_hdhp)
+
+### 2016
+summary(kff_2016$b12e)
+
+kff_2016$percent_hdhp <- kff_2016$b12e
+
+kff_2016$test_percent_hdhp <- kff_2016$b12e - kff_2016$percent_hdhp
+summary(kff_2016$test_percent_hdhp)
+
+### 2017
+summary(kff_2017$b12e)
+
+kff_2017$percent_hdhp <- kff_2017$b12e
+
+kff_2017$test_percent_hdhp <- kff_2017$b12e - kff_2017$percent_hdhp
+summary(kff_2017$test_percent_hdhp)
+
+### 2018
+summary(kff_2018$b12e)
+
+kff_2018$percent_hdhp <- kff_2018$b12e
+
+kff_2018$test_percent_hdhp <- kff_2018$b12e - kff_2018$percent_hdhp
+summary(kff_2018$test_percent_hdhp)
+
+#NOTE: variable are tracked in 2019 and 2020 datasets but not mentioned in codebooks/dictionaries
+
+### 2019
+summary(kff_2019$b12e_pct)
+
+kff_2019$percent_hdhp <- kff_2019$b12e_pct
+
+kff_2019$test_percent_hdhp <- kff_2019$b12e_pct - kff_2019$percent_hdhp
+summary(kff_2019$test_percent_hdhp)
+
+### 2020
+summary(kff_2020$b12e_pct)
+
+kff_2020$percent_hdhp <- kff_2020$b12e_pct
+
+kff_2020$test_percent_hdhp <- kff_2020$b12e_pct - kff_2020$percent_hdhp
+summary(kff_2020$test_percent_hdhp)
+
+###2021
+summary(kff_2021$b12e_pct)
+
+kff_2021$percent_hdhp <- kff_2021$b12e_pct
+
+kff_2021$test_percent_hdhp <- kff_2021$b12e_pct - kff_2021$percent_hdhp
+summary(kff_2021$test_percent_hdhp)
+
+###2022
+summary(kff_2022$b12e_pct)
+
+kff_2022$percent_hdhp <- kff_2022$b12e_pct
+
+kff_2022$test_percent_hdhp <- kff_2022$b12e_pct - kff_2022$percent_hdhp
+summary(kff_2022$test_percent_hdhp)
+
+###2023
+summary(kff_2023$b12e_pct)
+
+kff_2023$percent_hdhp <- kff_2023$b12e_pct
+
+kff_2023$test_percent_hdhp <- kff_2023$b12e_pct - kff_2023$percent_hdhp
+summary(kff_2023$test_percent_hdhp)
+
+###2024
+summary(kff_2024$b12e_pct)
+
+kff_2024$percent_hdhp <- kff_2024$b12e_pct
+
+kff_2024$test_percent_hdhp <- kff_2024$b12e_pct - kff_2024$percent_hdhp
+summary(kff_2024$test_percent_hdhp)
 
 
 
-###### Clean industry #####
+###### Industry #####
 
 ### 2003 ###
-##industry##
 # Step 1: Examine variable
 table(kff_2003$industry, useNA = "ifany")
 
@@ -266,20 +517,18 @@ kff_2003$government <- ifelse(kff_2003$industry == 9, 1, 0)
 kff_2003$healthcare <- ifelse(kff_2003$industry == 10, 1, 0)
 
 # step 3: Confirm correct cleaning
-table(kff_2003$industry, kff_2003$MinConst)
-table(kff_2003$industry, kff_2003$manufacturing)
-table(kff_2003$industry, kff_2003$transportutilcomms)
-table(kff_2003$industry, kff_2003$wholesale)
-table(kff_2003$industry, kff_2003$retail)
-table(kff_2003$industry, kff_2003$financial)
-table(kff_2003$industry, kff_2003$service)
-table(kff_2003$industry, kff_2003$government)
-table(kff_2003$industry, kff_2003$healthcare)
-
+table(kff_2003$industry, kff_2003$MinConst, useNA = "ifany")
+table(kff_2003$industry, kff_2003$manufacturing, useNA = "ifany")
+table(kff_2003$industry, kff_2003$transportutilcomms, useNA = "ifany")
+table(kff_2003$industry, kff_2003$wholesale, useNA = "ifany")
+table(kff_2003$industry, kff_2003$retail, useNA = "ifany")
+table(kff_2003$industry, kff_2003$financial, useNA = "ifany")
+table(kff_2003$industry, kff_2003$service, useNA = "ifany")
+table(kff_2003$industry, kff_2003$government, useNA = "ifany")
+table(kff_2003$industry, kff_2003$healthcare, useNA = "ifany")
 
 
 ### 2004 ###
-##industry##
 # Step 1: Examine variable
 table(kff_2004$industry, useNA = "ifany")
 
@@ -295,20 +544,18 @@ kff_2004$government <- ifelse(kff_2004$industry == 9, 1, 0)
 kff_2004$healthcare <- ifelse(kff_2004$industry == 10, 1, 0)
 
 # step 3: Confirm correct cleaning
-table(kff_2004$industry, kff_2004$MinConst)
-table(kff_2004$industry, kff_2004$manufacturing)
-table(kff_2004$industry, kff_2004$transportutilcomms)
-table(kff_2004$industry, kff_2004$wholesale)
-table(kff_2004$industry, kff_2004$retail)
-table(kff_2004$industry, kff_2004$financial)
-table(kff_2004$industry, kff_2004$service)
-table(kff_2004$industry, kff_2004$government)
-table(kff_2004$industry, kff_2004$healthcare)
-
+table(kff_2004$industry, kff_2004$MinConst, useNA = "ifany")
+table(kff_2004$industry, kff_2004$manufacturing, useNA = "ifany")
+table(kff_2004$industry, kff_2004$transportutilcomms, useNA = "ifany")
+table(kff_2004$industry, kff_2004$wholesale, useNA = "ifany")
+table(kff_2004$industry, kff_2004$retail, useNA = "ifany")
+table(kff_2004$industry, kff_2004$financial, useNA = "ifany")
+table(kff_2004$industry, kff_2004$service, useNA = "ifany")
+table(kff_2004$industry, kff_2004$government, useNA = "ifany")
+table(kff_2004$industry, kff_2004$healthcare, useNA = "ifany")
 
 
 ### 2005 ###
-##industry##
 # Step 1: Examine variable
 table(kff_2005$industry, useNA = "ifany")
 
@@ -324,16 +571,15 @@ kff_2005$government <- ifelse(kff_2005$industry == 9, 1, 0)
 kff_2005$healthcare <- ifelse(kff_2005$industry == 10, 1, 0)
 
 # step 3: Confirm correct cleaning
-table(kff_2005$industry, kff_2005$MinConst)
-table(kff_2005$industry, kff_2005$manufacturing)
-table(kff_2005$industry, kff_2005$transportutilcomms)
-table(kff_2005$industry, kff_2005$wholesale)
-table(kff_2005$industry, kff_2005$retail)
-table(kff_2005$industry, kff_2005$financial)
-table(kff_2005$industry, kff_2005$service)
-table(kff_2005$industry, kff_2005$government)
-table(kff_2005$industry, kff_2005$healthcare)
-
+table(kff_2005$industry, kff_2005$MinConst, useNA = "ifany")
+table(kff_2005$industry, kff_2005$manufacturing, useNA = "ifany")
+table(kff_2005$industry, kff_2005$transportutilcomms, useNA = "ifany")
+table(kff_2005$industry, kff_2005$wholesale, useNA = "ifany")
+table(kff_2005$industry, kff_2005$retail, useNA = "ifany")
+table(kff_2005$industry, kff_2005$financial, useNA = "ifany")
+table(kff_2005$industry, kff_2005$service, useNA = "ifany")
+table(kff_2005$industry, kff_2005$government, useNA = "ifany")
+table(kff_2005$industry, kff_2005$healthcare, useNA = "ifany")
 
 
 ### 2006 ###
@@ -353,16 +599,17 @@ kff_2006$government <- ifelse(kff_2006$industry == 9, 1, 0)
 kff_2006$healthcare <- ifelse(kff_2006$industry == 10, 1, 0)
 
 # step 3: Confirm correct cleaning
-table(kff_2006$industry, kff_2006$AgriMinConst) #experimental
-table(kff_2006$industry, kff_2006$MinConst)
-table(kff_2006$industry, kff_2006$manufacturing)
-table(kff_2006$industry, kff_2006$transportutilcomms)
-table(kff_2006$industry, kff_2006$wholesale)
-table(kff_2006$industry, kff_2006$retail)
-table(kff_2006$industry, kff_2006$financial)
-table(kff_2006$industry, kff_2006$service)
-table(kff_2006$industry, kff_2006$government)
-table(kff_2006$industry, kff_2006$healthcare)
+table(kff_2006$industry, kff_2006$AgriMinConst, useNA = "ifany") #experimental
+table(kff_2006$industry, kff_2006$MinConst, useNA = "ifany")
+table(kff_2006$industry, kff_2006$manufacturing, useNA = "ifany")
+table(kff_2006$industry, kff_2006$transportutilcomms, useNA = "ifany")
+table(kff_2006$industry, kff_2006$wholesale, useNA = "ifany")
+table(kff_2006$industry, kff_2006$retail, useNA = "ifany")
+table(kff_2006$industry, kff_2006$financial, useNA = "ifany")
+table(kff_2006$industry, kff_2006$service, useNA = "ifany")
+table(kff_2006$industry, kff_2006$government, useNA = "ifany")
+table(kff_2006$industry, kff_2006$healthcare, useNA = "ifany")
+
 
 ### 2007 ###
 # Step 1: Examine variable
@@ -380,15 +627,16 @@ kff_2007$government <- ifelse(kff_2007$industry == 9, 1, 0)
 kff_2007$healthcare <- ifelse(kff_2007$industry == 10, 1, 0)
 
 # step 3: Confirm correct cleaning
-table(kff_2007$industry, kff_2007$MinConst)
-table(kff_2007$industry, kff_2007$manufacturing)
-table(kff_2007$industry, kff_2007$transportutilcomms)
-table(kff_2007$industry, kff_2007$wholesale)
-table(kff_2007$industry, kff_2007$retail)
-table(kff_2007$industry, kff_2007$financial)
-table(kff_2007$industry, kff_2007$service)
-table(kff_2007$industry, kff_2007$government)
-table(kff_2007$industry, kff_2007$healthcare)
+table(kff_2007$industry, kff_2007$MinConst, useNA = "ifany")
+table(kff_2007$industry, kff_2007$manufacturing, useNA = "ifany")
+table(kff_2007$industry, kff_2007$transportutilcomms, useNA = "ifany")
+table(kff_2007$industry, kff_2007$wholesale, useNA = "ifany")
+table(kff_2007$industry, kff_2007$retail, useNA = "ifany")
+table(kff_2007$industry, kff_2007$financial, useNA = "ifany")
+table(kff_2007$industry, kff_2007$service, useNA = "ifany")
+table(kff_2007$industry, kff_2007$government, useNA = "ifany")
+table(kff_2007$industry, kff_2007$healthcare, useNA = "ifany")
+
 
 ### 2008 ###
 # Step 1: Examine variable
@@ -406,15 +654,16 @@ kff_2008$government <- ifelse(kff_2008$industry == 9, 1, 0)
 kff_2008$healthcare <- ifelse(kff_2008$industry == 10, 1, 0)
 
 # step 3: Confirm correct cleaning
-table(kff_2008$industry, kff_2008$MinConst)
-table(kff_2008$industry, kff_2008$manufacturing)
-table(kff_2008$industry, kff_2008$transportutilcomms)
-table(kff_2008$industry, kff_2008$wholesale)
-table(kff_2008$industry, kff_2008$retail)
-table(kff_2008$industry, kff_2008$financial)
-table(kff_2008$industry, kff_2008$service)
-table(kff_2008$industry, kff_2008$government)
-table(kff_2008$industry, kff_2008$healthcare)
+table(kff_2008$industry, kff_2008$MinConst, useNA = "ifany")
+table(kff_2008$industry, kff_2008$manufacturing, useNA = "ifany")
+table(kff_2008$industry, kff_2008$transportutilcomms, useNA = "ifany")
+table(kff_2008$industry, kff_2008$wholesale, useNA = "ifany")
+table(kff_2008$industry, kff_2008$retail, useNA = "ifany")
+table(kff_2008$industry, kff_2008$financial, useNA = "ifany")
+table(kff_2008$industry, kff_2008$service, useNA = "ifany")
+table(kff_2008$industry, kff_2008$government, useNA = "ifany")
+table(kff_2008$industry, kff_2008$healthcare, useNA = "ifany")
+
 
 ### 2009 ###
 # Step 1: Examine variable
@@ -432,15 +681,15 @@ kff_2009$government <- ifelse(kff_2009$industry == 9, 1, 0)
 kff_2009$healthcare <- ifelse(kff_2009$industry == 10, 1, 0)
 
 # step 3: Confirm correct cleaning
-table(kff_2009$industry, kff_2009$MinConst)
-table(kff_2009$industry, kff_2009$manufacturing)
-table(kff_2009$industry, kff_2009$transportutilcomms)
-table(kff_2009$industry, kff_2009$wholesale)
-table(kff_2009$industry, kff_2009$retail)
-table(kff_2009$industry, kff_2009$financial)
-table(kff_2009$industry, kff_2009$service)
-table(kff_2009$industry, kff_2009$government)
-table(kff_2009$industry, kff_2009$healthcare)
+table(kff_2009$industry, kff_2009$MinConst, useNA = "ifany")
+table(kff_2009$industry, kff_2009$manufacturing, useNA = "ifany")
+table(kff_2009$industry, kff_2009$transportutilcomms, useNA = "ifany")
+table(kff_2009$industry, kff_2009$wholesale, useNA = "ifany")
+table(kff_2009$industry, kff_2009$retail, useNA = "ifany")
+table(kff_2009$industry, kff_2009$financial, useNA = "ifany")
+table(kff_2009$industry, kff_2009$service, useNA = "ifany")
+table(kff_2009$industry, kff_2009$government, useNA = "ifany")
+table(kff_2009$industry, kff_2009$healthcare, useNA = "ifany")
 
 
 ### 2010 ###
@@ -459,15 +708,15 @@ kff_2010$government <- ifelse(kff_2010$industry == 9, 1, 0)
 kff_2010$healthcare <- ifelse(kff_2010$industry == 10, 1, 0)
 
 # step 3: Confirm correct cleaning
-table(kff_2010$industry, kff_2010$MinConst)
-table(kff_2010$industry, kff_2010$manufacturing)
-table(kff_2010$industry, kff_2010$transportutilcomms)
-table(kff_2010$industry, kff_2010$wholesale)
-table(kff_2010$industry, kff_2010$retail)
-table(kff_2010$industry, kff_2010$financial)
-table(kff_2010$industry, kff_2010$service)
-table(kff_2010$industry, kff_2010$government)
-table(kff_2010$industry, kff_2010$healthcare)
+table(kff_2010$industry, kff_2010$MinConst, useNA = "ifany")
+table(kff_2010$industry, kff_2010$manufacturing, useNA = "ifany")
+table(kff_2010$industry, kff_2010$transportutilcomms, useNA = "ifany")
+table(kff_2010$industry, kff_2010$wholesale, useNA = "ifany")
+table(kff_2010$industry, kff_2010$retail, useNA = "ifany")
+table(kff_2010$industry, kff_2010$financial, useNA = "ifany")
+table(kff_2010$industry, kff_2010$service, useNA = "ifany")
+table(kff_2010$industry, kff_2010$government, useNA = "ifany")
+table(kff_2010$industry, kff_2010$healthcare, useNA = "ifany")
 
 
 ## 2011 ##
@@ -486,15 +735,16 @@ kff_2011$government <- ifelse(kff_2011$industry == 9, 1, 0)
 kff_2011$healthcare <- ifelse(kff_2011$industry == 10, 1, 0)
 
 # step 3: Confirm correct cleaning
-table(kff_2011$industry, kff_2011$MinConst)
-table(kff_2011$industry, kff_2011$manufacturing)
-table(kff_2011$industry, kff_2011$transportutilcomms)
-table(kff_2011$industry, kff_2011$wholesale)
-table(kff_2011$industry, kff_2011$retail)
-table(kff_2011$industry, kff_2011$financial)
-table(kff_2011$industry, kff_2011$service)
-table(kff_2011$industry, kff_2011$government)
-table(kff_2011$industry, kff_2011$healthcare)
+table(kff_2011$industry, kff_2011$MinConst, useNA = "ifany")
+table(kff_2011$industry, kff_2011$manufacturing, useNA = "ifany")
+table(kff_2011$industry, kff_2011$transportutilcomms, useNA = "ifany")
+table(kff_2011$industry, kff_2011$wholesale, useNA = "ifany")
+table(kff_2011$industry, kff_2011$retail, useNA = "ifany")
+table(kff_2011$industry, kff_2011$financial, useNA = "ifany")
+table(kff_2011$industry, kff_2011$service, useNA = "ifany")
+table(kff_2011$industry, kff_2011$government, useNA = "ifany")
+table(kff_2011$industry, kff_2011$healthcare, useNA = "ifany")
+
 
 ### 2012 ###
 # Step 1: Examine variable
@@ -512,15 +762,15 @@ kff_2012$government <- ifelse(kff_2012$industry == 9, 1, 0)
 kff_2012$healthcare <- ifelse(kff_2012$industry == 10, 1, 0)
 
 # step 3: Confirm correct cleaning
-table(kff_2012$industry, kff_2012$AgriMinConst)
-table(kff_2012$industry, kff_2012$manufacturing)
-table(kff_2012$industry, kff_2012$transportutilcomms)
-table(kff_2012$industry, kff_2012$wholesale)
-table(kff_2012$industry, kff_2012$retail)
-table(kff_2012$industry, kff_2012$financial)
-table(kff_2012$industry, kff_2012$service)
-table(kff_2012$industry, kff_2012$government)
-table(kff_2012$industry, kff_2012$healthcare)
+table(kff_2012$industry, kff_2012$AgriMinConst, useNA = "ifany")
+table(kff_2012$industry, kff_2012$manufacturing, useNA = "ifany")
+table(kff_2012$industry, kff_2012$transportutilcomms, useNA = "ifany")
+table(kff_2012$industry, kff_2012$wholesale, useNA = "ifany")
+table(kff_2012$industry, kff_2012$retail, useNA = "ifany")
+table(kff_2012$industry, kff_2012$financial, useNA = "ifany")
+table(kff_2012$industry, kff_2012$service, useNA = "ifany")
+table(kff_2012$industry, kff_2012$government, useNA = "ifany")
+table(kff_2012$industry, kff_2012$healthcare, useNA = "ifany")
 
 
 ### 2013 ###
@@ -539,15 +789,15 @@ kff_2013$government <- ifelse(kff_2013$industry == 9, 1, 0)
 kff_2013$healthcare <- ifelse(kff_2013$industry == 10, 1, 0)
 
 # step 3: Confirm correct cleaning
-table(kff_2013$industry, kff_2013$AgriMinConst)
-table(kff_2013$industry, kff_2013$manufacturing)
-table(kff_2013$industry, kff_2013$transportutilcomms)
-table(kff_2013$industry, kff_2013$wholesale)
-table(kff_2013$industry, kff_2013$retail)
-table(kff_2013$industry, kff_2013$financial)
-table(kff_2013$industry, kff_2013$service)
-table(kff_2013$industry, kff_2013$government)
-table(kff_2013$industry, kff_2013$healthcare)
+table(kff_2013$industry, kff_2013$AgriMinConst, useNA = "ifany")
+table(kff_2013$industry, kff_2013$manufacturing, useNA = "ifany")
+table(kff_2013$industry, kff_2013$transportutilcomms, useNA = "ifany")
+table(kff_2013$industry, kff_2013$wholesale, useNA = "ifany")
+table(kff_2013$industry, kff_2013$retail, useNA = "ifany")
+table(kff_2013$industry, kff_2013$financial, useNA = "ifany")
+table(kff_2013$industry, kff_2013$service, useNA = "ifany")
+table(kff_2013$industry, kff_2013$government, useNA = "ifany")
+table(kff_2013$industry, kff_2013$healthcare, useNA = "ifany")
 
 
 ## 2014 ##
@@ -555,7 +805,7 @@ table(kff_2013$industry, kff_2013$healthcare)
 table(kff_2014$industry, useNA = "ifany")
 
 # Step 2: Clean variable (always create new variable!)
-kff_2014$construction    <- ifelse(kff_2014$industry == 2,  1, 0)
+kff_2014$AgriMinConst<- ifelse(kff_2014$industry == 2, 1, 0)
 kff_2014$manufacturing   <- ifelse(kff_2014$industry == 3,  1, 0)
 kff_2014$transportutilcomms  <- ifelse(kff_2014$industry == 4,  1, 0)
 kff_2014$wholesale       <- ifelse(kff_2014$industry == 5,  1, 0)
@@ -566,19 +816,258 @@ kff_2014$government      <- ifelse(kff_2014$industry == 9,  1, 0)
 kff_2014$healthcare      <- ifelse(kff_2014$industry == 10, 1, 0)
   
 # step 3: Confirm correct cleaning
-table(kff_2014$industry, kff_2014$construction)
-table(kff_2014$industry, kff_2014$manufacturing)
-table(kff_2014$industry, kff_2014$transportutilcomms)
-table(kff_2014$industry, kff_2014$wholesale)
-table(kff_2014$industry, kff_2014$retail)
-table(kff_2014$industry, kff_2014$financial)
-table(kff_2014$industry, kff_2014$service)
-table(kff_2014$industry, kff_2014$government)
-table(kff_2014$industry, kff_2014$healthcare)
+table(kff_2014$industry, kff_2014$$AgriMinConst, useNA = "ifany")
+table(kff_2014$industry, kff_2014$manufacturing, useNA = "ifany")
+table(kff_2014$industry, kff_2014$transportutilcomms, useNA = "ifany")
+table(kff_2014$industry, kff_2014$wholesale, useNA = "ifany")
+table(kff_2014$industry, kff_2014$retail, useNA = "ifany")
+table(kff_2014$industry, kff_2014$financial, useNA = "ifany")
+table(kff_2014$industry, kff_2014$service, useNA = "ifany")
+table(kff_2014$industry, kff_2014$government, useNA = "ifany")
+table(kff_2014$industry, kff_2014$healthcare, useNA = "ifany")
+
+### 2015 ###
+table(kff_2015$industry, useNA = "ifany")
+
+kff_2015$AgriMinConst<- ifelse(kff_2015$industry == 2, 1, 0)
+kff_2015$manufacturing   <- ifelse(kff_2015$industry == 3,  1, 0)
+kff_2015$transportutilcomms  <- ifelse(kff_2015$industry == 4,  1, 0)
+kff_2015$wholesale       <- ifelse(kff_2015$industry == 5,  1, 0)
+kff_2015$retail          <- ifelse(kff_2015$industry == 6,  1, 0)
+kff_2015$financial       <- ifelse(kff_2015$industry == 7,  1, 0)
+kff_2015$service         <- ifelse(kff_2015$industry == 8,  1, 0)
+kff_2015$government      <- ifelse(kff_2015$industry == 9,  1, 0)
+kff_2015$healthcare      <- ifelse(kff_2015$industry == 10, 1, 0)
+
+table(kff_2015$industry, kff_2015$AgriMinConst, useNA = "ifany")
+table(kff_2015$industry, kff_2015$manufacturing, useNA = "ifany")
+table(kff_2015$industry, kff_2015$transportutilcomms, useNA = "ifany")
+table(kff_2015$industry, kff_2015$wholesale, useNA = "ifany")
+table(kff_2015$industry, kff_2015$retail, useNA = "ifany")
+table(kff_2015$industry, kff_2015$financial, useNA = "ifany")
+table(kff_2015$industry, kff_2015$service, useNA = "ifany")
+table(kff_2015$industry, kff_2015$government, useNA = "ifany")
+table(kff_2015$industry, kff_2015$healthcare, useNA = "ifany")
+
+### 2016 ###
+table(kff_2016$industry, useNA = "ifany")
+
+kff_2016$AgriMinConst<- ifelse(kff_2016$industry == 2, 1, 0)
+kff_2016$manufacturing   <- ifelse(kff_2016$industry == 3,  1, 0)
+kff_2016$transportutilcomms  <- ifelse(kff_2016$industry == 4,  1, 0)
+kff_2016$wholesale       <- ifelse(kff_2016$industry == 5,  1, 0)
+kff_2016$retail          <- ifelse(kff_2016$industry == 6,  1, 0)
+kff_2016$financial       <- ifelse(kff_2016$industry == 7,  1, 0)
+kff_2016$service         <- ifelse(kff_2016$industry == 8,  1, 0)
+kff_2016$government      <- ifelse(kff_2016$industry == 9,  1, 0)
+kff_2016$healthcare      <- ifelse(kff_2016$industry == 10, 1, 0)
+
+table(kff_2016$industry, kff_2016$AgriMinConst, useNA = "ifany")
+table(kff_2016$industry, kff_2016$manufacturing, useNA = "ifany")
+table(kff_2016$industry, kff_2016$transportutilcomms, useNA = "ifany")
+table(kff_2016$industry, kff_2016$wholesale, useNA = "ifany")
+table(kff_2016$industry, kff_2016$retail, useNA = "ifany")
+table(kff_2016$industry, kff_2016$financial, useNA = "ifany")
+table(kff_2016$industry, kff_2016$service, useNA = "ifany")
+table(kff_2016$industry, kff_2016$government, useNA = "ifany")
+table(kff_2016$industry, kff_2016$healthcare, useNA = "ifany")
 
 
+### 2017 ###
+table(kff_2017$industry, useNA = "ifany")
+
+kff_2017$AgriMinConst<- ifelse(kff_2017$industry == 2, 1, 0)
+kff_2017$manufacturing   <- ifelse(kff_2017$industry == 3,  1, 0)
+kff_2017$transportutilcomms  <- ifelse(kff_2017$industry == 4,  1, 0)
+kff_2017$wholesale       <- ifelse(kff_2017$industry == 5,  1, 0)
+kff_2017$retail          <- ifelse(kff_2017$industry == 6,  1, 0)
+kff_2017$financial       <- ifelse(kff_2017$industry == 7,  1, 0)
+kff_2017$service         <- ifelse(kff_2017$industry == 8,  1, 0)
+kff_2017$government      <- ifelse(kff_2017$industry == 9,  1, 0)
+kff_2017$healthcare      <- ifelse(kff_2017$industry == 10, 1, 0)
+
+table(kff_2017$industry, kff_2017$AgriMinConst, useNA = "ifany")
+table(kff_2017$industry, kff_2017$manufacturing, useNA = "ifany")
+table(kff_2017$industry, kff_2017$transportutilcomms, useNA = "ifany")
+table(kff_2017$industry, kff_2017$wholesale, useNA = "ifany")
+table(kff_2017$industry, kff_2017$retail, useNA = "ifany")
+table(kff_2017$industry, kff_2017$financial, useNA = "ifany")
+table(kff_2017$industry, kff_2017$service, useNA = "ifany")
+table(kff_2017$industry, kff_2017$government, useNA = "ifany")
+table(kff_2017$industry, kff_2017$healthcare, useNA = "ifany")
+
+### 2018 ###
+table(kff_2018$industry, useNA = "ifany")
+
+kff_2018$AgriMinConst<- ifelse(kff_2018$industry == 2, 1, 0)
+kff_2018$manufacturing   <- ifelse(kff_2018$industry == 3,  1, 0)
+kff_2018$transportutilcomms  <- ifelse(kff_2018$industry == 4,  1, 0)
+kff_2018$wholesale       <- ifelse(kff_2018$industry == 5,  1, 0)
+kff_2018$retail          <- ifelse(kff_2018$industry == 6,  1, 0)
+kff_2018$financial       <- ifelse(kff_2018$industry == 7,  1, 0)
+kff_2018$service         <- ifelse(kff_2018$industry == 8,  1, 0)
+kff_2018$government      <- ifelse(kff_2018$industry == 9,  1, 0)
+kff_2018$healthcare      <- ifelse(kff_2018$industry == 10, 1, 0)
+                                   
+table(kff_2018$industry, kff_2018$AgriMinConst, useNA = "ifany")
+table(kff_2018$industry, kff_2018$manufacturing, useNA = "ifany")
+table(kff_2018$industry, kff_2018$transportutilcomms, useNA = "ifany")
+table(kff_2018$industry, kff_2018$wholesale, useNA = "ifany")
+table(kff_2018$industry, kff_2018$retail, useNA = "ifany")
+table(kff_2018$industry, kff_2018$financial, useNA = "ifany")
+table(kff_2018$industry, kff_2018$service, useNA = "ifany")
+table(kff_2018$industry, kff_2018$government, useNA = "ifany")
+table(kff_2018$industry, kff_2018$healthcare, useNA = "ifany")
+
+### 2019 ###
+table(kff_2019$industry, useNA = "ifany")  
+
+#10 (finance) not mentioned in codebook but is in dataset
+
+kff_2019$AgriMinConst<- ifelse(kff_2019$industry == 2, 1, 0)
+kff_2019$manufacturing   <- ifelse(kff_2019$industry == 3,  1, 0)
+kff_2019$transportutilcomms  <- ifelse(kff_2019$industry == 4,  1, 0)
+kff_2019$wholesale       <- ifelse(kff_2019$industry == 5,  1, 0)
+kff_2019$retail          <- ifelse(kff_2019$industry == 6,  1, 0)
+kff_2019$financial       <- ifelse(kff_2019$industry == 7,  1, 0)
+kff_2019$service         <- ifelse(kff_2019$industry == 8,  1, 0)
+kff_2019$government      <- ifelse(kff_2019$industry == 9,  1, 0)
+kff_2019$healthcare      <- ifelse(kff_2019$industry == 10, 1, 0)
+
+table(kff_2019$industry, kff_2019$AgriMinConst, useNA = "ifany")
+table(kff_2019$industry, kff_2019$manufacturing, useNA = "ifany")
+table(kff_2019$industry, kff_2019$transportutilcomms, useNA = "ifany")
+table(kff_2019$industry, kff_2019$wholesale, useNA = "ifany")
+table(kff_2019$industry, kff_2019$retail, useNA = "ifany")
+table(kff_2019$industry, kff_2019$financial, useNA = "ifany")
+table(kff_2019$industry, kff_2019$service, useNA = "ifany")
+table(kff_2019$industry, kff_2019$government, useNA = "ifany")
+table(kff_2019$industry, kff_2019$healthcare, useNA = "ifany")
+
+### 2020 ###
+table(kff_2020$industry, useNA = "ifany")
+#10 (finance) not mentioned in codebook but is in dataset
+
+kff_2020$AgriMinConst<- ifelse(kff_2020$industry == 2, 1, 0)
+kff_2020$manufacturing   <- ifelse(kff_2020$industry == 3,  1, 0)
+kff_2020$transportutilcomms  <- ifelse(kff_2020$industry == 4,  1, 0)
+kff_2020$wholesale       <- ifelse(kff_2020$industry == 5,  1, 0)
+kff_2020$retail          <- ifelse(kff_2020$industry == 6,  1, 0)
+kff_2020$financial       <- ifelse(kff_2020$industry == 7,  1, 0)
+kff_2020$service         <- ifelse(kff_2020$industry == 8,  1, 0)
+kff_2020$government      <- ifelse(kff_2020$industry == 9,  1, 0)
+kff_2020$healthcare      <- ifelse(kff_2020$industry == 10, 1, 0)
+
+table(kff_2020$industry, kff_2020$AgriMinConst, useNA = "ifany")
+table(kff_2020$industry, kff_2020$manufacturing, useNA = "ifany")
+table(kff_2020$industry, kff_2020$transportutilcomms, useNA = "ifany")
+table(kff_2020$industry, kff_2020$wholesale, useNA = "ifany")
+table(kff_2020$industry, kff_2020$retail, useNA = "ifany")
+table(kff_2020$industry, kff_2020$financial, useNA = "ifany")
+table(kff_2020$industry, kff_2020$service, useNA = "ifany")
+table(kff_2020$industry, kff_2020$government, useNA = "ifany")
+table(kff_2020$industry, kff_2020$healthcare, useNA = "ifany")
+
+
+
+### 2021 ###
+table(kff_2021$industry, useNA = "ifany")
+#10 (finance) not mentioned in codebook but is in dataset
+
+kff_2021$AgriMinConst<- ifelse(kff_2021$industry == 2, 1, 0)
+kff_2021$manufacturing   <- ifelse(kff_2021$industry == 3,  1, 0)
+kff_2021$transportutilcomms  <- ifelse(kff_2021$industry == 4,  1, 0)
+kff_2021$wholesale       <- ifelse(kff_2021$industry == 5,  1, 0)
+kff_2021$retail          <- ifelse(kff_2021$industry == 6,  1, 0)
+kff_2021$financial       <- ifelse(kff_2021$industry == 7,  1, 0)
+kff_2021$service         <- ifelse(kff_2021$industry == 8,  1, 0)
+kff_2021$government      <- ifelse(kff_2021$industry == 9,  1, 0)
+kff_2021$healthcare      <- ifelse(kff_2021$industry == 10, 1, 0)
+
+table(kff_2021$industry, kff_2021$AgriMinConst, useNA = "ifany")
+table(kff_2021$industry, kff_2021$manufacturing, useNA = "ifany")
+table(kff_2021$industry, kff_2021$transportutilcomms, useNA = "ifany")
+table(kff_2021$industry, kff_2021$wholesale, useNA = "ifany")
+table(kff_2021$industry, kff_2021$retail, useNA = "ifany")
+table(kff_2021$industry, kff_2021$financial, useNA = "ifany")
+table(kff_2021$industry, kff_2021$service, useNA = "ifany")
+table(kff_2021$industry, kff_2021$government, useNA = "ifany")
+table(kff_2021$industry, kff_2021$healthcare, useNA = "ifany")
+
+
+### 2022 ###
+table(kff_2022$industry, useNA = "ifany")
+
+kff_2022$AgriMinConst<- ifelse(kff_2022$industry == 2, 1, 0)
+kff_2022$manufacturing   <- ifelse(kff_2022$industry == 3,  1, 0)
+kff_2022$transportutilcomms  <- ifelse(kff_2022$industry == 4,  1, 0)
+kff_2022$wholesale       <- ifelse(kff_2022$industry == 5,  1, 0)
+kff_2022$retail          <- ifelse(kff_2022$industry == 6,  1, 0)
+kff_2022$financial       <- ifelse(kff_2022$industry == 7,  1, 0)
+kff_2022$service         <- ifelse(kff_2022$industry == 8,  1, 0)
+kff_2022$government      <- ifelse(kff_2022$industry == 9,  1, 0)
+kff_2022$healthcare      <- ifelse(kff_2022$industry == 10, 1, 0)
+
+table(kff_2022$industry, kff_2022$AgriMinConst, useNA = "ifany")
+table(kff_2022$industry, kff_2022$manufacturing, useNA = "ifany")
+table(kff_2022$industry, kff_2022$transportutilcomms, useNA = "ifany")
+table(kff_2022$industry, kff_2022$wholesale, useNA = "ifany")
+table(kff_2022$industry, kff_2022$retail, useNA = "ifany")
+table(kff_2022$industry, kff_2022$financial, useNA = "ifany")
+table(kff_2022$industry, kff_2022$service, useNA = "ifany")
+table(kff_2022$industry, kff_2022$government, useNA = "ifany")
+table(kff_2022$industry, kff_2022$healthcare, useNA = "ifany")
+
+### 2023 ###
+table(kff_2023$industry, useNA = "ifany")
+
+kff_2023$AgriMinConst<- ifelse(kff_2023$industry == 2, 1, 0)
+kff_2023$manufacturing   <- ifelse(kff_2023$industry == 3,  1, 0)
+kff_2023$transportutilcomms  <- ifelse(kff_2023$industry == 4,  1, 0)
+kff_2023$wholesale       <- ifelse(kff_2023$industry == 5,  1, 0)
+kff_2023$retail          <- ifelse(kff_2023$industry == 6,  1, 0)
+kff_2023$financial       <- ifelse(kff_2023$industry == 7,  1, 0)
+kff_2023$service         <- ifelse(kff_2023$industry == 8,  1, 0)
+kff_2023$government      <- ifelse(kff_2023$industry == 9,  1, 0)
+kff_2023$healthcare      <- ifelse(kff_2023$industry == 10, 1, 0)
+
+table(kff_2023$industry, kff_2023$AgriMinConst, useNA = "ifany")
+table(kff_2023$industry, kff_2023$manufacturing, useNA = "ifany")
+table(kff_2023$industry, kff_2023$transportutilcomms, useNA = "ifany")
+table(kff_2023$industry, kff_2023$wholesale, useNA = "ifany")
+table(kff_2023$industry, kff_2023$retail, useNA = "ifany")
+table(kff_2023$industry, kff_2023$financial, useNA = "ifany")
+table(kff_2023$industry, kff_2023$service, useNA = "ifany")
+table(kff_2023$industry, kff_2023$government, useNA = "ifany")
+table(kff_2023$industry, kff_2023$healthcare, useNA = "ifany")
+
+### 2024 ###
+table(kff_2024$industry, useNA = "ifany")
+
+kff_2024$AgriMinConst<- ifelse(kff_2024$industry == 2, 1, 0)
+kff_2024$manufacturing   <- ifelse(kff_2024$industry == 3,  1, 0)
+kff_2024$transportutilcomms  <- ifelse(kff_2024$industry == 4,  1, 0)
+kff_2024$wholesale       <- ifelse(kff_2024$industry == 5,  1, 0)
+kff_2024$retail          <- ifelse(kff_2024$industry == 6,  1, 0)
+kff_2024$financial       <- ifelse(kff_2024$industry == 7,  1, 0)
+kff_2024$service         <- ifelse(kff_2024$industry == 8,  1, 0)
+kff_2024$government      <- ifelse(kff_2024$industry == 9,  1, 0)
+kff_2024$healthcare      <- ifelse(kff_2024$industry == 10, 1, 0)
+
+table(kff_2024$industry, kff_2024$AgriMinConst, useNA = "ifany")
+table(kff_2024$industry, kff_2024$manufacturing, useNA = "ifany")
+table(kff_2024$industry, kff_2024$transportutilcomms, useNA = "ifany")
+table(kff_2024$industry, kff_2024$wholesale, useNA = "ifany")
+table(kff_2024$industry, kff_2024$retail, useNA = "ifany")
+table(kff_2024$industry, kff_2024$financial, useNA = "ifany")
+table(kff_2024$industry, kff_2024$service, useNA = "ifany")
+table(kff_2024$industry, kff_2024$government, useNA = "ifany")
+table(kff_2024$industry, kff_2024$healthcare, useNA = "ifany")
+
+
+                                     
+                                     
 ###### Categorized Percent of Workforce Earning $20,000 or Less #####
-
 ### 2003
 table(kff_2003$loincome, useNA = "ifany") #examine variable
 
@@ -587,166 +1076,232 @@ kff_2003$mostly_low_wage  <- ifelse(kff_2003$loincome == 2, 1, 0) #35% or more e
 kff_2003$some_low_wage    <- ifelse(kff_2003$loincome == 1, 1, 0) #Less than 35% earn $20k or less per year
 
 #confirm cleaning
-table(kff_2003$loincome, kff_2003$mostly_low_wage)
-table(kff_2003$loincome, kff_2003$some_low_wage)
+table(kff_2003$loincome, kff_2003$mostly_low_wage, useNA = "ifany")
+table(kff_2003$loincome, kff_2003$some_low_wage, useNA = "ifany")
+
 
 ### 2004
 table(kff_2004$loincome,useNA = "ifany") #examine variable
+
 kff_2004$mostly_low_wage  <- ifelse(kff_2004$loincome == 2, 1, 0) #35% or more earn $20k or less per year
 kff_2004$some_low_wage    <- ifelse(kff_2004$loincome == 1, 1, 0) #Less than 35% earn $20k or less per year
-table(kff_2004$loincome, kff_2004$mostly_low_wage)
-table(kff_2004$loincome, kff_2004$some_low_wage)
+
+table(kff_2004$loincome, kff_2004$mostly_low_wage, useNA = "ifany")
+table(kff_2004$loincome, kff_2004$some_low_wage, useNA = "ifany")
 
 #### NOTE: SOME FIRMS OVER 100%! DROP DROP DROP!!!
 
 ### 2005
 table(kff_2005$loincome,useNA = "ifany") #examine variable
+
 kff_2005$mostly_low_wage  <- ifelse(kff_2005$loincome == 2, 1, 0) #35% or more earn $20k or less per year
 kff_2005$some_low_wage    <- ifelse(kff_2005$loincome == 1, 1, 0) #Less than 35% earn $20k or less per year
-table(kff_2005$loincome, kff_2005$mostly_low_wage)
-table(kff_2005$loincome, kff_2005$some_low_wage)
+
+table(kff_2005$loincome, kff_2005$mostly_low_wage, useNA = "ifany")
+table(kff_2005$loincome, kff_2005$some_low_wage, useNA = "ifany")
+
 
 ### 2006
 table(kff_2006$loincome,useNA = "ifany") #examine variable
+
 kff_2006$mostly_low_wage  <- ifelse(kff_2006$loincome == 2, 1, 0) #35% or more earn $20k or less per year
 kff_2006$some_low_wage    <- ifelse(kff_2006$loincome == 1, 1, 0) #Less than 35% earn $20k or less per year
-table(kff_2006$loincome, kff_2006$mostly_low_wage)
-table(kff_2006$loincome, kff_2006$some_low_wage)
+
+table(kff_2006$loincome, kff_2006$mostly_low_wage, useNA = "ifany")
+table(kff_2006$loincome, kff_2006$some_low_wage, useNA = "ifany")
+
 
 ### 2007
 table(kff_2007$loincome,useNA = "ifany") #examine variable
+
 kff_2007$mostly_low_wage  <- ifelse(kff_2007$loincome == 2, 1, 0) #35% or more earn $21k or less per year
 kff_2007$some_low_wage    <- ifelse(kff_2007$loincome == 1, 1, 0) #Less than 35% earn $21k or less per year
-table(kff_2007$loincome, kff_2007$mostly_low_wage)
-table(kff_2007$loincome, kff_2007$some_low_wage)
+
+table(kff_2007$loincome, kff_2007$mostly_low_wage, useNA = "ifany")
+table(kff_2007$loincome, kff_2007$some_low_wage, useNA = "ifany")
+
 
 ### 2008
 table(kff_2008$loincome,useNA = "ifany") #examine variable
+
 kff_2008$mostly_low_wage  <- ifelse(kff_2008$loincome == 2, 1, 0) #35% or more earn $22k or less per year
 kff_2008$some_low_wage    <- ifelse(kff_2008$loincome == 1, 1, 0) #Less than 35% earn $22k or less per year
-table(kff_2008$loincome, kff_2008$mostly_low_wage)
-table(kff_2008$loincome, kff_2008$some_low_wage)
+
+table(kff_2008$loincome, kff_2008$mostly_low_wage, useNA = "ifany")
+table(kff_2008$loincome, kff_2008$some_low_wage, useNA = "ifany")
+
 
 ### 2009
 table(kff_2009$loincome,useNA = "ifany") #examine variable
+
 kff_2009$mostly_low_wage  <- ifelse(kff_2009$loincome == 2, 1, 0) #35% or more earn $21k or less per year
 kff_2009$some_low_wage    <- ifelse(kff_2009$loincome == 1, 1, 0) #Less than 35% earn $21k or less per year
-table(kff_2009$loincome, kff_2009$mostly_low_wage)
-table(kff_2009$loincome, kff_2009$some_low_wage)
+
+table(kff_2009$loincome, kff_2009$mostly_low_wage, useNA = "ifany")
+table(kff_2009$loincome, kff_2009$some_low_wage, useNA = "ifany")
+
 
 ### 2010
 table(kff_2010$loincome,useNA = "ifany") #examine variable
+
 kff_2010$mostly_low_wage  <- ifelse(kff_2010$loincome == 2, 1, 0) #35% or more earn $23k or less per year
 kff_2010$some_low_wage    <- ifelse(kff_2010$loincome == 1, 1, 0) #Less than 35% earn $23k or less per year
-table(kff_2010$loincome, kff_2010$mostly_low_wage)
-table(kff_2010$loincome, kff_2010$some_low_wage)
+
+table(kff_2010$loincome, kff_2010$mostly_low_wage, useNA = "ifany")
+table(kff_2010$loincome, kff_2010$some_low_wage, useNA = "ifany")
+
 
 ### 2011
 table(kff_2011$loincome,useNA = "ifany") #examine variable
+
 kff_2011$mostly_low_wage  <- ifelse(kff_2011$loincome == 2, 1, 0) #35% or more earn $23k or less per year
 kff_2011$some_low_wage    <- ifelse(kff_2011$loincome == 1, 1, 0) #Less than 35% earn $23k or less per year
-table(kff_2011$loincome, kff_2011$mostly_low_wage)
-table(kff_2011$loincome, kff_2011$some_low_wage)
+
+table(kff_2011$loincome, kff_2011$mostly_low_wage, useNA = "ifany")
+table(kff_2011$loincome, kff_2011$some_low_wage, useNA = "ifany")
+
 
 ### 2012
 table(kff_2012$loincome,useNA = "ifany") #examine
+
 kff_2012$mostly_low_wage  <- ifelse(kff_2012$loincome == 2, 1, 0) #35% or more earn $24k or less per year
 kff_2012$some_low_wage    <- ifelse(kff_2012$loincome == 1, 1, 0) #Less than 35% earn $24k or less per year
-table(kff_2012$loincome, kff_2012$mostly_low_wage)
-table(kff_2012$loincome, kff_2012$some_low_wage)
+
+table(kff_2012$loincome, kff_2012$mostly_low_wage, useNA = "ifany")
+table(kff_2012$loincome, kff_2012$some_low_wage, useNA = "ifany")
+
 
 ### 2013
 table(kff_2013$loincome,useNA = "ifany") #examine
+
 kff_2013$mostly_low_wage  <- ifelse(kff_2013$loincome == 2, 1, 0) #35% or more earn $24k or less per year
 kff_2013$some_low_wage    <- ifelse(kff_2013$loincome == 1, 1, 0) #Less than 35% earn $24k or less per year
-table(kff_2013$loincome, kff_2013$mostly_low_wage)
-table(kff_2013$loincome, kff_2013$some_low_wage)
+
+table(kff_2013$loincome, kff_2013$mostly_low_wage, useNA = "ifany")
+table(kff_2013$loincome, kff_2013$some_low_wage, useNA = "ifany")
+
+
 
 ###### Categorized Percent of Workforce With High Incomes #####
 ### 2007
 table(kff_2007$hiincome, useNA = "ifany") #examine variable
+
 kff_2007$mostly_high_wage <- ifelse(kff_2007$hiincome == 2, 1, 0) #35% or more earn $50k or more per year
 kff_2007$some_high_wage   <- ifelse(kff_2007$hiincome == 1, 1, 0) #Less than 35% earn $50k or more per year
-table(kff_2007$hiincome, kff_2007$mostly_high_wage)
-table(kff_2007$hiincome, kff_2007$some_high_wage)
+
+table(kff_2007$hiincome, kff_2007$mostly_high_wage, useNA = "ifany")
+table(kff_2007$hiincome, kff_2007$some_high_wage, useNA = "ifany")
+
 
 ### 2008
 table(kff_2008$hiincome, useNA = "ifany") #examine variable
+
 kff_2008$mostly_high_wage <- ifelse(kff_2008$hiincome == 2, 1, 0) #35% or more earn $50k or more per year
 kff_2008$some_high_wage   <- ifelse(kff_2008$hiincome == 1, 1, 0) #Less than 35% earn $50k or more per year
-table(kff_2008$hiincome, kff_2008$mostly_high_wage)
-table(kff_2008$hiincome, kff_2008$some_high_wage)
+
+table(kff_2008$hiincome, kff_2008$mostly_high_wage, useNA = "ifany")
+table(kff_2008$hiincome, kff_2008$some_high_wage, useNA = "ifany")
+
+### NOTE: 2009-2011,hiincome variable is missing/no measured
+
 
 ### 2012
 table(kff_2012$hiincome, useNA = "ifany") #examine variable
+
 kff_2012$mostly_high_wage <- ifelse(kff_2012$hiincome == 2, 1, 0) #35% or more earn $55k or more per year
 kff_2012$some_high_wage   <- ifelse(kff_2012$hiincome == 1, 1, 0) #Less than 35% earn $55k or more per year
-table(kff_2012$hiincome, kff_2012$mostly_high_wage)
-table(kff_2012$hiincome, kff_2012$some_high_wage)
+
+table(kff_2012$hiincome, kff_2012$mostly_high_wage, useNA = "ifany")
+table(kff_2012$hiincome, kff_2012$some_high_wage, useNA = "ifany")
+
 
 ### 2013
 table(kff_2013$hiincome, useNA = "ifany") #examine variable
+
 kff_2013$mostly_high_wage <- ifelse(kff_2013$hiincome == 2, 1, 0) #35% or more earn $55k or more per year
 kff_2013$some_high_wage   <- ifelse(kff_2013$hiincome == 1, 1, 0) #Less than 35% earn $55k or more per year
-table(kff_2013$hiincome, kff_2013$mostly_high_wage)
-table(kff_2013$hiincome, kff_2013$some_high_wage)
+
+table(kff_2013$hiincome, kff_2013$mostly_high_wage, useNA = "ifany")
+table(kff_2013$hiincome, kff_2013$some_high_wage, useNA = "ifany")
+
+
+
 
 ###### Categorized Percent of Workforce Age 26 or Younger #####
 ### 2007
 table(kff_2007$age26, useNA = "ifany") #examine variable
+
 kff_2007$mostly_young_workers <- ifelse(kff_2007$age26 == 2, 1, 0) #35% or more are age 26 or younger
 kff_2007$some_young_workers   <- ifelse(kff_2007$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
-table(kff_2007$age26, kff_2007$mostly_young_workers)
-table(kff_2007$age26, kff_2007$some_young_workers)
+
+table(kff_2007$age26, kff_2007$mostly_young_workers, useNA = "ifany")
+table(kff_2007$age26, kff_2007$some_young_workers, useNA = "ifany")
+
 
 ### 2008
 table(kff_2008$age26, useNA = "ifany") #examine variable
+
 kff_2008$mostly_young_workers <- ifelse(kff_2008$age26 == 2, 1, 0) #35% or more are age 26 or younger
 kff_2008$some_young_workers   <- ifelse(kff_2008$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
-table(kff_2008$age26, kff_2008$mostly_young_workers)
-table(kff_2008$age26, kff_2008$some_young_workers)
+
+table(kff_2008$age26, kff_2008$mostly_young_workers, useNA = "ifany")
+table(kff_2008$age26, kff_2008$some_young_workers, useNA = "ifany")
+
 
 #### 2009
 table(kff_2009$age26, useNA = "ifany") #examine variable
+
 kff_2009$mostly_young_workers <- ifelse(kff_2009$age26 == 2, 1, 0) #35% or more are age 26 or younger
 kff_2009$some_young_workers   <- ifelse(kff_2009$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
-table(kff_2009$age26, kff_2009$mostly_young_workers)
-table(kff_2009$age26, kff_2009$some_young_workers)
+
+table(kff_2009$age26, kff_2009$mostly_young_workers, useNA = "ifany")
+table(kff_2009$age26, kff_2009$some_young_workers, useNA = "ifany")
+
 
 ### 2010
 table(kff_2010$age26, useNA = "ifany") #examine variable
+
 kff_2010$mostly_young_workers <- ifelse(kff_2010$age26 == 2, 1, 0) #35% or more are age 26 or younger
 kff_2010$some_young_workers   <- ifelse(kff_2010$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
-table(kff_2010$age26, kff_2010$mostly_young_workers)
-table(kff_2010$age26, kff_2010$some_young_workers)
+
+table(kff_2010$age26, kff_2010$mostly_young_workers, useNA = "ifany")
+table(kff_2010$age26, kff_2010$some_young_workers, useNA = "ifany")
+
 
 ### 2011
 table(kff_2011$age26, useNA = "ifany") #examine variable
+
 kff_2011$mostly_young_workers <- ifelse(kff_2011$age26 == 2, 1, 0) #35% or more are age 26 or younger
 kff_2011$some_young_workers   <- ifelse(kff_2011$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
-table(kff_2011$age26, kff_2011$mostly_young_workers)
-table(kff_2011$age26, kff_2011$some_young_workers)
+
+table(kff_2011$age26, kff_2011$mostly_young_workers, useNA = "ifany")
+table(kff_2011$age26, kff_2011$some_young_workers, useNA = "ifany")
+
 
 ### 2012
 table(kff_2012$age26, useNA = "ifany") #examine variable
+
 kff_2012$mostly_young_workers <- ifelse(kff_2012$age26 == 2, 1, 0) #35% or more are age 26 or younger
 kff_2012$some_young_workers   <- ifelse(kff_2012$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
-table(kff_2012$age26, kff_2012$mostly_young_workers)
-table(kff_2012$age26, kff_2012$some_young_workers)
+
+table(kff_2012$age26, kff_2012$mostly_young_workers, useNA = "ifany")
+table(kff_2012$age26, kff_2012$some_young_workers, useNA = "ifany")
+
 
 ### 2013
 table(kff_2013$age26, useNA = "ifany") #examine variable
+
 kff_2013$mostly_young_workers <- ifelse(kff_2013$age26 == 2, 1, 0) #35% or more are age 26 or younger
 kff_2013$some_young_workers   <- ifelse(kff_2013$age26 == 1, 1, 0) #Less than 35% are age 26 or younger
+
 table(kff_2013$age26, kff_2013$mostly_young_workers)
 table(kff_2013$age26, kff_2013$some_young_workers)
 
 
 
-###### Clean for size (of industry) #####
+###### size (of firm) #####
 
 ### 2003
-
 # Step 1: Examine the Variable
 table(kff_2003$size)
 
@@ -769,9 +1324,9 @@ kff_2003$firm_size <- with(
 
 # Step 3: Confirm
 # dummy variables
-table(kff_2003$size, kff_2003$small_firm)
-table(kff_2003$size, kff_2003$medium_firm)
-table(kff_2003$size, kff_2003$large_firm)
+table(kff_2003$size, kff_2003$small_firm, useNA = "ifany")
+table(kff_2003$size, kff_2003$medium_firm, useNA = "ifany")
+table(kff_2003$size, kff_2003$large_firm, useNA = "ifany")
 
 # categorical variable
 table(kff_2003$size, kff_2003$firm_size)
@@ -786,9 +1341,9 @@ kff_2004$medium_firm   <- ifelse(kff_2004$size >  3 & kff_2004$size < 6,  1, 0)
 kff_2004$large_firm    <- ifelse(kff_2004$size == 6,                      1, 0)
 
 # Step 3: Confirm
-table(kff_2004$size, kff_2004$small_firm)
-table(kff_2004$size, kff_2004$medium_firm)
-table(kff_2004$size, kff_2004$large_firm)
+table(kff_2004$size, kff_2004$small_firm, useNA = "ifany")
+table(kff_2004$size, kff_2004$medium_firm, useNA = "ifany")
+table(kff_2004$size, kff_2004$large_firm, useNA = "ifany")
 
 
 ### 2005
@@ -798,9 +1353,9 @@ kff_2005$small_firm    <- ifelse(kff_2005$size <= 3,                      1, 0)
 kff_2005$medium_firm   <- ifelse(kff_2005$size >  3 & kff_2005$size < 6,  1, 0)
 kff_2005$large_firm    <- ifelse(kff_2005$size == 6,                      1, 0)
 
-table(kff_2005$size, kff_2005$small_firm)
-table(kff_2005$size, kff_2005$medium_firm)
-table(kff_2005$size, kff_2005$large_firm)
+table(kff_2005$size, kff_2005$small_firm, useNA = "ifany")
+table(kff_2005$size, kff_2005$medium_firm, useNA = "ifany")
+table(kff_2005$size, kff_2005$large_firm, useNA = "ifany")
 
 
 ### 2006
@@ -810,9 +1365,9 @@ kff_2006$small_firm    <- ifelse(kff_2006$size <= 3,                      1, 0)
 kff_2006$medium_firm   <- ifelse(kff_2006$size >  3 & kff_2006$size < 6,  1, 0)
 kff_2006$large_firm    <- ifelse(kff_2006$size == 6,                      1, 0)
 
-table(kff_2006$size, kff_2006$small_firm)
-table(kff_2006$size, kff_2006$medium_firm)
-table(kff_2006$size, kff_2006$large_firm)
+table(kff_2006$size, kff_2006$small_firm, useNA = "ifany")
+table(kff_2006$size, kff_2006$medium_firm, useNA = "ifany")
+table(kff_2006$size, kff_2006$large_firm, useNA = "ifany")
 
 
 ### 2007
@@ -822,9 +1377,9 @@ kff_2007$small_firm    <- ifelse(kff_2007$size <= 3,                      1, 0)
 kff_2007$medium_firm   <- ifelse(kff_2007$size >  3 & kff_2007$size < 6,  1, 0)
 kff_2007$large_firm    <- ifelse(kff_2007$size == 6,                      1, 0)
 
-table(kff_2007$size, kff_2007$small_firm)
-table(kff_2007$size, kff_2007$medium_firm)
-table(kff_2007$size, kff_2007$large_firm)
+table(kff_2007$size, kff_2007$small_firm, useNA = "ifany")
+table(kff_2007$size, kff_2007$medium_firm, useNA = "ifany")
+table(kff_2007$size, kff_2007$large_firm, useNA = "ifany")
 
 
 ### 2008
@@ -834,9 +1389,9 @@ kff_2008$small_firm    <- ifelse(kff_2008$size <= 3,                      1, 0)
 kff_2008$medium_firm   <- ifelse(kff_2008$size >  3 & kff_2008$size < 6,  1, 0)
 kff_2008$large_firm    <- ifelse(kff_2008$size == 6,                      1, 0)
 
-table(kff_2008$size, kff_2008$small_firm)
-table(kff_2008$size, kff_2008$medium_firm)
-table(kff_2008$size, kff_2008$large_firm)
+table(kff_2008$size, kff_2008$small_firm, useNA = "ifany")
+table(kff_2008$size, kff_2008$medium_firm, useNA = "ifany")
+table(kff_2008$size, kff_2008$large_firm, useNA = "ifany")
 
 
 ### 2009
@@ -846,9 +1401,9 @@ kff_2009$small_firm    <- ifelse(kff_2009$size <= 3,                      1, 0)
 kff_2009$medium_firm   <- ifelse(kff_2009$size >  3 & kff_2009$size < 6,  1, 0)
 kff_2009$large_firm    <- ifelse(kff_2009$size == 6,                      1, 0)
 
-table(kff_2009$size, kff_2009$small_firm)
-table(kff_2009$size, kff_2009$medium_firm)
-table(kff_2009$size, kff_2009$large_firm)
+table(kff_2009$size, kff_2009$small_firm, useNA = "ifany")
+table(kff_2009$size, kff_2009$medium_firm, useNA = "ifany")
+table(kff_2009$size, kff_2009$large_firm, useNA = "ifany")
 
 
 ### 2010
@@ -858,9 +1413,9 @@ kff_2010$small_firm    <- ifelse(kff_2010$size <= 3,                      1, 0)
 kff_2010$medium_firm   <- ifelse(kff_2010$size >  3 & kff_2010$size < 6,  1, 0)
 kff_2010$large_firm    <- ifelse(kff_2010$size == 6,                      1, 0)
 
-table(kff_2010$size, kff_2010$small_firm)
-table(kff_2010$size, kff_2010$medium_firm)
-table(kff_2010$size, kff_2010$large_firm)
+table(kff_2010$size, kff_2010$small_firm, useNA = "ifany")
+table(kff_2010$size, kff_2010$medium_firm, useNA = "ifany")
+table(kff_2010$size, kff_2010$large_firm, useNA = "ifany")
 
 
 ### 2011
@@ -870,9 +1425,9 @@ kff_2011$small_firm    <- ifelse(kff_2011$size <= 3,                      1, 0)
 kff_2011$medium_firm   <- ifelse(kff_2011$size >  3 & kff_2011$size < 6,  1, 0)
 kff_2011$large_firm    <- ifelse(kff_2011$size == 6,                      1, 0)
 
-table(kff_2011$size, kff_2011$small_firm)
-table(kff_2011$size, kff_2011$medium_firm)
-table(kff_2011$size, kff_2011$large_firm)
+table(kff_2011$size, kff_2011$small_firm, useNA = "ifany")
+table(kff_2011$size, kff_2011$medium_firm, useNA = "ifany")
+table(kff_2011$size, kff_2011$large_firm, useNA = "ifany")
 
 
 ### 2012
@@ -882,9 +1437,9 @@ kff_2012$small_firm    <- ifelse(kff_2012$size <= 3,                      1, 0)
 kff_2012$medium_firm   <- ifelse(kff_2012$size >  3 & kff_2012$size < 6,  1, 0)
 kff_2012$large_firm    <- ifelse(kff_2012$size == 6,                      1, 0)
 
-table(kff_2012$size, kff_2012$small_firm)
-table(kff_2012$size, kff_2012$medium_firm)
-table(kff_2012$size, kff_2012$large_firm)
+table(kff_2012$size, kff_2012$small_firm, useNA = "ifany")
+table(kff_2012$size, kff_2012$medium_firm, useNA = "ifany")
+table(kff_2012$size, kff_2012$large_firm, useNA = "ifany")
 
 
 ### 2013
@@ -894,9 +1449,56 @@ kff_2013$small_firm    <- ifelse(kff_2013$size <= 3,                      1, 0)
 kff_2013$medium_firm   <- ifelse(kff_2013$size >  3 & kff_2013$size < 6,  1, 0)
 kff_2013$large_firm    <- ifelse(kff_2013$size == 6,                      1, 0)
 
-table(kff_2013$size, kff_2013$small_firm)
-table(kff_2013$size, kff_2013$medium_firm)
-table(kff_2013$size, kff_2013$large_firm)
+table(kff_2013$size, kff_2013$small_firm, useNA = "ifany")
+table(kff_2013$size, kff_2013$medium_firm, useNA = "ifany")
+table(kff_2013$size, kff_2013$large_firm, useNA = "ifany")
+
+
+
+
+###### Likelihood of Making a Change in the Next Year: Offer High Deductible Health Plan #####
+
+###2004 (Note: defined as a deductible of more than $1000.)
+#step 1: examine variable
+summary(kff_2004$k11h)
+table(kff_2004$k11h, useNA = "ifany")
+
+#step 2: clean variable by creating a new variable
+kff_2004$very_likely_next_year <- ifelse(kff_2004$k11h == 1,1,0)
+kff_2004$sm_likely_next_year <- ifelse(kff_2004$k11h == 2,1,0)
+kff_2004$not_too_likely_next_year <- ifelse(kff_2004$k11h == 3,1,0)
+kff_2004$not_at_all_likely_next_year <- ifelse(kff_2004$k11h == 4,1,0)
+kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
+
+#confirm correct cleaning
+table(kff_2004$k11h, kff_2004$very_likely_next_year, useNA = "ifany")
+table(kff_2004$k11h, kff_2004$sm_likely_next_year, useNA = "ifany")
+table(kff_2004$k11h, kff_2004$not_too_likely_next_year, useNA = "ifany")
+table(kff_2004$k11h, kff_2004$not_at_all_likely_next_year, useNA = "ifany")
+table(kff_2004$k11h, kff_2004$dk_how_likely_next_year, useNA = "ifany")
+
+
+###2005 (Note: defined as an annual deductible of at least $1,000 for single coverage and $2,000 for family coverage, with a health reimbursement arrangement in the next year?)
+#step 1: examine variable
+summary(kff_2005$k11h)
+
+#step 2: clean variable by creating a new variable
+kff_2004$very_likely_next_year <- ifelse(kff_2004$k11h == 1,1,0)
+kff_2004$sm_likely_next_year <- ifelse(kff_2004$k11h == 2,1,0)
+kff_2004$not_too_likely_next_year <- ifelse(kff_2004$k11h == 3,1,0)
+kff_2004$not_at_all_likely_next_year <- ifelse(kff_2004$k11h == 4,1,0)
+kff_2004$dk_how_likely_next_year <- ifelse(kff_2004$k11h == 5,1,0)
+
+#confirm correct cleaning
+table(kff_2004$k11h, kff_2004$very_likely_next_year, useNA = "ifany")
+table(kff_2004$k11h, kff_2004$sm_likely_next_year, useNA = "ifany")
+table(kff_2004$k11h, Kff_2004$not_too_likely_next_year, useNA = "ifany")
+#=======
+table(kff_2004$k11h, kff_2004$not_too_likely_next_year, useNA = "ifany")
+#>>>>>>> ed7d427559ee523afbb6328f1a8a4a599527dcdb
+#>>>>>>> Stashed changes
+table(kff_2004$k11h, kff_2004$not_at_all_likely_next_year, useNA = "ifany")
+table(kff_2004$k11h, kff_2004$dk_how_likely_next_year, useNA = "ifany")
 
 
 
