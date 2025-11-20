@@ -25,14 +25,16 @@ setwd("G:/.shortcut-targets-by-id/14oLkrWtHW1NzX87aL0DxDGo_9Ysj-XBQ/HDHP/work")
 #install.packages("janitor")
 #install.packages("ggplot2")
 #install.packages("haven")
-
+#install.packages("tidyr")
+#install.packages("lme4")
 
 library(dplyr)
 library(readxl)
 library(janitor)
 library(ggplot2)
 library(haven)
-
+library(tidyr)
+library(lme4)
 
 # load the data
 kff_2000 <- read_sav('health benefits 00.sav')
@@ -81,14 +83,16 @@ summary(kff_2003$j3)
 table(kff_2003$j3, useNA = "ifany") 
 
 # Step 2: Clean variable (always create new variable!)
-kff_2003$offers <- ifelse(kff_2003$j3 == 1, 1, 0)
-kff_2003$doesnt_offer <- ifelse(kff_2003$j3 == 2,1,0)
-kff_2003$unsure_of_offer <- ifelse(kff_2003$j3 ==3,1,0)
+kff_2003$offers <- ifelse(kff_2003$j3 == 1, 1, 
+                          ifelse(kff_2003$j3 == 2, 0, NA))
+kff_2003$doesnt_offer <- ifelse(kff_2003$j3 == 2, 1,
+                                ifelse(kff_2003$j3 == 1, 0, NA))
+
 
 # step 3: Confirm correct cleaning
 table(kff_2003$j3, kff_2003$offers, useNA = "ifany")
 table(kff_2003$j3, kff_2003$doesnt_offer, useNA = "ifany")
-table(kff_2003$j3, kff_2003$unsure_of_offer, useNA = "ifany")
+
 
 
 ### 2004
@@ -1715,9 +1719,9 @@ kff_complete_case_2024 <- kff_2024 %>%
 
 # Step 3: Create Long Dataset merging all years
 kff_long_all_years <- bind_rows(
-  kff_complete_case_2003 %>% mutate(year = 2003),
-  kff_complete_case_2004 %>% mutate(year = 2004),
-  kff_complete_case_2005 %>% mutate(year = 2005),
+#  kff_complete_case_2003 %>% mutate(year = 2003),
+#  kff_complete_case_2004 %>% mutate(year = 2004),
+#  kff_complete_case_2005 %>% mutate(year = 2005),
   kff_complete_case_2006 %>% mutate(year = 2006),
   kff_complete_case_2007 %>% mutate(year = 2007),
   kff_complete_case_2008 %>% mutate(year = 2008),
@@ -1753,3 +1757,175 @@ hdhp_offering_trend <- kff_long_all_years %>%
     firms_offering_hdhp = sum(offers),
     proportion_offering_hdhp = firms_offering_hdhp / total_firms
   )
+# Plot the trend
+ggplot(hdhp_offering_trend, aes(x = year, y = proportion_offering_hdhp)) +
+  geom_line(color = "blue") +
+  geom_point(color = "red") +
+  labs(title = "Trend of Firms Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of Firms Offering HDHPs") +
+  theme_minimal()
+
+
+# plot proportion that don't offer HDHP over time
+hdhp_not_offering_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    firms_not_offering_hdhp = sum(doesnt_offer),
+    proportion_not_offering_hdhp = firms_not_offering_hdhp / total_firms
+  )
+# Plot the trend
+ggplot(hdhp_not_offering_trend, aes(x = year, y = proportion_not_offering_hdhp)) +
+  geom_line(color = "green") +
+  geom_point(color = "orange") +
+  labs(title = "Trend of Firms Not Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of Firms Not Offering HDHPs") +
+  theme_minimal()
+
+
+
+
+
+# plot the proportion of firms in each industry over time
+industry_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    AgriMinConst_count = sum(AgriMinConst),
+    manufacturing_count = sum(manufacturing),
+    transportutilcomms_count = sum(transportutilcomms),
+    wholesale_count = sum(wholesale),
+    retail_count = sum(retail),
+    financial_count = sum(financial),
+    service_count = sum(service),
+    government_count = sum(government),
+    healthcare_count = sum(healthcare)
+  ) %>%
+  mutate(
+    AgriMinConst_prop = AgriMinConst_count / total_firms,
+    manufacturing_prop = manufacturing_count / total_firms,
+    transportutilcomms_prop = transportutilcomms_count / total_firms,
+    wholesale_prop = wholesale_count / total_firms,
+    retail_prop = retail_count / total_firms,
+    financial_prop = financial_count / total_firms,
+    service_prop = service_count / total_firms,
+    government_prop = government_count / total_firms,
+    healthcare_prop = healthcare_count / total_firms
+  ) %>%
+  select(year, ends_with("_prop")) %>%
+  pivot_longer(-year, names_to = "industry", values_to = "proportion")
+
+# Plot the industry trend
+ggplot(industry_trend, aes(x = year, y = proportion, color = industry)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Proportion of Firms in Each Industry Over Time",
+       x = "Year",
+       y = "Proportion of Firms",
+       color = "Industry") +
+  theme_minimal()
+
+# plot this proportion as a stacked line graph
+ggplot(industry_trend, aes(x = year, y = proportion, fill = industry)) +
+  geom_area(position = 'fill', alpha = 0.6) +
+  labs(title = "Proportion of Firms in Each Industry Over Time",
+       x = "Year",
+       y = "Proportion of Firms",
+       fill = "Industry") +
+  theme_minimal()
+
+
+
+
+# plot the proportion of firms by size over time
+size_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    small_firm_count = sum(small_firm),
+    medium_firm_count = sum(medium_firm),
+    large_firm_count = sum(large_firm)
+  ) %>%
+  mutate(
+    small_firm_prop = small_firm_count / total_firms,
+    medium_firm_prop = medium_firm_count / total_firms,
+    large_firm_prop = large_firm_count / total_firms
+  ) %>%
+  select(year, ends_with("_prop")) %>%
+  pivot_longer(-year, names_to = "firm_size", values_to = "proportion")
+
+# Plot the size trend
+ggplot(size_trend, aes(x = year, y = proportion, color = firm_size)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Proportion of Firms by Size Over Time",
+       x = "Year",
+       y = "Proportion of Firms",
+       color = "Firm Size") +
+  theme_minimal()
+
+
+
+# plot this proportion as a stacked line graph
+ggplot(size_trend, aes(x = year, y = proportion, fill = firm_size)) +
+  geom_area(position = 'fill', alpha = 0.6) +
+  labs(title = "Proportion of Firms by Size Over Time",
+       x = "Year",
+       y = "Proportion of Firms",
+       fill = "Firm Size") +
+  theme_minimal()
+
+
+
+
+# calculate summary statistics for the long dataset
+summary_stats <- kff_long_all_years %>%
+  summarize(
+    total_firms = n(),
+    avg_small_firm = mean(small_firm),
+    avg_medium_firm = mean(medium_firm),
+    avg_large_firm = mean(large_firm),
+    avg_AgriMinConst = mean(AgriMinConst),
+    avg_manufacturing = mean(manufacturing),
+    avg_transportutilcomms = mean(transportutilcomms),
+    avg_wholesale = mean(wholesale),
+    avg_retail = mean(retail),
+    avg_financial = mean(financial),
+    avg_service = mean(service),
+    avg_government = mean(government),
+    avg_healthcare = mean(healthcare),
+    avg_offers = mean(offers),
+    avg_doesnt_offer = mean(doesnt_offer)
+  )
+
+print(summary_stats)
+
+
+####################################################################################
+############              Phase 4: Regression Analysis        ############
+####################################################################################
+
+
+# Logistic regression model to predict the likelihood of offering HDHPs
+hdhp_logistic_model <- glm(offers ~ small_firm + medium_firm  +
+                             AgriMinConst + manufacturing + transportutilcomms +
+                             wholesale + retail + financial +
+                             government + healthcare + year,
+                           data = kff_long_all_years,
+                           family = binomial)
+summary(hdhp_logistic_model)
+
+# hlm with year as random intercept
+hdhp_hlm_model <- glmer(offers ~ small_firm + medium_firm  +
+                          AgriMinConst + manufacturing + transportutilcomms +
+                          wholesale + retail + financial  +
+                          government + healthcare + (1 | year),
+                        data = kff_long_all_years,
+                        family = binomial)
+summary(hdhp_hlm_model)
+
+# MUSE plots
+# proportion of firms offering HDHPs by industry over time; separate graphs for each industry
+
