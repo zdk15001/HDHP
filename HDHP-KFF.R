@@ -1714,7 +1714,7 @@ kff_complete_case_2024 <- kff_2024 %>%
   filter(complete.cases(.))
 
 # Step 3: Create Long Dataset merging all years
-kff_wide_all_years <- bind_rows(
+kff_long_all_years <- bind_rows(
   kff_complete_case_2003 %>% mutate(year = 2003),
   kff_complete_case_2004 %>% mutate(year = 2004),
   kff_complete_case_2005 %>% mutate(year = 2005),
@@ -1739,6 +1739,17 @@ kff_wide_all_years <- bind_rows(
   kff_complete_case_2024 %>% mutate(year = 2024)
 )
 
-#want the proportion of industries in agriculture over time
+
+####################################################################################
+############              Phase 3: Descriptive statistics        ############
+####################################################################################
 
 
+# figure showing the proportion of firms offering HDHPs over time
+hdhp_offering_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    firms_offering_hdhp = sum(offers),
+    proportion_offering_hdhp = firms_offering_hdhp / total_firms
+  )
