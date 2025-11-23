@@ -1653,7 +1653,7 @@ table(kff_2004$k11h, kff_2004$dk_how_likely_next_year, useNA = "ifany")
 my_varlist <- c("small_firm", "medium_firm", "large_firm",
                 "AgriMinConst", "manufacturing", "transportutilcomms",
                 "wholesale", "retail", "financial", "service",
-                "government", "healthcare", "offers", "doesnt_offer")
+                "government", "healthcare", "offers", "doesnt_offer", "percent_hdhp")
 
 
 
@@ -1931,6 +1931,30 @@ summary_stats <- kff_long_all_years %>%
   )
 
 print(summary_stats)
+
+
+###multi line graph of  Percent of Workers with Health Benefits Covered in HDHP by industry over time
+plot_multiple_industs <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    AgriMinConst_offering = mean(offers[AgriMinConst == 1]),
+    manufacturing_offering = mean(offers[manufacturing == 1]),
+    transportutilcomms_offering = mean(offers[transportutilcomms == 1]),
+    wholesale_offering = mean(offers[wholesale == 1]),
+    retail_offering = mean(offers[retail == 1]),
+    financial_offering = mean(offers[financial == 1]),
+    government_offering = mean(offers[government == 1]),
+    healthcare_offering = mean(offers[healthcare == 1])
+  ) %>%
+  pivot_longer(-year, names_to = "industry", values_to = "proportion_offering")
+ggplot(plot_multiple_industs, aes(x = year, y = proportion_offering, color = industry)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Proportion of Firms Offering HDHPs by Industry Over Time",
+       x = "Year",
+       y = "Proportion of Firms Offering HDHPs",
+       color = "Industry") +
+  theme_minimal()
 
 
 ####################################################################################
