@@ -1933,29 +1933,6 @@ summary_stats <- kff_long_all_years %>%
 print(summary_stats)
 
 
-###multi line graph of offers by industry over time
-plot_multiple_industs <- kff_long_all_years %>%
-  group_by(year) %>%
-  summarize(
-    AgriMinConst_offering = mean(offers[AgriMinConst == 1]),
-    manufacturing_offering = mean(offers[manufacturing == 1]),
-    transportutilcomms_offering = mean(offers[transportutilcomms == 1]),
-    wholesale_offering = mean(offers[wholesale == 1]),
-    retail_offering = mean(offers[retail == 1]),
-    financial_offering = mean(offers[financial == 1]),
-    government_offering = mean(offers[government == 1]),
-    healthcare_offering = mean(offers[healthcare == 1])
-  ) %>%
-  pivot_longer(-year, names_to = "industry", values_to = "proportion_offering")
-ggplot(plot_multiple_industs, aes(x = year, y = proportion_offering, color = industry)) +
-  geom_line() +
-  geom_point() +
-  labs(title = "Proportion of Firms Offering HDHPs by Industry Over Time",
-       x = "Year",
-       y = "Proportion of Firms Offering HDHPs",
-       color = "Industry") +
-  theme_minimal()
-
 ###percent of hdhp offered by industry over time
 
 ##AgriMinCost
@@ -1986,7 +1963,7 @@ manufacturing_trend <- kff_long_all_years %>%
     manufacturing_total = sum(manufacturing)
   ) %>%
   mutate(
-    manufacturing_prop_offering = manufacturing_offering / manufacturing
+    manufacturing_prop_offering = manufacturing_offering / manufacturing_total
   )
 ggplot(manufacturing_trend, aes(x = year, y = manufacturing_prop_offering)) +
   geom_line(color = "brown") +
@@ -1996,7 +1973,163 @@ ggplot(manufacturing_trend, aes(x = year, y = manufacturing_prop_offering)) +
        y = "Proportion of Manufacturing Firms Offering HDHPs") +
   theme_minimal()
 
+##transportutilcomms
+transportutilcomms_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    transportutilcomms_offering = sum(offers[transportutilcomms == 1]),
+    transportutilcomms_total = sum(transportutilcomms)
+  ) %>%
+  mutate(
+    transportutilcomms_prop_offering = transportutilcomms_offering / transportutilcomms_total
+  )
+ggplot(transportutilcomms_trend, aes(x = year, y = transportutilcomms_prop_offering)) +
+  geom_line(color = "cyan") +
+  geom_point(color = "darkblue") +
+  labs(title = "Proportion of TransportUtilComms Firms Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of TransportUtilComms Firms Offering HDHPs") +
+  theme_minimal()
 
+
+### wholesale
+wholesale_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    wholesale_offering = sum(offers[wholesale == 1]),
+    wholesale_total = sum(wholesale)
+  ) %>%
+  mutate(
+    wholesale_prop_offering = wholesale_offering / wholesale_total
+  )
+ggplot(wholesale_trend, aes(x = year, y = wholesale_prop_offering)) +
+  geom_line(color = "darkgreen") +
+  geom_point(color = "lightgreen") +
+  labs(title = "Proportion of Wholesale Firms Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of Wholesale Firms Offering HDHPs") +
+  theme_minimal()
+
+### retail
+retail_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    retail_offering = sum(offers[retail == 1]),
+    retail_total = sum(retail)
+  ) %>%
+  mutate(
+    retail_prop_offering = retail_offering / retail_total
+  )
+ggplot(retail_trend, aes(x = year, y = retail_prop_offering)) +
+  geom_line(color = "darkred") +
+  geom_point(color = "orange") +
+  labs(title = "Proportion of Retail Firms Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of Retail Firms Offering HDHPs") +
+  theme_minimal()
+
+### financial
+financial_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    financial_offering = sum(offers[financial == 1]),
+    financial_total = sum(financial)
+  ) %>%
+  mutate(
+    financial_prop_offering = financial_offering / financial_total
+  )
+ggplot(financial_trend, aes(x = year, y = financial_prop_offering)) +
+  geom_line(color = "navy") +
+  geom_point(color = "lightblue") +
+  labs(title = "Proportion of Financial Firms Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of Financial Firms Offering HDHPs") +
+  theme_minimal()
+
+## government
+government_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    government_offering = sum(offers[government == 1]),
+    government_total = sum(government)
+  ) %>%
+  mutate(
+    government_prop_offering = government_offering / government_total
+  )
+ggplot(government_trend, aes(x = year, y = government_prop_offering)) +
+  geom_line(color = "darkgray") +
+  geom_point(color = "lightgray") +
+  labs(title = "Proportion of Government Firms Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of Government Firms Offering HDHPs") +
+  theme_minimal()
+
+## healthcare
+healthcare_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    healthcare_offering = sum(offers[healthcare == 1]),
+    healthcare_total = sum(healthcare)
+  ) %>%
+  mutate(
+    healthcare_prop_offering = healthcare_offering / healthcare_total
+  )
+ggplot(healthcare_trend, aes(x = year, y = healthcare_prop_offering)) +
+  geom_line(color = "maroon") +
+  geom_point(color = "pink") +
+  labs(title = "Proportion of Healthcare Firms Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of Healthcare Firms Offering HDHPs") +
+  theme_minimal()
+
+###plot a multi-line graph of all industries together
+industry_offering_trends <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    AgriMinConst_prop_offering = sum(offers[AgriMinConst == 1]) / sum(AgriMinConst),
+    manufacturing_prop_offering = sum(offers[manufacturing == 1]) / sum(manufacturing),
+    transportutilcomms_prop_offering = sum(offers[transportutilcomms == 1]) / sum(transportutilcomms),
+    wholesale_prop_offering = sum(offers[wholesale == 1]) / sum(wholesale),
+    retail_prop_offering = sum(offers[retail == 1]) / sum(retail),
+    financial_prop_offering = sum(offers[financial == 1]) / sum(financial),
+    government_prop_offering = sum(offers[government == 1]) / sum(government),
+    healthcare_prop_offering = sum(offers[healthcare == 1]) / sum(healthcare)
+  ) %>%
+  pivot_longer(-year, names_to = "industry", values_to = "proportion_offering")
+ggplot(industry_offering_trends, aes(x = year, y = proportion_offering, color = industry)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Proportion of Firms Offering HDHPs by Industry Over Time",
+       x = "Year",
+       y = "Proportion of Firms Offering HDHPs",
+       color = "Industry") +
+  theme_minimal()
+  
+
+### graphs for percent of workers offered HDHP by industry over time
+  
+### graph for percent of workers with HDHP for each industry
+
+##agrimincost
+agri_mincost_percent_hdhp_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    avg_AgriMinConst_percent_hdhp = mean(percent_hdhp[AgriMinConst == 1], na.rm = TRUE)
+  )
+ggplot(agri_mincost_percent_hdhp_trend, aes(x = year, y = avg_AgriMinConst_percent_hdhp)) +
+  geom_line(color = "purple") +
+  geom_point(color = "pink") +
+  labs(title = "Average Percent of Workers Offered HDHPs in AgriMinConst Over Time",
+       x = "Year",
+       y = "Average Percent of Workers Offered HDHPs in AgriMinConst") +
+  theme_minimal()
+  
 ####################################################################################
 ############              Phase 4: Regression Analysis        ############
 ####################################################################################
