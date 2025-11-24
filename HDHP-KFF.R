@@ -1937,11 +1937,11 @@ print(summary_stats)
 
 ##AgriMinCost
 agri_mincost_trend <- kff_long_all_years %>%
-  group_by(year) %>%
+  group_by(year) %>% #group by year so the graph can measure changes over time
   summarize(
-    total_firms = n(),
-    AgriMinConst_offering = sum(offers[AgriMinConst == 1]),
-    AgriMinConst_total = sum(AgriMinConst)
+    total_firms = n(), #counts total firms each year
+    AgriMinConst_offering = sum(offers[AgriMinConst == 1]), #filters for AgriMinConst firms offering HDHPs since 1 is the encoding for our offers variable
+    AgriMinConst_total = sum(AgriMinConst) #sums all AgriMinConst firms
   ) %>%
   mutate(
     AgriMinConst_prop_offering = AgriMinConst_offering / AgriMinConst_total
