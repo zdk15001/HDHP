@@ -100,19 +100,21 @@ table(kff_2003$j3, kff_2003$doesnt_offer, useNA = "ifany")
 summary(kff_2004$j3)
 
 # Step 2: Clean variable (always create new variable!)
-kff_2004$offers <- ifelse(kff_2004$j3 == 1, 1, 0)
-kff_2004$doesnt_offer <- ifelse(kff_2004$j3 == 2,1,0)
-kff_2004$unsure_of_offer <- ifelse(kff_2004$j3 ==3,1,0)
+kff_2004$offers <- ifelse(kff_2004$j3 == 1, 1, 
+                          ifelse(kff_2004$j3 == 2, 0,
+                                 ifelse(kff_2004$j3 == 3, NA, NA)))
+kff_2004$doesnt_offer <- ifelse(kff_2004$j3 == 2,1,
+                                ifelse(kff_2004$j3 == 1,0,
+                                       ifelse(kff_2004$j3 == 3, NA, NA)))
 
 # step 3: Confirm correct cleaning
 table(kff_2004$j3, kff_2004$offers, useNA = "ifany")
 table(kff_2004$j3, kff_2004$doesnt_offer, useNA = "ifany")
-table(kff_2004$j3, kff_2004$unsure_of_offer, useNA = "ifany")
 
 
 ### 2005
 #Step 1: Examine variable
-summary(kff_2005$b8e) 
+table(kff_2005$b8e) 
 
 # Step 2: Clean variable (always create new variable!)
 kff_2005$offers <- ifelse(kff_2005$b8e == 1, 1, 0)
@@ -125,7 +127,7 @@ table(kff_2005$b8e, kff_2005$doesnt_offer, useNA = "ifany")
 
 ###2006
 #Step 1: Examine variable
-summary(kff_2006$b8e) 
+table(kff_2006$b8e) 
 
 # Step 2: Clean variable (always create new variable!)
 kff_2006$offers <- ifelse(kff_2006$b8e == 1, 1, 0)
@@ -138,7 +140,7 @@ table(kff_2006$b8e, kff_2006$doesnt_offer, useNA = "ifany")
 
 ###2007
 #Step 1: Examine variable
-summary(kff_2007$b8e)
+table(kff_2007$b8e)
 
 # Step 2: Clean variable (always create new variable!)
 kff_2007$offers <- ifelse(kff_2007$b8e == 1, 1, 0)
@@ -149,7 +151,7 @@ table(kff_2007$b8e, kff_2007$offers, useNA = "ifany")
 table(kff_2007$b8e, kff_2007$doesnt_offer, useNA = "ifany")
 
 ###2008
-summary(kff_2008$b8e)
+table(kff_2008$b8e)
 
 kff_2008$offers <- ifelse(kff_2008$b8e == 1, 1, 0)
 kff_2008$doesnt_offer <- ifelse(kff_2008$b8e == 2,1,0)
@@ -159,7 +161,7 @@ table(kff_2008$b8e, kff_2008$doesnt_offer, useNA = "ifany")
 
 
 ###2009
-summary(kff_2009$b8e)
+table(kff_2009$b8e)
 
 kff_2009$offers <- ifelse(kff_2009$b8e == 1, 1, 0)
 kff_2009$doesnt_offer <- ifelse(kff_2009$b8e == 2,1,0)
@@ -169,7 +171,7 @@ table(kff_2009$b8e, kff_2009$doesnt_offer, useNA = "ifany")
 
 
 ###2010
-summary(kff_2010$b8e)
+table(kff_2010$b8e)
 
 kff_2010$offers <- ifelse(kff_2010$b8e == 1, 1, 0)
 kff_2010$doesnt_offer <- ifelse(kff_2010$b8e == 2,1,0)
@@ -179,7 +181,7 @@ table(kff_2010$b8e, kff_2010$doesnt_offer, useNA = "ifany")
 
 
 ###2011
-summary(kff_2011$b8e)
+table(kff_2011$b8e)
 
 kff_2011$offers <- ifelse(kff_2011$b8e == 1, 1, 0)
 kff_2011$doesnt_offer <- ifelse(kff_2011$b8e == 2,1,0)
@@ -194,31 +196,37 @@ summary(kff_2012$b8e)
 
 
 ###2013
-summary(kff_2013$b8e)
+table(kff_2013$b8e)
 
-kff_2013$offers <- ifelse(kff_2013$b8e == 1, 1, 0)
-kff_2013$doesnt_offer <- ifelse(kff_2013$b8e == 2,1,0)
-kff_2013$unsure_of_offer <- ifelse(kff_2013$b8e ==3,1,0)
+kff_2013$offers <- ifelse(kff_2013$b8e == 1, 1, 
+                         ifelse(kff_2013$b8e == 2, 0,
+                                ifelse(kff_2013$b8e == 3, NA, NA)))
+kff_2013$doesnt_offer <- ifelse(kff_2013$b8e == 2,1,
+                               ifelse(kff_2013$b8e == 1,0,
+                                      ifelse(kff_2013$b8e == 3, NA, NA)))
 
 table(kff_2013$b8e, kff_2013$offers, useNA = "ifany")
 table(kff_2013$b8e, kff_2013$doesnt_offer, useNA = "ifany")
-table(kff_2013$b8e, kff_2013$unsure_of_offer, useNA = "ifany")
+
 
 
 ####2014
-summary(kff_2014$b8e)
+table(kff_2014$b8e)
 
-kff_2014$offers <- ifelse(kff_2014$b8e == 1, 1, 0)
-kff_2014$doesnt_offer <- ifelse(kff_2014$b8e == 2,1,0)
-kff_2014$unsure_of_offer <- ifelse(kff_2014$b8e ==3,1,0)
+kff_2014$offers <- ifelse(kff_2014$b8e == 1, 1, 
+                         ifelse(kff_2014$b8e == 2, 0,
+                                ifelse(kff_2014$b8e == 3, NA, NA)))
+kff_2014$doesnt_offer <- ifelse(kff_2014$b8e == 2,1,
+                               ifelse(kff_2014$b8e == 1,0,
+                                      ifelse(kff_2014$b8e == 3, NA, NA)))
 
 table(kff_2014$b8e, kff_2014$offers, useNA = "ifany")
 table(kff_2014$b8e, kff_2014$doesnt_offer, useNA = "ifany")
-table(kff_2014$b8e, kff_2014$unsure_of_offer, useNA = "ifany")
+
 
 
 ###2015
-summary(kff_2015$b8e)
+table(kff_2015$b8e)
 
 kff_2015$offers <- ifelse(kff_2015$b8e == 1, 1, 0)
 kff_2015$doesnt_offer <- ifelse(kff_2015$b8e == 2,1,0)
@@ -228,106 +236,128 @@ table(kff_2015$b8e, kff_2015$doesnt_offer, useNA = "ifany")
 
 
 ###2016
-summary(kff_2016$b8e)
+table(kff_2016$b8e)
 
-kff_2016$offers <- ifelse(kff_2016$b8e == 1, 1, 0)
-kff_2016$doesnt_offer <- ifelse(kff_2016$b8e == 2,1,0)
-kff_2016$unsure_of_offer <- ifelse(kff_2016$b8e ==3,1,0)
+kff_2016$offers <- ifelse(kff_2016$b8e == 1, 1, 
+                        ifelse(kff_2016$b8e == 2, 0,
+                               ifelse(kff_2016$b8e == 3, NA, NA)))
+kff_2016$doesnt_offer <- ifelse(kff_2016$b8e == 2,1,
+                              ifelse(kff_2016$b8e == 1,0,
+                                     ifelse(kff_2016$b8e == 3, NA, NA)))
 
 table(kff_2016$b8e, kff_2016$offers, useNA = "ifany")
 table(kff_2016$b8e, kff_2016$doesnt_offer, useNA = "ifany")
-table(kff_2016$b8e, kff_2016$unsure_of_offer, useNA = "ifany")
 
 
 ###2017
-summary(kff_2017$b8e)
+table(kff_2017$b8e)
 
-kff_2017$offers <- ifelse(kff_2017$b8e == 1, 1, 0)
-kff_2017$doesnt_offer <- ifelse(kff_2017$b8e == 2,1,0)
-kff_2017$unsure_of_offer <- ifelse(kff_2017$b8e ==3,1,0)
+kff_2017$offers <- ifelse(kff_2017$b8e == 1, 1, 
+                        ifelse(kff_2017$b8e == 2, 0,
+                               ifelse(kff_2017$b8e == 3, NA, NA)))
+kff_2017$doesnt_offer <- ifelse(kff_2017$b8e == 2,1,
+                              ifelse(kff_2017$b8e == 1,0,
+                                     ifelse(kff_2017$b8e == 3, NA, NA)))
 
 table(kff_2017$b8e, kff_2017$offers, useNA = "ifany")
 table(kff_2017$b8e, kff_2017$doesnt_offer, useNA = "ifany")
-table(kff_2017$b8e, kff_2017$unsure_of_offer, useNA = "ifany")
-
 
 ###2018
-summary(kff_2018$b8e)
+table(kff_2018$b8e)
 
-kff_2018$offers <- ifelse(kff_2018$b8e == 1, 1, 0)
-kff_2018$doesnt_offer <- ifelse(kff_2018$b8e == 2,1,0)
-kff_2018$unsure_of_offer <- ifelse(kff_2018$b8e ==3,1,0)
+kff_2018$offers <- ifelse(kff_2018$b8e == 1, 1, 
+                        ifelse(kff_2018$b8e == 2, 0,
+                               ifelse(kff_2018$b8e == 3, NA, NA)))
+kff_2018$doesnt_offer <- ifelse(kff_2018$b8e == 2,1,
+                              ifelse(kff_2018$b8e == 1,0,
+                                     ifelse(kff_2018$b8e == 3, NA, NA)))
 
 table(kff_2018$b8e, kff_2018$offers, useNA = "ifany")
 table(kff_2018$b8e, kff_2018$doesnt_offer, useNA = "ifany")
-table(kff_2018$b8e, kff_2018$unsure_of_offer, useNA = "ifany")
+
 
 ###2019
 table(kff_2019$b8e,useNA = "ifany")
 
-kff_2019$offers <- ifelse(kff_2019$b8e == 1, 1, 0)
-kff_2019$doesnt_offer <- ifelse(kff_2019$b8e == 2,1,0)
-kff_2019$unsure_of_offer <- ifelse(kff_2019$b8e ==3,1,0)
+kff_2019$offers <- ifelse(kff_2019$b8e == 1, 1, 
+                        ifelse(kff_2019$b8e == 2, 0,
+                               ifelse(kff_2019$b8e == 3, NA, NA)))
+kff_2019$doesnt_offer <- ifelse(kff_2019$b8e == 2,1,
+                              ifelse(kff_2019$b8e == 1,0,
+                                     ifelse(kff_2019$b8e == 3, NA, NA)))
 
 table(kff_2019$b8e, kff_2019$offers, useNA = "ifany")
 table(kff_2019$b8e, kff_2019$doesnt_offer, useNA = "ifany")
-table(kff_2019$b8e, kff_2019$unsure_of_offer, useNA = "ifany")
 
 ###2020
 table(kff_2020$b8e,useNA = "ifany")
 
-#NOTE: 2020 has 3, unsure if they offer HDHP in the dataset but not in the codebook/data dictionary
-kff_2020$offers <- ifelse(kff_2020$b8e == 1, 1, 0)
-kff_2020$doesnt_offer <- ifelse(kff_2020$b8e == 2,1,0)
-kff_2020$unsure_of_offer <- ifelse(kff_2020$b8e ==3,1,0)
+#NOTE: 2020 has 3rd encoded outcome, unsure if they offer HDHP in the dataset but not in the codebook/data dictionary
+kff_2020$offers <- ifelse(kff_2020$b8e == 1, 1, 
+                        ifelse(kff_2020$b8e == 2, 0,
+                               ifelse(kff_2020$b8e == 3, NA, NA)))
+kff_2020$doesnt_offer <- ifelse(kff_2020$b8e == 2,1,
+                              ifelse(kff_2020$b8e == 1,0,
+                                     ifelse(kff_2020$b8e == 3, NA, NA)))
 
 table(kff_2020$b8e, kff_2020$offers, useNA = "ifany")
 table(kff_2020$b8e, kff_2020$doesnt_offer, useNA = "ifany")
-table(kff_2020$b8e, kff_2020$unsure_of_offer, useNA = "ifany")
+
 
 ###2021
 table(kff_2021$b8e,useNA = "ifany")
 
-kff_2021$offers <- ifelse(kff_2021$b8e == 1, 1, 0)
-kff_2021$doesnt_offer <- ifelse(kff_2021$b8e == 2,1,0)
-kff_2021$unsure_of_offer <- ifelse(kff_2021$b8e ==3,1,0)
+kff_2021$offers <- ifelse(kff_2021$b8e == 1, 1,
+                        ifelse(kff_2021$b8e == 2, 0,
+                               ifelse(kff_2021$b8e == 3, NA, NA)))
+kff_2021$doesnt_offer <- ifelse(kff_2021$b8e == 2,1,
+                              ifelse(kff_2021$b8e == 1,0,
+                                     ifelse(kff_2021$b8e == 3, NA, NA)))
 
 table(kff_2021$b8e, kff_2021$offers, useNA = "ifany")
 table(kff_2021$b8e, kff_2021$doesnt_offer, useNA = "ifany")
-table(kff_2021$b8e, kff_2021$unsure_of_offer, useNA = "ifany")
+
 
 ###2022
 table(kff_2022$b8e,useNA = "ifany")
 
-kff_2022$offers <- ifelse(kff_2022$b8e == 1, 1, 0)
-kff_2022$doesnt_offer <- ifelse(kff_2022$b8e == 2,1,0)
-kff_2022$unsure_of_offer <- ifelse(kff_2022$b8e ==3,1,0)
+kff_2022$offers <- ifelse(kff_2022$b8e == 1, 1, 
+                        ifelse(kff_2022$b8e == 2, 0,
+                               ifelse(kff_2022$b8e == 3, NA, NA)))
+kff_2022$doesnt_offer <- ifelse(kff_2022$b8e == 2,1,
+                              ifelse(kff_2022$b8e == 1,0,
+                                     ifelse(kff_2022$b8e == 3, NA, NA)))
 
 table(kff_2022$b8e, kff_2022$offers, useNA = "ifany")
 table(kff_2022$b8e, kff_2022$doesnt_offer, useNA = "ifany")
-table(kff_2022$b8e, kff_2022$unsure_of_offer, useNA = "ifany")
+
 
 ###2023
 table(kff_2023$b8e,useNA = "ifany")
 
-kff_2023$offers <- ifelse(kff_2023$b8e == 1, 1, 0)
-kff_2023$doesnt_offer <- ifelse(kff_2023$b8e == 2,1,0)
-kff_2023$unsure_of_offer <- ifelse(kff_2023$b8e ==3,1,0)
+kff_2023$offers <- ifelse(kff_2023$b8e == 1, 1, 
+                        ifelse(kff_2023$b8e == 2, 0,
+                               ifelse(kff_2023$b8e == 3, NA, NA)))
+kff_2023$doesnt_offer <- ifelse(kff_2023$b8e == 2,1,
+                              ifelse(kff_2023$b8e == 1,0,
+                                     ifelse(kff_2023$b8e == 3, NA, NA)))
 
 table(kff_2023$b8e, kff_2023$offers, useNA = "ifany")
 table(kff_2023$b8e, kff_2023$doesnt_offer, useNA = "ifany")
-table(kff_2023$b8e, kff_2023$unsure_of_offer, useNA = "ifany")
 
 ###2024
 table(kff_2024$b8e,useNA = "ifany")
 
-kff_2024$offers <- ifelse(kff_2024$b8e == 1, 1, 0)
-kff_2024$doesnt_offer <- ifelse(kff_2024$b8e == 2,1,0)
-kff_2024$unsure_of_offer <- ifelse(kff_2024$b8e ==3,1,0)
+kff_2024$offers <- ifelse(kff_2024$b8e == 1, 1,
+                        ifelse(kff_2024$b8e == 2, 0,
+                               ifelse(kff_2024$b8e == 3, NA, NA)))
+kff_2024$doesnt_offer <- ifelse(kff_2024$b8e == 2,1,
+                              ifelse(kff_2024$b8e == 1,0,
+                                     ifelse(kff_2024$b8e == 3, NA, NA)))
 
 table(kff_2024$b8e, kff_2024$offers, useNA = "ifany")
 table(kff_2024$b8e, kff_2024$doesnt_offer, useNA = "ifany")
-table(kff_2024$b8e, kff_2024$unsure_of_offer, useNA = "ifany")
+
 
 
 ###### Percent of Workers with Health Benefits Covered in HDHP #####
@@ -1623,22 +1653,22 @@ table(kff_2004$k11h, kff_2004$dk_how_likely_next_year, useNA = "ifany")
 my_varlist <- c("small_firm", "medium_firm", "large_firm",
                 "AgriMinConst", "manufacturing", "transportutilcomms",
                 "wholesale", "retail", "financial", "service",
-                "government", "healthcare", "offers", "doesnt_offer")
+                "government", "healthcare", "offers", "doesnt_offer", "percent_hdhp")
 
 
 
 # Step 2: Complete case information for all variables in varlsit in 2004
-kff_complete_case_2003 <- kff_2003 %>%
-  select(all_of(my_varlist)) %>%
-  filter(complete.cases(.))
-
-kff_complete_case_2004 <- kff_2004 %>%
-  select(all_of(my_varlist)) %>%
-  filter(complete.cases(.))
-
-kff_complete_case_2005 <- kff_2005 %>%
-  select(all_of(my_varlist)) %>%
-  filter(complete.cases(.))
+# kff_complete_case_2003 <- kff_2003 %>%
+#   select(all_of(my_varlist)) %>%
+#   filter(complete.cases(.))
+# 
+# kff_complete_case_2004 <- kff_2004 %>%
+#   select(all_of(my_varlist)) %>%
+#   filter(complete.cases(.))
+# 
+# kff_complete_case_2005 <- kff_2005 %>%
+#   select(all_of(my_varlist)) %>%
+#   filter(complete.cases(.))
 
 kff_complete_case_2006 <- kff_2006 %>%
   select(all_of(my_varlist)) %>%
@@ -1903,6 +1933,203 @@ summary_stats <- kff_long_all_years %>%
 print(summary_stats)
 
 
+###percent of hdhp offered by industry over time
+
+##AgriMinCost
+agri_mincost_trend <- kff_long_all_years %>%
+  group_by(year) %>% #group by year so the graph can measure changes over time
+  summarize(
+    total_firms = n(), #counts total firms each year
+    AgriMinConst_offering = sum(offers[AgriMinConst == 1]), #filters for AgriMinConst firms offering HDHPs since 1 is the encoding for our offers variable
+    AgriMinConst_total = sum(AgriMinConst) #sums all AgriMinConst firms
+  ) %>%
+  mutate(
+    AgriMinConst_prop_offering = AgriMinConst_offering / AgriMinConst_total
+  )
+ggplot(agri_mincost_trend, aes(x = year, y = AgriMinConst_prop_offering)) +
+  geom_line(color = "purple") +
+  geom_point(color = "pink") +
+  labs(title = "Proportion of AgriMinConst Firms Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of AgriMinConst Firms Offering HDHPs") +
+  theme_minimal()
+
+##manufacturing
+manufacturing_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    manufacturing_offering = sum(offers[manufacturing == 1]),
+    manufacturing_total = sum(manufacturing)
+  ) %>%
+  mutate(
+    manufacturing_prop_offering = manufacturing_offering / manufacturing_total
+  )
+ggplot(manufacturing_trend, aes(x = year, y = manufacturing_prop_offering)) +
+  geom_line(color = "brown") +
+  geom_point(color = "yellow") +
+  labs(title = "Proportion of Manufacturing Firms Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of Manufacturing Firms Offering HDHPs") +
+  theme_minimal()
+
+##transportutilcomms
+transportutilcomms_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    transportutilcomms_offering = sum(offers[transportutilcomms == 1]),
+    transportutilcomms_total = sum(transportutilcomms)
+  ) %>%
+  mutate(
+    transportutilcomms_prop_offering = transportutilcomms_offering / transportutilcomms_total
+  )
+ggplot(transportutilcomms_trend, aes(x = year, y = transportutilcomms_prop_offering)) +
+  geom_line(color = "cyan") +
+  geom_point(color = "darkblue") +
+  labs(title = "Proportion of TransportUtilComms Firms Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of TransportUtilComms Firms Offering HDHPs") +
+  theme_minimal()
+
+
+### wholesale
+wholesale_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    wholesale_offering = sum(offers[wholesale == 1]),
+    wholesale_total = sum(wholesale)
+  ) %>%
+  mutate(
+    wholesale_prop_offering = wholesale_offering / wholesale_total
+  )
+ggplot(wholesale_trend, aes(x = year, y = wholesale_prop_offering)) +
+  geom_line(color = "darkgreen") +
+  geom_point(color = "lightgreen") +
+  labs(title = "Proportion of Wholesale Firms Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of Wholesale Firms Offering HDHPs") +
+  theme_minimal()
+
+### retail
+retail_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    retail_offering = sum(offers[retail == 1]),
+    retail_total = sum(retail)
+  ) %>%
+  mutate(
+    retail_prop_offering = retail_offering / retail_total
+  )
+ggplot(retail_trend, aes(x = year, y = retail_prop_offering)) +
+  geom_line(color = "darkred") +
+  geom_point(color = "orange") +
+  labs(title = "Proportion of Retail Firms Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of Retail Firms Offering HDHPs") +
+  theme_minimal()
+
+### financial
+financial_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    financial_offering = sum(offers[financial == 1]),
+    financial_total = sum(financial)
+  ) %>%
+  mutate(
+    financial_prop_offering = financial_offering / financial_total
+  )
+ggplot(financial_trend, aes(x = year, y = financial_prop_offering)) +
+  geom_line(color = "navy") +
+  geom_point(color = "lightblue") +
+  labs(title = "Proportion of Financial Firms Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of Financial Firms Offering HDHPs") +
+  theme_minimal()
+
+## government
+government_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    government_offering = sum(offers[government == 1]),
+    government_total = sum(government)
+  ) %>%
+  mutate(
+    government_prop_offering = government_offering / government_total
+  )
+ggplot(government_trend, aes(x = year, y = government_prop_offering)) +
+  geom_line(color = "darkgray") +
+  geom_point(color = "lightgray") +
+  labs(title = "Proportion of Government Firms Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of Government Firms Offering HDHPs") +
+  theme_minimal()
+
+## healthcare
+healthcare_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    healthcare_offering = sum(offers[healthcare == 1]),
+    healthcare_total = sum(healthcare)
+  ) %>%
+  mutate(
+    healthcare_prop_offering = healthcare_offering / healthcare_total
+  )
+ggplot(healthcare_trend, aes(x = year, y = healthcare_prop_offering)) +
+  geom_line(color = "maroon") +
+  geom_point(color = "pink") +
+  labs(title = "Proportion of Healthcare Firms Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of Healthcare Firms Offering HDHPs") +
+  theme_minimal()
+
+###plot a multi-line graph of all industries together
+industry_offering_trends <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    AgriMinConst_prop_offering = sum(offers[AgriMinConst == 1]) / sum(AgriMinConst),
+    manufacturing_prop_offering = sum(offers[manufacturing == 1]) / sum(manufacturing),
+    transportutilcomms_prop_offering = sum(offers[transportutilcomms == 1]) / sum(transportutilcomms),
+    wholesale_prop_offering = sum(offers[wholesale == 1]) / sum(wholesale),
+    retail_prop_offering = sum(offers[retail == 1]) / sum(retail),
+    financial_prop_offering = sum(offers[financial == 1]) / sum(financial),
+    government_prop_offering = sum(offers[government == 1]) / sum(government),
+    healthcare_prop_offering = sum(offers[healthcare == 1]) / sum(healthcare)
+  ) %>%
+  pivot_longer(-year, names_to = "industry", values_to = "proportion_offering")
+ggplot(industry_offering_trends, aes(x = year, y = proportion_offering, color = industry)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Proportion of Firms Offering HDHPs by Industry Over Time",
+       x = "Year",
+       y = "Proportion of Firms Offering HDHPs",
+       color = "Industry") +
+  theme_minimal()
+  
+
+### graphs for percent of workers offered HDHP by industry over time
+  
+### graph for percent of workers with HDHP for each industry
+
+##agrimincost
+agri_mincost_percent_hdhp_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    avg_AgriMinConst_percent_hdhp = mean(percent_hdhp[AgriMinConst == 1], na.rm = TRUE)
+  )
+ggplot(agri_mincost_percent_hdhp_trend, aes(x = year, y = avg_AgriMinConst_percent_hdhp)) +
+  geom_line(color = "purple") +
+  geom_point(color = "pink") +
+  labs(title = "Average Percent of Workers Offered HDHPs in AgriMinConst Over Time",
+       x = "Year",
+       y = "Average Percent of Workers Offered HDHPs in AgriMinConst") +
+  theme_minimal()
+  
 ####################################################################################
 ############              Phase 4: Regression Analysis        ############
 ####################################################################################
