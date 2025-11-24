@@ -1933,7 +1933,7 @@ summary_stats <- kff_long_all_years %>%
 print(summary_stats)
 
 
-###multi line graph of  Percent of Workers with Health Benefits Covered in HDHP by industry over time
+###multi line graph of offers by industry over time
 plot_multiple_industs <- kff_long_all_years %>%
   group_by(year) %>%
   summarize(
@@ -1954,6 +1954,46 @@ ggplot(plot_multiple_industs, aes(x = year, y = proportion_offering, color = ind
        x = "Year",
        y = "Proportion of Firms Offering HDHPs",
        color = "Industry") +
+  theme_minimal()
+
+###percent of hdhp offered by industry over time
+
+##AgriMinCost
+agri_mincost_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    AgriMinConst_offering = sum(offers[AgriMinConst == 1]),
+    AgriMinConst_total = sum(AgriMinConst)
+  ) %>%
+  mutate(
+    AgriMinConst_prop_offering = AgriMinConst_offering / AgriMinConst_total
+  )
+ggplot(agri_mincost_trend, aes(x = year, y = AgriMinConst_prop_offering)) +
+  geom_line(color = "purple") +
+  geom_point(color = "pink") +
+  labs(title = "Proportion of AgriMinConst Firms Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of AgriMinConst Firms Offering HDHPs") +
+  theme_minimal()
+
+##manufacturing
+manufacturing_trend <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    total_firms = n(),
+    manufacturing_offering = sum(offers[manufacturing == 1]),
+    manufacturing_total = sum(manufacturing)
+  ) %>%
+  mutate(
+    manufacturing_prop_offering = manufacturing_offering / manufacturing
+  )
+ggplot(manufacturing_trend, aes(x = year, y = manufacturing_prop_offering)) +
+  geom_line(color = "brown") +
+  geom_point(color = "yellow") +
+  labs(title = "Proportion of Manufacturing Firms Offering HDHPs Over Time",
+       x = "Year",
+       y = "Proportion of Manufacturing Firms Offering HDHPs") +
   theme_minimal()
 
 
