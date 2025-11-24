@@ -1946,6 +1946,7 @@ agri_mincost_trend <- kff_long_all_years %>%
   mutate(
     AgriMinConst_prop_offering = AgriMinConst_offering / AgriMinConst_total
   )
+
 ggplot(agri_mincost_trend, aes(x = year, y = AgriMinConst_prop_offering)) +
   geom_line(color = "purple") +
   geom_point(color = "pink") +
@@ -2134,12 +2135,13 @@ ggplot(agri_mincost_percent_hdhp_trend, aes(x = year, y = avg_AgriMinConst_perce
 ############              Phase 4: Regression Analysis        ############
 ####################################################################################
 
+kff_long_all_years$year2 <- kff_long_all_years$year*kff_long_all_years$year
 
 # Logistic regression model to predict the likelihood of offering HDHPs
 hdhp_logistic_model <- glm(offers ~ small_firm + medium_firm  +
                              AgriMinConst + manufacturing + transportutilcomms +
                              wholesale + retail + financial +
-                             government + healthcare + year,
+                             government + healthcare + year + year2,
                            data = kff_long_all_years,
                            family = binomial)
 summary(hdhp_logistic_model)
