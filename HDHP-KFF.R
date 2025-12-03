@@ -833,7 +833,7 @@ table(kff_2013$industry, kff_2013$healthcare, useNA = "ifany")
 ## 2014 ##
 table(kff_2014$industry, useNA = "ifany")
 
-kff_2014$AgriMinConst.       <- ifelse(kff_2014$industry == 2, 1, 0)
+kff_2014$AgriMinConst       <- ifelse(kff_2014$industry == 2, 1, 0)
 kff_2014$manufacturing       <- ifelse(kff_2014$industry == 3,  1, 0)
 kff_2014$transportutilcomms  <- ifelse(kff_2014$industry == 4,  1, 0)
 kff_2014$wholesale           <- ifelse(kff_2014$industry == 5,  1, 0)
@@ -857,7 +857,7 @@ table(kff_2014$industry, kff_2014$healthcare, useNA = "ifany")
 ### 2015 ###
 table(kff_2015$industry, useNA = "ifany")
 
-kff_2015$AgriMinConst.       <- ifelse(kff_2015$industry == 2, 1, 0)
+kff_2015$AgriMinConst       <- ifelse(kff_2015$industry == 2, 1, 0)
 kff_2015$manufacturing       <- ifelse(kff_2015$industry == 3,  1, 0)
 kff_2015$transportutilcomms  <- ifelse(kff_2015$industry == 4,  1, 0)
 kff_2015$wholesale           <- ifelse(kff_2015$industry == 5,  1, 0)
@@ -881,7 +881,7 @@ table(kff_2015$industry, kff_2015$healthcare, useNA = "ifany")
 ### 2016 ###
 table(kff_2016$industry, useNA = "ifany")
 
-kff_2016$AgriMinConst.       <- ifelse(kff_2016$industry == 2, 1, 0)
+kff_2016$AgriMinConst       <- ifelse(kff_2016$industry == 2, 1, 0)
 kff_2016$manufacturing       <- ifelse(kff_2016$industry == 3,  1, 0)
 kff_2016$transportutilcomms  <- ifelse(kff_2016$industry == 4,  1, 0)
 kff_2016$wholesale           <- ifelse(kff_2016$industry == 5,  1, 0)
@@ -1762,7 +1762,8 @@ kff_long_all_years <- bind_rows(
 ####################################################################################
 
 
-# figure showing the proportion of firms offering HDHPs over time
+## Plots proportion of firms offering HDHPs over time
+# Creates data frame with relevant columns
 hdhp_offering_trend <- kff_long_all_years %>%
   group_by(year) %>%
   summarize(
@@ -1770,17 +1771,20 @@ hdhp_offering_trend <- kff_long_all_years %>%
     firms_offering_hdhp = sum(offers),
     proportion_offering_hdhp = firms_offering_hdhp / total_firms
   )
-# Plot the trend
+# Creates line plot
 ggplot(hdhp_offering_trend, aes(x = year, y = proportion_offering_hdhp)) +
   geom_line(color = "blue") +
   geom_point(color = "red") +
+  scale_y_continuous(limits = c(0, 1)) +
+  scale_x_continuous(breaks = 2006:2024) +
   labs(title = "Trend of Firms Offering HDHPs Over Time",
        x = "Year",
        y = "Proportion of Firms Offering HDHPs") +
   theme_minimal()
 
 
-# plot proportion that don't offer HDHP over time
+## Plots proportion of firms that don't offer HDHP over time
+# Creates data frame with relevant columns
 hdhp_not_offering_trend <- kff_long_all_years %>%
   group_by(year) %>%
   summarize(
@@ -1788,10 +1792,12 @@ hdhp_not_offering_trend <- kff_long_all_years %>%
     firms_not_offering_hdhp = sum(doesnt_offer),
     proportion_not_offering_hdhp = firms_not_offering_hdhp / total_firms
   )
-# Plot the trend
+# Creates line plot
 ggplot(hdhp_not_offering_trend, aes(x = year, y = proportion_not_offering_hdhp)) +
   geom_line(color = "green") +
   geom_point(color = "orange") +
+  scale_y_continuous(limits = c(0, 1)) +
+  scale_x_continuous(breaks = 2006:2024) +
   labs(title = "Trend of Firms Not Offering HDHPs Over Time",
        x = "Year",
        y = "Proportion of Firms Not Offering HDHPs") +
@@ -1801,7 +1807,8 @@ ggplot(hdhp_not_offering_trend, aes(x = year, y = proportion_not_offering_hdhp))
 
 
 
-# plot the proportion of firms in each industry over time
+## Plots the proportion of firms in each industry over time
+# Creates data frame with relevant columns; calculates proportions from counts
 industry_trend <- kff_long_all_years %>%
   group_by(year) %>%
   summarize(
@@ -1830,17 +1837,18 @@ industry_trend <- kff_long_all_years %>%
   select(year, ends_with("_prop")) %>%
   pivot_longer(-year, names_to = "industry", values_to = "proportion")
 
-# Plot the industry trend
+# Plot the propotion over time by industry
 ggplot(industry_trend, aes(x = year, y = proportion, color = industry)) +
   geom_line() +
   geom_point() +
+  scale_y_continuous(limits = c(0, 0.5)) +
   labs(title = "Proportion of Firms in Each Industry Over Time",
        x = "Year",
        y = "Proportion of Firms",
        color = "Industry") +
   theme_minimal()
 
-# plot this proportion as a stacked line graph
+# Plot these proportions as a stacked line graph
 ggplot(industry_trend, aes(x = year, y = proportion, fill = industry)) +
   geom_area(position = 'fill', alpha = 0.6) +
   labs(title = "Proportion of Firms in Each Industry Over Time",
@@ -1852,7 +1860,8 @@ ggplot(industry_trend, aes(x = year, y = proportion, fill = industry)) +
 
 
 
-# plot the proportion of firms by size over time
+## Plots the proportion of firm sizes over time
+# Creates data frame with relevant columns; calculates proportions from firm counts
 size_trend <- kff_long_all_years %>%
   group_by(year) %>%
   summarize(
@@ -1869,19 +1878,18 @@ size_trend <- kff_long_all_years %>%
   select(year, ends_with("_prop")) %>%
   pivot_longer(-year, names_to = "firm_size", values_to = "proportion")
 
-# Plot the size trend
+# Plots the proportion of firm sizes over time
 ggplot(size_trend, aes(x = year, y = proportion, color = firm_size)) +
   geom_line() +
   geom_point() +
+  scale_y_continuous(limits = c(0, 0.5)) +
   labs(title = "Proportion of Firms by Size Over Time",
        x = "Year",
        y = "Proportion of Firms",
        color = "Firm Size") +
   theme_minimal()
 
-
-
-# plot this proportion as a stacked line graph
+# Plots these proportions as a stacked line graph
 ggplot(size_trend, aes(x = year, y = proportion, fill = firm_size)) +
   geom_area(position = 'fill', alpha = 0.6) +
   labs(title = "Proportion of Firms by Size Over Time",
@@ -1916,7 +1924,8 @@ summary_stats <- kff_long_all_years %>%
 print(summary_stats)
 
 
-###multi line graph of offers by industry over time
+### Plots multi line graph of percent HDHO offers by industry over time
+# Creates data frame with mean HDHP % offered by industry over time
 plot_multiple_industs <- kff_long_all_years %>%
   group_by(year) %>%
   summarize(
@@ -1933,51 +1942,54 @@ plot_multiple_industs <- kff_long_all_years %>%
 ggplot(plot_multiple_industs, aes(x = year, y = proportion_offering, color = industry)) +
   geom_line() +
   geom_point() +
+  scale_y_continuous(limits = c(0, 1)) +
+  scale_x_continuous(breaks = 2006:2024) +
   labs(title = "Proportion of Firms Offering HDHPs by Industry Over Time",
        x = "Year",
        y = "Proportion of Firms Offering HDHPs",
        color = "Industry") +
   theme_minimal()
 
-###percent of hdhp offered by industry over time
 
-##AgriMinCost
-agri_mincost_trend <- kff_long_all_years %>%
-  group_by(year) %>%
-  summarize(
-    total_firms = n(),
-    AgriMinConst_offering = sum(offers[AgriMinConst == 1]),
-    AgriMinConst_total = sum(AgriMinConst)
-  ) %>%
-  mutate(
-    AgriMinConst_prop_offering = AgriMinConst_offering / AgriMinConst_total
-  )
-ggplot(agri_mincost_trend, aes(x = year, y = AgriMinConst_prop_offering)) +
-  geom_line(color = "purple") +
-  geom_point(color = "pink") +
-  labs(title = "Proportion of AgriMinConst Firms Offering HDHPs Over Time",
-       x = "Year",
-       y = "Proportion of AgriMinConst Firms Offering HDHPs") +
-  theme_minimal()
 
-##manufacturing
-manufacturing_trend <- kff_long_all_years %>%
-  group_by(year) %>%
-  summarize(
-    total_firms = n(),
-    manufacturing_offering = sum(offers[manufacturing == 1]),
-    manufacturing_total = sum(manufacturing)
-  ) %>%
-  mutate(
-    manufacturing_prop_offering = manufacturing_offering / manufacturing
-  )
-ggplot(manufacturing_trend, aes(x = year, y = manufacturing_prop_offering)) +
-  geom_line(color = "brown") +
-  geom_point(color = "yellow") +
-  labs(title = "Proportion of Manufacturing Firms Offering HDHPs Over Time",
-       x = "Year",
-       y = "Proportion of Manufacturing Firms Offering HDHPs") +
-  theme_minimal()
+###Percent of firms offering hdhp by industry over time; individual line graphs
+###for each industry
+
+##Function to plot each individual graph:
+plot_prop_HDHP_offer <- function(industry_name, color1) {
+  # industry_name is expected to be a string like "AgriMinConst_offering"
+  
+  # prettify for the title: remove suffix, replace underscores
+  pretty_name <- industry_name |>
+    sub("_offering$", "", x = _) |>
+    gsub("_", " ", x = _)
+  
+  df <- plot_multiple_industs %>%
+    filter(industry == industry_name)
+  
+  ggplot(df, aes(x = year, y = proportion_offering)) +
+    geom_line(color = color1) +
+    geom_point(color = "black") +
+    scale_y_continuous(limits = c(0, 1)) +
+    scale_x_continuous(breaks = 2006:2024) +
+    labs(
+      title = paste0("Proportion of ", pretty_name, " Firms Offering HDHPs Over Time"),
+      x = "Year",
+      y = "Proportion"
+    ) +
+    theme_minimal()
+}
+
+
+plot_prop_HDHP_offer("AgriMinConst_offering", "purple")
+plot_prop_HDHP_offer("manufacturing_offering", "red")
+plot_prop_HDHP_offer("transportutilcomms_offering", "blue")
+plot_prop_HDHP_offer("wholesale_offering", "green")
+plot_prop_HDHP_offer("retail_offering", "pink")
+plot_prop_HDHP_offer("financial_offering", "orange")
+plot_prop_HDHP_offer("government_offering", "yellow")
+plot_prop_HDHP_offer("healthcare_offering", "magenta")
+
 
 
 ####################################################################################
@@ -2002,7 +2014,3 @@ hdhp_hlm_model <- glmer(offers ~ small_firm + medium_firm  +
                         data = kff_long_all_years,
                         family = binomial)
 summary(hdhp_hlm_model)
-
-# MUSE plots
-# proportion of firms offering HDHPs by industry over time; separate graphs for each industry
-
