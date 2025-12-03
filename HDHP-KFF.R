@@ -1924,7 +1924,6 @@ summary_stats <- kff_long_all_years %>%
 print(summary_stats)
 
 
-<<<<<<< HEAD
 ### Plots multi line graph of percent HDHO offers by industry over time
 # Creates data frame with mean HDHP % offered by industry over time
 plot_multiple_industs <- kff_long_all_years %>%
@@ -2031,7 +2030,6 @@ ggplot(manufacturing_trend, aes(x = year, y = manufacturing_prop_offering)) +
        x = "Year",
        y = "Proportion of Manufacturing Firms Offering HDHPs") +
   theme_minimal()
->>>>>>> f2e53c54c1dcacb22ee93a1c65b7eb39a1489397
 
 ##transportutilcomms
 transportutilcomms_trend <- kff_long_all_years %>%
