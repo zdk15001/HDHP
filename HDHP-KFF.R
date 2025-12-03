@@ -1837,7 +1837,7 @@ industry_trend <- kff_long_all_years %>%
   select(year, ends_with("_prop")) %>%
   pivot_longer(-year, names_to = "industry", values_to = "proportion")
 
-# Plot the propotion over time by industry
+# Plot the propotion of firms over time by industry
 ggplot(industry_trend, aes(x = year, y = proportion, color = industry)) +
   geom_line() +
   geom_point() +
@@ -1954,11 +1954,8 @@ ggplot(plot_multiple_industs, aes(x = year, y = proportion_offering, color = ind
 
 ###Percent of firms offering hdhp by industry over time; individual line graphs
 ###for each industry
-
-##Function to plot each individual graph:
+#Function to plot each individual graph:
 plot_prop_HDHP_offer <- function(industry_name, color1) {
-  # industry_name is expected to be a string like "AgriMinConst_offering"
-  
   # prettify for the title: remove suffix, replace underscores
   pretty_name <- industry_name |>
     sub("_offering$", "", x = _) |>
@@ -1980,7 +1977,6 @@ plot_prop_HDHP_offer <- function(industry_name, color1) {
     theme_minimal()
 }
 
-
 plot_prop_HDHP_offer("AgriMinConst_offering", "purple")
 plot_prop_HDHP_offer("manufacturing_offering", "red")
 plot_prop_HDHP_offer("transportutilcomms_offering", "blue")
@@ -1991,6 +1987,72 @@ plot_prop_HDHP_offer("government_offering", "yellow")
 plot_prop_HDHP_offer("healthcare_offering", "magenta")
 
 
+
+
+### Percent of workers covered by hdhp by industry over time; individual line graphs
+# Dataframe:
+percent_HDHP_covered <- kff_long_all_years %>%
+  group_by(year) %>%
+  summarize(
+    AgriMinConst_covered = mean(percent_hdhp[AgriMinConst == 1]),
+    manufacturing_covered = mean(percent_hdhp[manufacturing == 1]),
+    transportutilcomms_covered = mean(percent_hdhp[transportutilcomms == 1]),
+    wholesale_covered = mean(percent_hdhp[wholesale == 1]),
+    retail_covered = mean(percent_hdhp[retail == 1]),
+    financial_covered = mean(percent_hdhp[financial == 1]),
+    government_covered = mean(percent_hdhp[government == 1]),
+    healthcare_covered = mean(percent_hdhp[healthcare == 1])
+  ) %>%
+  pivot_longer(-year, names_to = "industry", values_to = "percent_covered")
+
+#Multi-line graph:
+ggplot(percent_HDHP_covered, aes(x = year, y = percent_covered, color = industry)) +
+  geom_line() +
+  geom_point() +
+  scale_y_continuous(limits = c(0, 0.5)) +
+  scale_x_continuous(breaks = 2006:2024) +
+  labs(title = "Percent of Workers Covered by HDHPs by Industry Over Time",
+       x = "Year",
+       y = "Proportion of Firms Offering HDHPs",
+       color = "Industry") +
+  theme_minimal()
+
+##Function to plot each individual graph:
+plot_prop_HDHP_covered <- function(industry_name, color1) {
+  # industry_name is expected to be a string like "AgriMinConst_offering"
+  
+  # prettify for the title: remove suffix, replace underscores
+  pretty_name <- industry_name |>
+    sub("_offering$", "", x = _) |>
+    gsub("_", " ", x = _)
+  
+  df <- percent_HDHP_covered %>%
+    filter(industry == industry_name)
+  
+  ggplot(df, aes(x = year, y = percent_covered)) +
+    geom_line(color = color1) +
+    geom_point(color = "black") +
+    scale_y_continuous(limits = c(0, 1)) +
+    scale_x_continuous(breaks = 2006:2024) +
+    labs(
+      title = paste0("Proportion of ", pretty_name, " Workers Covered By HDHPs Over Time"),
+      x = "Year",
+      y = "Proportion"
+    ) +
+    theme_minimal()+
+    theme(
+      panel.grid.minor.x = element_blank()
+    )
+}
+
+plot_prop_HDHP_offer("AgriMinConst_offering", "purple")
+plot_prop_HDHP_offer("manufacturing_offering", "red")
+plot_prop_HDHP_offer("transportutilcomms_offering", "blue")
+plot_prop_HDHP_offer("wholesale_offering", "green")
+plot_prop_HDHP_offer("retail_offering", "pink")
+plot_prop_HDHP_offer("financial_offering", "orange")
+plot_prop_HDHP_offer("government_offering", "yellow")
+plot_prop_HDHP_offer("healthcare_offering", "magenta")
 
 ####################################################################################
 ############              Phase 4: Regression Analysis        ############
