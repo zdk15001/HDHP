@@ -204,7 +204,7 @@ kff_2013$doesnt_offer  <- ifelse(kff_2013$b8e == 2, 1,
                                         ifelse(kff_2013$b8e == 3, NA, NA)))
 
 table(kff_2013$b8e, kff_2013$offers, useNA = "ifany")
-table(kff_2013$b8e, kff_2013$doesnt_offer, useNA = "ifany")
+
 
 
 ####2014
@@ -219,6 +219,8 @@ kff_2014$doesnt_offer  <- ifelse(kff_2014$b8e == 2, 1,
 
 table(kff_2014$b8e, kff_2014$offers, useNA = "ifany")
 table(kff_2014$b8e, kff_2014$doesnt_offer, useNA = "ifany")
+
+
 
 
 ###2015
@@ -2058,12 +2060,13 @@ plot_prop_HDHP_offer("healthcare_offering", "magenta")
 ############              Phase 4: Regression Analysis        ############
 ####################################################################################
 
+kff_long_all_years$year2 <- kff_long_all_years$year*kff_long_all_years$year
 
 # Logistic regression model to predict the likelihood of offering HDHPs
 hdhp_logistic_model <- glm(offers ~ small_firm + medium_firm  +
                              AgriMinConst + manufacturing + transportutilcomms +
                              wholesale + retail + financial +
-                             government + healthcare + year,
+                             government + healthcare + year + year2,
                            data = kff_long_all_years,
                            family = binomial)
 summary(hdhp_logistic_model)
