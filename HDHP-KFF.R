@@ -1815,15 +1815,15 @@ industry_trend <- kff_long_all_years %>%
   group_by(year) %>%
   summarize(
     total_firms = n(),
-    AgriMinConst_count = sum(AgriMinConst),
-    manufacturing_count = sum(manufacturing),
+    AgriMinConst_count       = sum(AgriMinConst),
+    manufacturing_count      = sum(manufacturing),
     transportutilcomms_count = sum(transportutilcomms),
-    wholesale_count = sum(wholesale),
-    retail_count = sum(retail),
-    financial_count = sum(financial),
-    service_count = sum(service),
-    government_count = sum(government),
-    healthcare_count = sum(healthcare)
+    wholesale_count          = sum(wholesale),
+    retail_count             = sum(retail),
+    financial_count          = sum(financial),
+    service_count            = sum(service),
+    government_count         = sum(government),
+    healthcare_count         = sum(healthcare)
   ) %>%
   mutate(
     AgriMinConst_prop = AgriMinConst_count / total_firms,
@@ -1926,19 +1926,22 @@ summary_stats <- kff_long_all_years %>%
 print(summary_stats)
 
 
+
+
+
 ### Plots multi line graph of percent HDHO offers by industry over time
 # Creates data frame with mean HDHP % offered by industry over time
 plot_multiple_industs <- kff_long_all_years %>%
   group_by(year) %>%
   summarize(
-    AgriMinConst_offering = mean(offers[AgriMinConst == 1]),
-    manufacturing_offering = mean(offers[manufacturing == 1]),
-    transportutilcomms_offering = mean(offers[transportutilcomms == 1]),
-    wholesale_offering = mean(offers[wholesale == 1]),
-    retail_offering = mean(offers[retail == 1]),
-    financial_offering = mean(offers[financial == 1]),
-    government_offering = mean(offers[government == 1]),
-    healthcare_offering = mean(offers[healthcare == 1])
+    prAgriMinConst_offering = mean(offers[AgriMinConst == 1]),
+    prmanufacturing_offering = mean(offers[manufacturing == 1]),
+    prtransportutilcomms_offering = mean(offers[transportutilcomms == 1]),
+    prwholesale_offering = mean(offers[wholesale == 1]),
+    prretail_offering = mean(offers[retail == 1]),
+    prfinancial_offering = mean(offers[financial == 1]),
+    prgovernment_offering = mean(offers[government == 1]),
+    prhealthcare_offering = mean(offers[healthcare == 1])
   ) %>%
   pivot_longer(-year, names_to = "industry", values_to = "proportion_offering")
 ggplot(plot_multiple_industs, aes(x = year, y = proportion_offering, color = industry)) +
@@ -1979,14 +1982,14 @@ plot_prop_HDHP_offer <- function(industry_name, color1) {
     theme_minimal()
 }
 
-plot_prop_HDHP_offer("AgriMinConst_offering", "purple")
-plot_prop_HDHP_offer("manufacturing_offering", "red")
-plot_prop_HDHP_offer("transportutilcomms_offering", "blue")
-plot_prop_HDHP_offer("wholesale_offering", "green")
-plot_prop_HDHP_offer("retail_offering", "pink")
-plot_prop_HDHP_offer("financial_offering", "orange")
-plot_prop_HDHP_offer("government_offering", "yellow")
-plot_prop_HDHP_offer("healthcare_offering", "magenta")
+plot_prop_HDHP_offer("prAgriMinConst_offering", "purple")
+plot_prop_HDHP_offer("prmanufacturing_offering", "red")
+plot_prop_HDHP_offer("prtransportutilcomms_offering", "blue")
+plot_prop_HDHP_offer("prwholesale_offering", "green")
+plot_prop_HDHP_offer("prretail_offering", "pink")
+plot_prop_HDHP_offer("prfinancial_offering", "orange")
+plot_prop_HDHP_offer("prgovernment_offering", "yellow")
+plot_prop_HDHP_offer("prhealthcare_offering", "magenta")
 
 
 
@@ -2034,7 +2037,7 @@ plot_prop_HDHP_covered <- function(industry_name, color1) {
   ggplot(df, aes(x = year, y = percent_covered)) +
     geom_line(color = color1) +
     geom_point(color = "black") +
-    scale_y_continuous(limits = c(0, 1)) +
+    scale_y_continuous(limits = c(0, .5)) +
     scale_x_continuous(breaks = 2006:2024) +
     labs(
       title = paste0("Proportion of ", pretty_name, " Workers Covered By HDHPs Over Time"),
@@ -2047,14 +2050,14 @@ plot_prop_HDHP_covered <- function(industry_name, color1) {
     )
 }
 
-plot_prop_HDHP_offer("AgriMinConst_offering", "purple")
-plot_prop_HDHP_offer("manufacturing_offering", "red")
-plot_prop_HDHP_offer("transportutilcomms_offering", "blue")
-plot_prop_HDHP_offer("wholesale_offering", "green")
-plot_prop_HDHP_offer("retail_offering", "pink")
-plot_prop_HDHP_offer("financial_offering", "orange")
-plot_prop_HDHP_offer("government_offering", "yellow")
-plot_prop_HDHP_offer("healthcare_offering", "magenta")
+plot_prop_HDHP_covered("AgriMinConst_covered", "purple")
+plot_prop_HDHP_covered("manufacturing_covered", "red")
+plot_prop_HDHP_covered("transportutilcomms_covered", "blue")
+plot_prop_HDHP_covered("wholesale_covered", "green")
+plot_prop_HDHP_covered("retail_covered", "pink")
+plot_prop_HDHP_covered("financial_covered", "orange")
+plot_prop_HDHP_covered("government_covered", "yellow")
+plot_prop_HDHP_covered("healthcare_covered", "magenta")
 
 ####################################################################################
 ############              Phase 4: Regression Analysis        ############
@@ -2074,7 +2077,7 @@ summary(hdhp_logistic_model)
 # hlm with year as random intercept
 hdhp_hlm_model <- glmer(offers ~ small_firm + medium_firm  +
                           AgriMinConst + manufacturing + transportutilcomms +
-                          wholesale + retail + financial  +
+                          wholesale + retail   +
                           government + healthcare + (1 | year),
                         data = kff_long_all_years,
                         family = binomial)
