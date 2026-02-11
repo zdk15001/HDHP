@@ -1628,6 +1628,90 @@ table(kff_2004$k11h, kff_2004$dk_how_likely_next_year, useNA = "ifany")
 
 
 
+########## Weights ##########
+
+###### Employer Weights ######
+
+###2005
+summary(kff_2005$empwt_a6)
+summary(kff_2005$empwt)
+
+###2006
+summary(kff_2006$empwt_a6)
+summary(kff_2006$empwt)
+
+###2007
+summary(kff_2007$empwt_a6)
+summary(kff_2007$empwt)
+
+###2008
+summary(kff_2008$empwt_a6)
+summary(kff_2008$empwt)
+
+###2009
+summary(kff_2009$empwt_a6)
+summary(kff_2009$empwt)
+
+###2010
+summary(kff_2010$empwt_a6)
+summary(kff_2010$empwt)
+
+###2011
+summary(kff_2011$empwt_a6)
+summary(kff_2011$empwt)
+
+###2012
+summary(kff_2012$empwt_a6)
+summary(kff_2012$empwt)
+
+###2013
+summary(kff_2013$empwt_a6)
+summary(kff_2013$empwt)
+
+###2014
+summary(kff_2014$empwt_a6)
+summary(kff_2014$empwt)
+
+###2015
+summary(kff_2015$empwt_a6)
+summary(kff_2015$empwt)
+
+###2016
+summary(kff_2016$empwt_a6)
+summary(kff_2016$empwt)
+
+###2017
+summary(kff_2017$empwt_a6)
+summary(kff_2017$empwt)
+
+###2018
+summary(kff_2018$empwt_a6)
+summary(kff_2018$empwt)
+
+###2019
+summary(kff_2019$empwt_a6)
+summary(kff_2019$empwt)
+
+###NOTE: no NA values for empwt_a6 from here on out. INVESTIGATE?
+###2020
+summary(kff_2020$empwt_a6)  
+summary(kff_2020$empwt)
+
+###2021
+summary(kff_2021$empwt_a6)
+summary(kff_2021$empwt)
+
+###2022
+summary(kff_2022$empwt_a6)
+summary(kff_2022$empwt)
+
+###2023
+summary(kff_2023$empwt_a6)
+summary(kff_2023$empwt)
+
+###2024
+summary(kff_2024$empwt_a6)
+summary(kff_2024$empwt)
 
 
 ####################################################################################
