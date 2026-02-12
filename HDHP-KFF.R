@@ -1961,7 +1961,8 @@ summary(kff_2024$hdpwt_enrollment)
 my_varlist <- c("small_firm", "medium_firm", "large_firm",
                 "AgriMinConst", "manufacturing", "transportutilcomms",
                 "wholesale", "retail", "financial", "service",
-                "government", "healthcare", "offers", "doesnt_offer", "percent_hdhp")
+                "government", "healthcare", "offers", "doesnt_offer", "percent_hdhp",
+                "empwt", "covwt" )
 
 
 
