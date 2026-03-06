@@ -361,17 +361,17 @@ table(kff_2024$b8e, kff_2024$doesnt_offer, useNA = "ifany")
 
 
 
-###### Percent of Workers with Health Benefits Covered in HDHP #####
+###### proportion of workers with Health Benefits Covered in HDHP #####
 
 ### 2006
 #examine variable by showing summary stats (min, 1st quartile, median, mean, 3rd quartile, max, and number of missing values (NA))
 summary(kff_2006$b12e)
 
-kff_2006$percent_hdhp       <- kff_2006$b12e #clean data by creating new variable 
+kff_2006$proportion_hdhp       <- kff_2006$b12e #clean data by creating new variable 
 
 #confirm correct cleaning by checking that the new variable matches the original (difference should be 0 for all observations)
-kff_2006$test_percent_hdhp  <- kff_2006$b12e - kff_2006$percent_hdhp
-summary(kff_2006$test_percent_hdhp) #print summary stats
+kff_2006$test_proportion_hdhp  <- kff_2006$b12e - kff_2006$proportion_hdhp
+summary(kff_2006$test_proportion_hdhp) #print summary stats
 
 
 ### 2007
@@ -379,38 +379,38 @@ summary(kff_2006$test_percent_hdhp) #print summary stats
 summary(kff_2007$b12e)
 
 # Step 2: Clean variable (always create new variable!)
-kff_2007$percent_hdhp       <- kff_2007$b12e
+kff_2007$proportion_hdhp       <- kff_2007$b12e
 
 # step 3: Confirm correct cleaning
-kff_2007$test_percent_hdhp  <- kff_2007$b12e - kff_2007$percent_hdhp
-summary(kff_2007$test_percent_hdhp)
+kff_2007$test_proportion_hdhp  <- kff_2007$b12e - kff_2007$proportion_hdhp
+summary(kff_2007$test_proportion_hdhp)
 
 
 ### 2008
 summary(kff_2008$b12e)
 
-kff_2008$percent_hdhp       <- kff_2008$b12e
+kff_2008$proportion_hdhp       <- kff_2008$b12e
 
-kff_2008$test_percent_hdhp  <- kff_2008$b12e - kff_2008$percent_hdhp
-summary(kff_2008$test_percent_hdhp)
+kff_2008$test_proportion_hdhp  <- kff_2008$b12e - kff_2008$proportion_hdhp
+summary(kff_2008$test_proportion_hdhp)
 
 
 ### 2009
 summary(kff_2009$b12e)
 
-kff_2009$percent_hdhp       <- kff_2009$b12e
+kff_2009$proportion_hdhp       <- kff_2009$b12e
 
-kff_2009$test_percent_hdhp  <- kff_2009$b12e - kff_2009$percent_hdhp
-summary(kff_2009$test_percent_hdhp)
+kff_2009$test_proportion_hdhp  <- kff_2009$b12e - kff_2009$proportion_hdhp
+summary(kff_2009$test_proportion_hdhp)
 
 
 ### 2010
 summary(kff_2010$b12e)
 
-kff_2010$percent_hdhp       <- kff_2010$b12e
+kff_2010$proportion_hdhp       <- kff_2010$b12e
 
-kff_2010$test_percent_hdhp  <- kff_2010$b12e - kff_2010$percent_hdhp
-summary(kff_2010$test_percent_hdhp)
+kff_2010$test_proportion_hdhp  <- kff_2010$b12e - kff_2010$proportion_hdhp
+summary(kff_2010$test_proportion_hdhp)
 
 #NOTE:mean increases from 2010 to 2011, from 0.0725 to 0.155
 
@@ -418,19 +418,19 @@ summary(kff_2010$test_percent_hdhp)
 ### 2011
 summary(kff_2011$b12e)
 
-kff_2011$percent_hdhp       <- kff_2011$b12e
+kff_2011$proportion_hdhp       <- kff_2011$b12e
 
-kff_2011$test_percent_hdhp  <- kff_2011$b12e - kff_2011$percent_hdhp
-summary(kff_2011$test_percent_hdhp)
+kff_2011$test_proportion_hdhp  <- kff_2011$b12e - kff_2011$proportion_hdhp
+summary(kff_2011$test_proportion_hdhp)
 
 
 ### 2012
 summary(kff_2012$b12e)
 
-kff_2012$percent_hdhp       <- kff_2012$b12e
+kff_2012$proportion_hdhp       <- kff_2012$b12e
 
-kff_2012$test_percent_hdhp  <- kff_2012$b12e - kff_2012$percent_hdhp
-summary(kff_2012$test_percent_hdhp)
+kff_2012$test_proportion_hdhp  <- kff_2012$b12e - kff_2012$proportion_hdhp
+summary(kff_2012$test_proportion_hdhp)
 
 
 ### 2013
@@ -438,11 +438,11 @@ summary(kff_2012$test_percent_hdhp)
 summary(kff_2013$b12e)
 
 # Step 2: Clean variable (always create new variable!)
-kff_2013$percent_hdhp       <- kff_2013$b12e
+kff_2013$proportion_hdhp       <- kff_2013$b12e
 
 # step 3: Confirm correct cleaning
-kff_2013$test_percent_hdhp  <- kff_2013$b12e - kff_2013$percent_hdhp
-summary(kff_2013$test_percent_hdhp)
+kff_2013$test_proportion_hdhp  <- kff_2013$b12e - kff_2013$proportion_hdhp
+summary(kff_2013$test_proportion_hdhp)
 
 
 ### 2014
@@ -450,102 +450,102 @@ summary(kff_2013$test_percent_hdhp)
 summary(kff_2014$b12e)
 
 # Step 2: Clean variable (always create new variable!)
-kff_2014$percent_hdhp       <- kff_2014$b12e
+kff_2014$proportion_hdhp       <- kff_2014$b12e
 
 # step 3: Confirm correct cleaning
-kff_2014$test_percent_hdhp  <- kff_2014$b12e - kff_2014$percent_hdhp
-summary(kff_2014$test_percent_hdhp)
+kff_2014$test_proportion_hdhp  <- kff_2014$b12e - kff_2014$proportion_hdhp
+summary(kff_2014$test_proportion_hdhp)
 
 
 ### 2015
 summary(kff_2015$b12e)
 
-kff_2015$percent_hdhp       <- kff_2015$b12e
+kff_2015$proportion_hdhp       <- kff_2015$b12e
 
-kff_2015$test_percent_hdhp  <- kff_2015$b12e - kff_2015$percent_hdhp
-summary(kff_2015$test_percent_hdhp)
+kff_2015$test_proportion_hdhp  <- kff_2015$b12e - kff_2015$proportion_hdhp
+summary(kff_2015$test_proportion_hdhp)
 
 
 ### 2016
 summary(kff_2016$b12e)
 
-kff_2016$percent_hdhp       <- kff_2016$b12e
+kff_2016$proportion_hdhp       <- kff_2016$b12e
 
-kff_2016$test_percent_hdhp  <- kff_2016$b12e - kff_2016$percent_hdhp
-summary(kff_2016$test_percent_hdhp)
+kff_2016$test_proportion_hdhp  <- kff_2016$b12e - kff_2016$proportion_hdhp
+summary(kff_2016$test_proportion_hdhp)
 
 
 ### 2017
 summary(kff_2017$b12e)
 
-kff_2017$percent_hdhp       <- kff_2017$b12e
+kff_2017$proportion_hdhp       <- kff_2017$b12e
 
-kff_2017$test_percent_hdhp  <- kff_2017$b12e - kff_2017$percent_hdhp
-summary(kff_2017$test_percent_hdhp)
+kff_2017$test_proportion_hdhp  <- kff_2017$b12e - kff_2017$proportion_hdhp
+summary(kff_2017$test_proportion_hdhp)
 
 
 ### 2018
 summary(kff_2018$b12e)
 
-kff_2018$percent_hdhp       <- kff_2018$b12e
+kff_2018$proportion_hdhp       <- kff_2018$b12e
 
-kff_2018$test_percent_hdhp  <- kff_2018$b12e - kff_2018$percent_hdhp
-summary(kff_2018$test_percent_hdhp)
+kff_2018$test_proportion_hdhp  <- kff_2018$b12e - kff_2018$proportion_hdhp
+summary(kff_2018$test_proportion_hdhp)
 
 
 #NOTE: variable are tracked in 2019 and 2020 datasets but not mentioned in codebooks/dictionaries
 ### 2019
 summary(kff_2019$b12e_pct)
 
-kff_2019$percent_hdhp       <- kff_2019$b12e_pct
+kff_2019$proportion_hdhp       <- kff_2019$b12e_pct
 
-kff_2019$test_percent_hdhp  <- kff_2019$b12e_pct - kff_2019$percent_hdhp
-summary(kff_2019$test_percent_hdhp)
+kff_2019$test_proportion_hdhp  <- kff_2019$b12e_pct - kff_2019$proportion_hdhp
+summary(kff_2019$test_proportion_hdhp)
 
 
 ### 2020
 summary(kff_2020$b12e_pct)
 
-kff_2020$percent_hdhp       <- kff_2020$b12e_pct
+kff_2020$proportion_hdhp       <- kff_2020$b12e_pct
 
-kff_2020$test_percent_hdhp  <- kff_2020$b12e_pct - kff_2020$percent_hdhp
-summary(kff_2020$test_percent_hdhp)
+kff_2020$test_proportion_hdhp  <- kff_2020$b12e_pct - kff_2020$proportion_hdhp
+summary(kff_2020$test_proportion_hdhp)
 
 
 ###2021
 summary(kff_2021$b12e_pct)
 
-kff_2021$percent_hdhp       <- kff_2021$b12e_pct
+kff_2021$proportion_hdhp       <- kff_2021$b12e_pct
 
-kff_2021$test_percent_hdhp  <- kff_2021$b12e_pct - kff_2021$percent_hdhp
-summary(kff_2021$test_percent_hdhp)
+kff_2021$test_proportion_hdhp  <- kff_2021$b12e_pct - kff_2021$proportion_hdhp
+summary(kff_2021$test_proportion_hdhp)
 
 
 ###2022
 summary(kff_2022$b12e_pct)
 
-kff_2022$percent_hdhp       <- kff_2022$b12e_pct
+kff_2022$proportion_hdhp       <- kff_2022$b12e_pct
 
-kff_2022$test_percent_hdhp  <- kff_2022$b12e_pct - kff_2022$percent_hdhp
-summary(kff_2022$test_percent_hdhp)
+kff_2022$test_proportion_hdhp  <- kff_2022$b12e_pct - kff_2022$proportion_hdhp
+summary(kff_2022$test_proportion_hdhp)
 
 
 ###2023
 summary(kff_2023$b12e_pct)
 
-kff_2023$percent_hdhp       <- kff_2023$b12e_pct
+kff_2023$proportion_hdhp       <- kff_2023$b12e_pct
 
-kff_2023$test_percent_hdhp  <- kff_2023$b12e_pct - kff_2023$percent_hdhp
-summary(kff_2023$test_percent_hdhp)
+kff_2023$test_proportion_hdhp  <- kff_2023$b12e_pct - kff_2023$proportion_hdhp
+summary(kff_2023$test_proportion_hdhp)
 
 
 ###2024
 summary(kff_2024$b12e_pct)
 
-kff_2024$percent_hdhp       <- kff_2024$b12e_pct
+kff_2024$proportion_hdhp       <- kff_2024$b12e_pct
 
-kff_2024$test_percent_hdhp  <- kff_2024$b12e_pct - kff_2024$percent_hdhp
-summary(kff_2024$test_percent_hdhp)
+kff_2024$test_proportion_hdhp  <- kff_2024$b12e_pct - kff_2024$proportion_hdhp
+summary(kff_2024$test_proportion_hdhp)
 
 
 
@@ -1961,7 +1961,8 @@ summary(kff_2024$hdpwt_enrollment)
 my_varlist <- c("small_firm", "medium_firm", "large_firm",
                 "AgriMinConst", "manufacturing", "transportutilcomms",
                 "wholesale", "retail", "financial", "service",
-                "government", "healthcare", "offers", "doesnt_offer", "percent_hdhp")
+                "government", "healthcare", "offers", "doesnt_offer", 
+                "proportion_hdhp", "empwt", "wkrwt", "empwt_a6", "wkrwt_a6", "covwt")
 
 
 
@@ -2094,7 +2095,7 @@ hdhp_offering_trend <- kff_long_all_years %>%
   summarize(
     total_firms = n(),
     firms_offering_hdhp = sum(offers),
-    proportion_offering_hdhp = firms_offering_hdhp / total_firms
+    proportion_offering_hdhp = firms_offering_hdhp / total_firms,
   )
 # Creates line plot
 ggplot(hdhp_offering_trend, aes(x = year, y = proportion_offering_hdhp)) +
@@ -2252,19 +2253,19 @@ print(summary_stats)
 
 
 
-### Plots multi line graph of percent HDHO offers by industry over time
-# Creates data frame with mean HDHP % offered by industry over time
+### Plots multi line graph of proportion of firms offering HDHP offers industry over time
+# Creates data frame with mean propoportion of HDHP offered by industry over time
 plot_multiple_industs <- kff_long_all_years %>%
   group_by(year) %>%
   summarize(
-    prAgriMinConst_offering = mean(offers[AgriMinConst == 1]),
-    prmanufacturing_offering = mean(offers[manufacturing == 1]),
-    prtransportutilcomms_offering = mean(offers[transportutilcomms == 1]),
-    prwholesale_offering = mean(offers[wholesale == 1]),
-    prretail_offering = mean(offers[retail == 1]),
-    prfinancial_offering = mean(offers[financial == 1]),
-    prgovernment_offering = mean(offers[government == 1]),
-    prhealthcare_offering = mean(offers[healthcare == 1])
+    AgriMinConst_offering = mean(offers[AgriMinConst == 1]),
+    manufacturing_offering = mean(offers[manufacturing == 1]),
+    transportutilcomms_offering = mean(offers[transportutilcomms == 1]),
+    wholesale_offering = mean(offers[wholesale == 1]),
+    retail_offering = mean(offers[retail == 1]),
+    financial_offering = mean(offers[financial == 1]),
+    government_offering = mean(offers[government == 1]),
+    healthcare_offering = mean(offers[healthcare == 1])
   ) %>%
   pivot_longer(-year, names_to = "industry", values_to = "proportion_offering")
 ggplot(plot_multiple_industs, aes(x = year, y = proportion_offering, color = industry)) +
@@ -2317,29 +2318,29 @@ plot_prop_HDHP_offer("prhealthcare_offering", "magenta")
 
 
 
-### Percent of workers covered by hdhp by industry over time; individual line graphs
+### Proportion of workers covered by hdhp by industry over time; individual line graphs
 # Dataframe:
-percent_HDHP_covered <- kff_long_all_years %>%
+proportion_HDHP_covered <- kff_long_all_years %>%
   group_by(year) %>%
   summarize(
-    AgriMinConst_covered = mean(percent_hdhp[AgriMinConst == 1]),
-    manufacturing_covered = mean(percent_hdhp[manufacturing == 1]),
-    transportutilcomms_covered = mean(percent_hdhp[transportutilcomms == 1]),
-    wholesale_covered = mean(percent_hdhp[wholesale == 1]),
-    retail_covered = mean(percent_hdhp[retail == 1]),
-    financial_covered = mean(percent_hdhp[financial == 1]),
-    government_covered = mean(percent_hdhp[government == 1]),
-    healthcare_covered = mean(percent_hdhp[healthcare == 1])
+    AgriMinConst_covered = mean(proportion_hdhp[AgriMinConst == 1]),
+    manufacturing_covered = mean(proportion_hdhp[manufacturing == 1]),
+    transportutilcomms_covered = mean(proportion_hdhp[transportutilcomms == 1]),
+    wholesale_covered = mean(proportion_hdhp[wholesale == 1]),
+    retail_covered = mean(proportion_hdhp[retail == 1]),
+    financial_covered = mean(proportion_hdhp[financial == 1]),
+    government_covered = mean(proportion_hdhp[government == 1]),
+    healthcare_covered = mean(proportion_hdhp[healthcare == 1])
   ) %>%
-  pivot_longer(-year, names_to = "industry", values_to = "percent_covered")
+  pivot_longer(-year, names_to = "industry", values_to = "proportion_covered")
 
 #Multi-line graph:
-ggplot(percent_HDHP_covered, aes(x = year, y = percent_covered, color = industry)) +
+ggplot(proportion_HDHP_covered, aes(x = year, y = proportion_covered, color = industry)) +
   geom_line() +
   geom_point() +
   scale_y_continuous(limits = c(0, 0.5)) +
   scale_x_continuous(breaks = 2006:2024) +
-  labs(title = "Percent of Workers Covered by HDHPs by Industry Over Time",
+  labs(title = "Proportion of Workers Covered by HDHPs by Industry Over Time",
        x = "Year",
        y = "Proportion of Firms Offering HDHPs",
        color = "Industry") +
@@ -2354,10 +2355,10 @@ plot_prop_HDHP_covered <- function(industry_name, color1) {
     sub("_offering$", "", x = _) |>
     gsub("_", " ", x = _)
   
-  df <- percent_HDHP_covered %>%
+  df <- proportion_HDHP_covered %>%
     filter(industry == industry_name)
   
-  ggplot(df, aes(x = year, y = percent_covered)) +
+  ggplot(df, aes(x = year, y = proportion_covered)) +
     geom_line(color = color1) +
     geom_point(color = "black") +
     scale_y_continuous(limits = c(0, .5)) +
