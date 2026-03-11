@@ -1960,8 +1960,6 @@ my_varlist <- c("small_firm", "medium_firm", "large_firm",
                 "wholesale", "retail", "financial", "service",
                 "government", "healthcare", "offers_hdhp", "doesnt_offer", 
                 "proportion_hdhp", "empwt", "wkrwt", "empwt_a6", "wkrwt_a6", "covwt")
-                "government", "healthcare", "offers", "doesnt_offer", "percent_hdhp",
-                "empwt", "covwt" )
 
 
 
