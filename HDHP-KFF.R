@@ -2135,14 +2135,14 @@ plot_multiple_industs <- kff_long_all_years %>%
       sum(empwt * healthcare),
   ) %>%
   pivot_longer(-year, names_to = "industry", values_to = "proportion_offering")
-ggplot(plot_multiple_industs, aes(x = year, y = proportion_offering, color = industry)) +
+ggplot(plot_multiple_industs, aes(x = year, y = proportion_offering *100, color = industry)) +
   geom_line() +
   geom_point() +
-  scale_y_continuous(limits = c(0, 1)) +
+  scale_y_continuous(limits = c(0, 100), labels = function(x) paste0(x, "%")) +
   scale_x_continuous(breaks = 2006:2024) +
-  labs(title = "Proportion of Firms Offering HDHPs by Industry Over Time",
+  labs(title = "Percentage of Firms Offering HDHPs by Industry Over Time",
        x = "Year",
-       y = "Proportion of Firms Offering HDHPs",
+       y = "Percentage of Firms Offering HDHPs",
        color = "Industry") +
   theme_minimal()
 
@@ -2183,14 +2183,14 @@ proportion_HDHP_covered <- kff_long_all_years %>%
   pivot_longer(-year, names_to = "industry", values_to = "proportion_covered")
 
 #Multi-line graph:
-ggplot(proportion_HDHP_covered, aes(x = year, y = proportion_covered, color = industry)) +
+ggplot(proportion_HDHP_covered, aes(x = year, y = proportion_covered * 100, color = industry)) +
   geom_line() +
   geom_point() +
-  scale_y_continuous(limits = c(0, 0.6)) +
+  scale_y_continuous(limits = c(0, 80), labels = function(x) paste0(x, "%")) +
   scale_x_continuous(breaks = 2006:2024) +
-  labs(title = "Proportion of Workers Covered by HDHPs by Industry Over Time",
+  labs(title = "Percentage of Workers Covered by HDHPs by Industry Over Time",
        x = "Year",
-       y = "Proportion of Firms Offering HDHPs",
+       y = "Percentage of Firms Offering HDHPs",
        color = "Industry") +
   theme_minimal()
 
