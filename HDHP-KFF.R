@@ -18,7 +18,7 @@ setwd("G:/My Drive/EDU_SYNC/Research/Active/HDHP/work")
 setwd("~/Library/CloudStorage/GoogleDrive-gugliem2@tcnj.edu/.shortcut-targets-by-id/14oLkrWtHW1NzX87aL0DxDGo_9Ysj-XBQ/HDHP/work")
 
 # Daniel's command to set WD
-setwd("G:/.shortcut-targets-by-id/14oLkrWtHW1NzX87aL0DxDGo_9Ysj-XBQ/HDHP/work")
+setwd("G:\\.shortcut-targets-by-id\\14oLkrWtHW1NzX87aL0DxDGo_9Ysj-XBQ\\HDHP\\work")
 
 #install.packages("dplyr")
 #install.packages("readxl")
@@ -2135,16 +2135,6 @@ plot_multiple_industs <- kff_long_all_years %>%
       sum(empwt * healthcare),
   ) %>%
   pivot_longer(-year, names_to = "industry", values_to = "proportion_offering")
-ggplot(plot_multiple_industs, aes(x = year, y = proportion_offering *100, color = industry)) +
-  geom_line() +
-  geom_point() +
-  scale_y_continuous(limits = c(0, 100), labels = function(x) paste0(x, "%")) +
-  scale_x_continuous(breaks = 2006:2024) +
-  labs(title = "Percentage of Firms Offering HDHPs by Industry Over Time",
-       x = "Year",
-       y = "Percentage of Firms Offering HDHPs",
-       color = "Industry") +
-  theme_minimal()
 
 
 ### Proportion of workers covered by hdhp by industry over time; individual line graphs
@@ -2182,17 +2172,59 @@ proportion_HDHP_covered <- kff_long_all_years %>%
   ) %>%
   pivot_longer(-year, names_to = "industry", values_to = "proportion_covered")
 
-#Multi-line graph:
+#Multi-line graphs:
+ggplot(plot_multiple_industs, aes(x = year, y = proportion_offering *100, color = industry)) +
+  geom_line(size = 1.03) +
+  geom_point(size = 2) +
+  scale_y_continuous(limits = c(0, 100), labels = function(x) paste0(x, "%")) +
+  scale_x_continuous(breaks = 2006:2024) +
+  labs(title = "Percentage of Firms Offering HDHPs by Industry Over Time",
+       x = "Year",
+       y = "Percentage of Firms Offering HDHPs",
+       color = "Industry") +
+  theme_minimal() +
+  theme(
+    plot.title   = element_text(size = 20, face = "bold"),
+    axis.title   = element_text(size = 16, face = "bold"),
+    axis.text    = element_text(size = 14, face = "bold"),
+    axis.text.x  = element_text(hjust = 1),
+    legend.title = element_text(size = 15, face = "bold"),
+    legend.text  = element_text(size = 14)
+  )
+
 ggplot(proportion_HDHP_covered, aes(x = year, y = proportion_covered * 100, color = industry)) +
-  geom_line() +
-  geom_point() +
-  scale_y_continuous(limits = c(0, 80), labels = function(x) paste0(x, "%")) +
+  geom_line(size = 1.03) +
+  geom_point(size = 2) +
+  scale_y_continuous(limits = c(0, 60), labels = function(x) paste0(x, "%")) +
   scale_x_continuous(breaks = 2006:2024) +
   labs(title = "Percentage of Workers Covered by HDHPs by Industry Over Time",
        x = "Year",
        y = "Percentage of Firms Offering HDHPs",
        color = "Industry") +
-  theme_minimal()
+  theme_minimal() +
+  theme(
+    plot.title   = element_text(size = 20, face = "bold"),
+    axis.title   = element_text(size = 16, face = "bold"),
+    axis.text    = element_text(size = 14, face = "bold"),
+    axis.text.x  = element_text(hjust = 1),
+    legend.title = element_text(size = 15, face = "bold"),
+    legend.text  = element_text(size = 14)
+  )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ##Function to plot each individual graph:
 plot_prop_HDHP_covered <- function(industry_name, color1) {
@@ -2230,19 +2262,6 @@ plot_prop_HDHP_covered("retail_covered", "pink")
 plot_prop_HDHP_covered("financial_covered", "orange")
 plot_prop_HDHP_covered("government_covered", "yellow")
 plot_prop_HDHP_covered("healthcare_covered", "magenta")
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## Plots proportion of firms offering HDHPs over time
 # Creates data frame with relevant columns
