@@ -36,6 +36,8 @@ library(haven)
 library(tidyr)
 library(lme4)
 
+
+
 # load the data
 kff_2000 <- read_sav('health benefits 00.sav')
 kff_2001 <- read_sav('health benefits 01.sav')
