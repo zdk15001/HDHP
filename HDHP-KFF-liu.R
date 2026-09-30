@@ -2,6 +2,11 @@
 ############       Liu & Sydnor (2022) 2015 Replication        ############
 ####################################################################################
 
+
+### Settings + Packages
+# Kline's command to set WD
+setwd("G:/My Drive/EDU_SYNC/Research/Active/HDHP/work")
+
 library(dplyr)
 library(tidyr)
 library(haven)
@@ -229,3 +234,6 @@ cat(
   nrow(ls2015),
   "\n"
 )
+
+
+# generate descriptive statistics table and compare to descriptives presented by Liu and Sydnor (2022)
