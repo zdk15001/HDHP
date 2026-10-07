@@ -406,12 +406,7 @@ head(rename_map, 20)
 # This is the R equivalent of the many rename commands in the original Stata file.
 
 ls2015 <- ls2015 %>%
-  rename(
-    !!!setNames(
-      rename_map$old,
-      rename_map$readable
-    )
-  )
+  rename(all_of(setNames(rename_map$old, rename_map$readable)))
 
 # Step 17: Reshape the data from one row per firm to one row per firm-plan
 
