@@ -7,12 +7,20 @@
 # Kline's command to set WD
 setwd("G:/My Drive/EDU_SYNC/Research/Active/HDHP/work")
 
+# Jenna's command to set up WD
+setwd("G:/.shortcut-targets-by-id/14oLkrWtHW1NzX87aL0DxDGo_9Ysj-XBQ/HDHP/work")
+
+#install.packages("dplyr")
+#install.packages("haven")
+#install.packages("tidyr")
+
 library(dplyr)
 library(tidyr)
 library(haven)
 
-# Step 1: Start with the 2015 KFF data already loaded in the main project
-ls2015 <- kff_2015
+# Step 1: Load the data
+
+ls2015 <- read_sav('health benefits 2015.sav')
 
 # Step 2: Give every firm a unique ID 
 # each row in this dataset represents one firm
@@ -116,6 +124,12 @@ ls2015 <- ls2015 %>%
     !(is.na(g43) & is.na(g41))
   )
 
+cat(
+  "After contribution-information exclusion:",
+  nrow(ls2015),
+  "\n"
+)
+
 # Step 7: Remove firms with missing policy information
 # e6, f6, and d6 contain policy information for the non-HDHP plan slots
 # g6 contains the corresponding HDHP policy information 
@@ -125,12 +139,16 @@ ls2015 <- ls2015 %>%
 ls2015 <- ls2015 %>%
   filter(
     !(
-      (is.na(e6) & is.na(f6) & is.na(d6))
-      |
+      (is.na(e6) & is.na(f6) & is.na(d6)) |
         is.na(g6)
     )
   )
 
+cat(
+  "After policy-information exclusion:",
+  nrow(ls2015),
+  "\n"
+)
 
 # Step 8: Remove firms with missing MOOP information 
 # MOOP - maximum out-of-pocket limit
@@ -141,11 +159,16 @@ ls2015 <- ls2015 %>%
 ls2015 <- ls2015 %>%
   filter(
     !(
-      is.na(g9)
-      |
+      is.na(g9) |
         (is.na(e9) & is.na(d9) & is.na(f9))
     )
   )
+
+cat(
+  "After missing-MOOP exclusion:",
+  nrow(ls2015),
+  "\n"
+)
 
 # Step 9: Remove firms with unknown or very high MOOP 
 # Liu and Sydnor remove firms when the MOOP info is unknown or above $6,850 (limit was the relevant HDHP legal cap for 2015)
@@ -235,5 +258,218 @@ cat(
   "\n"
 )
 
+#### SECTION 2: Restructure the data from wide to long ######
+
+
+# Up to this point, each row represents one firm
+# but each firm can have information for several plan types in different columns
+# so we use reshape long so that each row represents one firm-plan instead of one firm
+
+# Step 13: Create variables used in the reshape 
+# the original Stata code creates g2 and g4 as empty variables before renaming plan-specific variables
+
+if (!"g2" %in% names(ls2015)) {
+  ls2015$g2 <- NA_real_
+}
+
+if (!"g4" %in% names(ls2015)) {
+  ls2015$g4 <- NA_real_
+}
+
+# Step 14: Read the variable-renaming instructions from the STATA file (the .do file)
+# readLines() lets us bring those commands into R as text (the .do file is a text file with all the commands)
+
+do_file <- readLines(
+  "clean_2015.do",
+  warn = FALSE
+)
+
+# Find only the lines that have a rename command, which we need to translate into the plan-specific variable names
+
+rename_lines <- do_file[
+  grepl(
+    "^\\s*rename\\s+",
+    do_file
+  )
+]
+
+# Convert rename commands into a data frame 
+# "old" = the original KFF variable name 
+# "new" = the name Liu and Sydnor gave the variable in Stata
+# For example:
+# d1   -> fr11
+# e1   -> fr12
+# f1   -> fr13
+# g1   -> fr14
+# The last digit tells us which plan type the variable belongs t
+
+rename_map <- do.call(
+  rbind,
+  lapply(
+    rename_lines,
+    function(x) {
+      
+      parts <- strsplit(
+        trimws(x),
+        "\\s+"
+      )[[1]]
+      
+      data.frame(
+        old = parts[2],
+        new = parts[3],
+        stringsAsFactors = FALSE
+      )
+    }
+  )
+)
+
+rownames(rename_map) <- NULL
+
+# Look at the first few rename instructions to make sure the Stata file was read correctly 
+
+head(rename_map)
+
+# The original file contains a typo
+# it first says "rename g40 ddct44", but g4 was created above and g40 is later renamed to cs404.
+# The intended mapping is:
+# g4 -> ddct44
+# g40 -> cs404
+
+rename_map <- rename_map %>%
+  filter(
+    !(old == "g40" & new == "ddct44")
+  )
+
+rename_map <- rbind(
+  rename_map,
+  data.frame(
+    old = "g4",
+    new = "ddct44",
+    stringsAsFactors = FALSE
+  )
+)
+
+# Check whether any original variable is being renamed more than once (this should return no rows) 
+
+rename_map %>%
+  count(old) %>%
+  filter(n > 1)
+
+# Step 15: Replace the numeric plan suffix with a readable plan name
+# The authors use numbers at the end of their variable names:
+# 1 = HMO
+# 2 = PPO
+# 3 = POS
+# 4 = HDHP
+# For our  dataset, we are going to replace those numbers with readable plan names instead
+# Example:
+# prmsa1 -> prmsa_hmo
+# prmsa2 -> prmsa_ppo
+# prmsa3 -> prmsa_pos
+# prmsa4 -> prmsa_hdp
+
+rename_map$plan <- case_when(
+  grepl("1$", rename_map$new) ~ "hmo",
+  grepl("2$", rename_map$new) ~ "ppo",
+  grepl("3$", rename_map$new) ~ "pos",
+  grepl("4$", rename_map$new) ~ "hdp"
+)
+
+# Remove the final plan number from the variable name
+# Example:
+# prmsa1 -> prmsa
+# ddcts4 -> ddcts
+
+rename_map$stem <- sub(
+  "[1-4]$",
+  "",
+  rename_map$new
+)
+
+# Put the readable plan name back onto the variable
+# Example:
+# prmsa + hmo -> prmsa_hmo
+# ddcts + hdp -> ddcts_hdp
+
+rename_map$readable <- paste0(
+  rename_map$stem,
+  "_",
+  rename_map$plan
+)
+
+# Check the first few readable names
+
+head(rename_map, 20)
+
+# Step 16: Rename the plan-specific variables
+# setNames() creates a named vector telling rename() that readable_name = original_name
+# This is the R equivalent of the many rename commands in the original Stata file.
+
+ls2015 <- ls2015 %>%
+  rename(
+    !!!setNames(
+      rename_map$old,
+      rename_map$readable
+    )
+  )
+
+# Step 17: Reshape the data from one row per firm to one row per firm-plan
+
+plan_columns <- rename_map$readable
+
+ls2015_long <- ls2015 %>%
+  pivot_longer(
+    cols = all_of(plan_columns),
+    names_to = c(".value", "plan_type"),
+    names_pattern = "^(.*)_(hmo|ppo|pos|hdp)$"
+  )
+
+# Step 18: Label the plan types so it is easier to read
+# At this point plan_type contains "hmo", "ppo", "pos", or "hdp"
+# We turn these into labeled categories so the dataset is easier to interpret.
+
+ls2015_long <- ls2015_long %>%
+  mutate(
+    plan_type = factor(
+      plan_type,
+      levels = c("hmo", "ppo", "pos", "hdp"),
+      labels = c("HMO", "PPO", "POS", "HDP")
+    )
+  )
+
+# Step 19: Remove plan rows that were not offered
+# The reshape creates four possible rows for every firm: HMO, PPO, POS, and HDP.
+# But each firm in our sample only offers two of these so the rows corresponding to plans the firm does not offerhave missing values for cs6.
+# The original Stata code says: drop if cs6=
+
+ls2015_long <- ls2015_long %>%
+  filter(
+    !is.na(cs6)
+  )
+
+# Step 20: Rename the main variables to names that are easier to understand
+
+ls2015_long <- ls2015_long %>%
+  rename(
+    single_deductible = ddcts,
+    max_oop = cs9bx,
+    annual_premium = prmsa,
+    worker_premium_share = pcts,
+    hra_contribution = g41,
+    hsa_contribution = g43ann
+  )
+
+# Check the number of firms (we should still have 399 unique firms)
+
+length(unique(ls2015_long$firm))
+
+# Check the number of plan observations (we should have 798 firm-plan observations)
+
+nrow(ls2015_long)
+
+# Check the number of each plan type
+
+table(ls2015_long$plan_type)
 
 # generate descriptive statistics table and compare to descriptives presented by Liu and Sydnor (2022)
+
