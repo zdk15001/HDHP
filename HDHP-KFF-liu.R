@@ -258,7 +258,9 @@ cat(
   "\n"
 )
 
-#### SECTION 2: Restructure the data from wide to long ######
+####################################################################################
+############       SECTION 2: Restructure the data from wide to long     ###############
+####################################################################################
 
 
 # Up to this point, each row represents one firm
@@ -442,29 +444,167 @@ ls2015_long <- ls2015_long %>%
     !is.na(cs6)
   )
 
-# Step 20: Rename the main variables to names that are easier to understand
+####################################################################################
+############       SECTION 3: Create problem flags (clean_2015.do)     ###############
+####################################################################################
+
+# These flags identify plan characteristics that require special treatment
+# Each flag is a new variable: 
+# 1 = the condition is true for the plan
+# 0 = the condition is false for the plan
+# This section should NOT remove any rows from the dataset
+
+# Step 21: Preserve the original firm-level plan-combination code
+# Original pty values: 
+#   5 = HDHP + HMO
+#   6 = HDHP + PPO
+#   7 = HDHP + POS
+#
+# In our dataset, plan_type already identifies the individual plan: HMO, PPO, POS, or HDP 
+# We rename pty to pty2 to distinguish the firm-level combination from the individual plan type 
 
 ls2015_long <- ls2015_long %>%
   rename(
-    single_deductible = ddcts,
-    max_oop = cs9bx,
-    annual_premium = prmsa,
-    worker_premium_share = pcts,
-    hra_contribution = g41,
-    hsa_contribution = g43ann
+    pty2 = pty
   )
 
-# Check the number of firms (we should still have 399 unique firms)
+# Save the number of rows before creating the flags
+# We will check that the row count is unchanged after
 
-length(unique(ls2015_long$firm))
+rows_before_flags <- nrow(ls2015_long)
 
-# Check the number of plan observations (we should have 798 firm-plan observations)
+# Step 22: Create flags for coinsurance structure (prob_1_xx)
+# The codes 1, 2, and 3 identify different coinsurance structures in the corresponding source variables 
+# The final digit identifies the service: 
+#   1 = Primary office visits (cs6c)
+#   2 = Specialty office visits (cs18c)
+#   3 = Drug tier 1 (cs30ab1)
+#   4 = Drug tier 2 (cs30bb1)
+#   5 = Drug tier 3 (cs30cb1)
+#   6 = Drug tier 4 (cs30db1)
+#
+# The middle digit identifies the structure:
+#   1 = Code 1
+#   2 = Code 2
+#   3 = Code 3
+
+ls2015_long <- ls2015_long %>%
+  mutate(
+    
+    # Source-variable code 1
+    prob_1_11 = as.integer(cs6c %in% 1),
+    prob_1_12 = as.integer(cs18c %in% 1),
+    prob_1_13 = as.integer(cs30ab1 %in% 1),
+    prob_1_14 = as.integer(cs30bb1 %in% 1),
+    prob_1_15 = as.integer(cs30cb1 %in% 1),
+    prob_1_16 = as.integer(cs30db1 %in% 1),
+    
+    # Source-variable code 2
+    prob_1_21 = as.integer(cs6c %in% 2),
+    prob_1_22 = as.integer(cs18c %in% 2),
+    prob_1_23 = as.integer(cs30ab1 %in% 2),
+    prob_1_24 = as.integer(cs30bb1 %in% 2),
+    prob_1_25 = as.integer(cs30cb1 %in% 2),
+    prob_1_26 = as.integer(cs30db1 %in% 2),
+    
+    # Source-variable code 3
+    prob_1_31 = as.integer(cs6c %in% 3),
+    prob_1_32 = as.integer(cs18c %in% 3),
+    prob_1_33 = as.integer(cs30ab1 %in% 3),
+    prob_1_34 = as.integer(cs30bb1 %in% 3),
+    prob_1_35 = as.integer(cs30cb1 %in% 3),
+    prob_1_36 = as.integer(cs30db1 %in% 3)
+  )
+
+# Step 23: Create flags for copay and coinsurance structures (prob_2_xx)
+# These flags identify special cost-sharing arrangements 
+# We preserve the conditions used in the original Stata code
+
+ls2015_long <- ls2015_long %>%
+  mutate(
+    
+    # Both a copay and coinsurance
+    prob_2_11 = as.integer(cs8x4 %in% 1), 
+    prob_2_12 = as.integer(cs7x4 %in% 1),
+    
+    # Per-day copay AND coinsurance for inpatient care
+    prob_2_13 = as.integer(
+      cs8x5 %in% 1 & cs8x3 %in% 1
+    ),
+    
+    # Per-day inpatient copay
+    prob_2_14 = as.integer(cs8x5 %in% 1),
+    
+    # Two firms identified for special handling in the original code
+    prob_2_15 = as.integer(firm %in% c(998, 3395)),
+    
+    # Either a copay or coinsurance, whichever is greater
+    prob_2_21 = as.integer(cs8x4 %in% 2),
+    prob_2_22 = as.integer(cs7x4 %in% 2),
+    
+    # "None of the above" responses
+    prob_2_31 = as.integer(cs6 %in% 4),
+    prob_2_32 = as.integer(cs18 %in% 4),
+    prob_2_33 = as.integer(cs29 %in% 6),
+    
+    # Special outpatient-versus-inpatient coinsurance arrangement
+    prob_2_42 = as.integer(
+      cs7x3 %in% 2 &
+        cs8x3 %in% 1 &
+        cs7x2 %in% 1
+    )
+  )
+
+# Step 24: Create flags for separate deductibles (prob_3_xx)
+# plan_type identifies the individual plan, so we use it rather than pty 
+# prob_3_4 applies to HMO, PPO, and POS plans
+# prob_3_4 applies to HDHP plan
+#
+# We check for missing values deliberately because these flags identify missing deductible info 
+
+ls2015_long <- ls2015_long %>%
+  mutate(
+    
+    # Separate deductible for inpatient care
+    prob_3_1 = as.integer(cs8x1 %in% 1),
+    
+    # Separate deductible for outpatient surgery
+    prob_3_2 = as.integer(cs7x1 %in% 1),
+    
+    # Drugs have a separate deductible and a general deductible
+    prob_3_3 = as.integer(
+      cs27 %in% 1 &
+        (ddct3c %in% 1 | is.na(ddct3c))
+    ),
+    
+    # Missing deductible information for a non-HDP plan
+    prob_3_4 = as.integer(
+      (is.na(ddct3c) | is.na(ddct3b)) &
+        plan_type %in% c("HMO", "PPO", "POS")
+    ),
+    
+    # Missing deductible information for the HDP plan
+    prob_3_5 = as.integer(
+      (is.na(ddct3b) | is.na(ddct3c)) &
+        plan_type %in% "HDP"
+    )
+  )
+
+# Step 25: Check the problem flags
+
+# Check that we still have 798 firm-plan observations
 
 nrow(ls2015_long)
 
-# Check the number of each plan type
+# Check that none of the problem flags have missing values
+sum(is.na(ls2015_long$prob_1_31))
 
-table(ls2015_long$plan_type)
+# Count how many observations are flagged for each condition
+
+ls2015_long %>%
+  summarise(
+    across(starts_with("prob_"), sum)
+  )
 
 # generate descriptive statistics table and compare to descriptives presented by Liu and Sydnor (2022)
 
