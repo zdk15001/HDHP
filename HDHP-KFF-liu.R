@@ -558,7 +558,7 @@ ls2015_long <- ls2015_long %>%
 # Step 24: Create flags for separate deductibles (prob_3_xx)
 # plan_type identifies the individual plan, so we use it rather than pty 
 # prob_3_4 applies to HMO, PPO, and POS plans
-# prob_3_4 applies to HDHP plan
+# prob_3_5 applies to HDHP plan
 #
 # We check for missing values deliberately because these flags identify missing deductible info 
 
