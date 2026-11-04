@@ -606,5 +606,242 @@ ls2015_long %>%
     across(starts_with("prob_"), sum)
   )
 
+# Step 26: Replace selected missing values and recode responses 
+
+# We are preparing selected survey responses for the next stage of analysis by 
+# applying the missing-value and category recoding rules used in original Stata
+# script 
+
+# Missing values in selected variables are replaced with 0 
+# Certain numerical responses are combined 
+#   4 becomes 3 in cs6, cs18, and cs30a-cs30d 
+#   6 becomes 5 in cs29 
+# Missing values in cs32 are replaced with 1
+
+# These changes standardize selected responsees before the researchers use them to 
+# identify cost-sharing arrangements and calculate other plan characteristics 
+
+ls2015_long <- ls2015_long %>% 
+  mutate( 
+    
+    # Replapce selected missing values with zero 
+    cs27a = if_else(is.na(cs27a), 0, cs27a),
+    cs6a  = if_else(is.na(cs6a), 0, cs6a),
+    cs6b  = if_else(is.na(cs6b), 0, cs6b),
+    cs18a = if_else(is.na(cs18a), 0, cs18a),
+    cs18b = if_else(is.na(cs18b), 0, cs18b),
+    cs8a  = if_else(is.na(cs8a), 0, cs8a),
+    cs8b  = if_else(is.na(cs8b), 0, cs8b),
+    cs8c  = if_else(is.na(cs8c), 0, cs8c),
+    cs7a  = if_else(is.na(cs7a), 0, cs7a),
+    cs7b  = if_else(is.na(cs7b), 0, cs7b),
+    
+    # Recode certain response categories 
+    cs6   = if_else(cs6 == 4, 3, cs6),
+    cs18  = if_else(cs18 == 4, 3, cs18),
+    cs29  = if_else(cs29 == 6, 5, cs29),
+    cs30a = if_else(cs30a == 4, 3, cs30a),
+    cs30b = if_else(cs30b == 4, 3, cs30b),
+    cs30c = if_else(cs30c == 4, 3, cs30c),
+    cs30d = if_else(cs30d == 4, 3, cs30d),
+    
+    # Replace missing cs32 values with 1
+    cs32 = if_else(is.na(cs32), 1, cs32)
+  )
+
+# Step 27: Reorganize prescription drug information 
+
+# The survey contains information about different prescription drug tiers, which are 
+# stored in separate groups: 
+# cs30a-cs30d = number of drug tiers and deductible information
+# cs30aa-cs30db1 = copay and coinsurance information for each drug
+
+# This code copies information from one set of tier variables into another based on the value 
+# of cs29 
+
+# For cs29 = 4, the first tier's information is moved into the second tier's variables
+# For cs29 = 3 or 4, the second tier's information is moved into the third tier's variables
+# For cs29 = 2, 3, or 4, copy the updated third-tier information into the fourth-tier 
+
+# This creates a more consistent arrangement of prescription drug information 
+# before it is used in later calculations 
+
+
+ls2015_long <- ls2015_long %>%
+  mutate(
+    
+    # If cs29 indicates four drug tiers, 
+    # move the first tier's information into the second tier's variables 
+    
+    cs30b   = if_else(cs29 == 4, cs30a, cs30b, missing = cs30b),
+    cs30ba  = if_else(cs29 == 4, cs30aa, cs30ba, missing = cs30ba),
+    cs30bb  = if_else(cs29 == 4, cs30ab, cs30bb, missing = cs30bb),
+    cs30bb1 = if_else(cs29 == 4, cs30ab1, cs30bb1, missing = cs30bb1),
+    
+    # if cs29 indicates three or four drug tiers, 
+    # move the second tier's information into the third tier's variables
+
+    cs30c   = if_else(cs29 %in% c(3, 4), cs30b, cs30c),
+    cs30ca  = if_else(cs29 %in% c(3, 4), cs30ba, cs30ca),
+    cs30cb  = if_else(cs29 %in% c(3, 4), cs30bb, cs30cb),
+    cs30cb1 = if_else(cs29 %in% c(3, 4), cs30bb1, cs30cb1),
+    
+    # if cs29 indicates two, three, or four drug tiers, 
+    # move the third tier's information into the fourth tier's variables 
+    cs30d   = if_else(cs29 %in% c(2, 3, 4), cs30c, cs30d),
+    cs30da  = if_else(cs29 %in% c(2, 3, 4), cs30ca, cs30da),
+    cs30db  = if_else(cs29 %in% c(2, 3, 4), cs30cb, cs30db),
+    cs30db1 = if_else(cs29 %in% c(2, 3, 4), cs30cb1, cs30db1)
+  )
+
+# Step 28: Handle additional missing values and special cases 
+
+# Make additional corrections to prescription drug information, 
+# employer contributions, and deductible-related variables 
+
+# Adjustments: 
+# 1. Prescription drug deductible adjustments 
+# 2. Replacement of additional missing values 
+# 3. Corrections for a specific POS plan offered by firm 3395 
+# 4. Standardization of deductible-related variables 
+
+ls2015_long <- ls2015_long %>%
+  mutate(
+    
+    # If cs32 equals 2, adjust these drug deductible values
+    # if cs32 is missing, preserve the existing value 
+    
+    cs30da = if_else(cs32 == 2, 0, cs30da, missing = cs30da),
+    cs30db = if_else(cs32 == 2, 100, cs30db, missing = cs30db),
+    
+    # Replace remaining missing drug information with zero 
+    
+    cs30aa = if_else(is.na(cs30aa), 0, cs30aa),
+    cs30ba = if_else(is.na(cs30ba), 0, cs30ba),
+    cs30ca = if_else(is.na(cs30ca), 0, cs30ca),
+    cs30da = if_else(is.na(cs30da), 0, cs30da),
+    
+    cs30ab = if_else(is.na(cs30ab), 0, cs30ab),
+    cs30bb = if_else(is.na(cs30bb), 0, cs30bb),
+    cs30cb = if_else(is.na(cs30cb), 0, cs30cb),
+    cs30db = if_else(is.na(cs30db), 0, cs30db)
+  ) %>%
+  mutate(
+    
+    # Correct two variables for a specific POS plan offered by firm 3395 
+    cs8x5 = if_else(
+      firm == 3395 & plan_type == "POS",
+      2,
+      cs8x5
+    ),
+    
+    cs8c = if_else(
+      firm == 3395 & plan_type == "POS",
+      0,
+      cs8c
+    ),
+    
+    # Replace missing employer contribution information with zero
+    g41 = if_else(is.na(g41), 0, g41),
+    g43ann = if_else(is.na(g43ann), 0, g43ann),
+    
+    # Standardize deductible-related variables
+    # Set them to 1 if missing or if the plan is an HDP.
+    ddct3c = if_else(
+      is.na(ddct3c) | plan_type == "HDP",
+      1,
+      ddct3c
+    ),
+    
+    ddct3b = if_else(
+      is.na(ddct3b) | plan_type == "HDP",
+      1,
+      ddct3b
+    )
+  )
+
+
+# Step 29: Create additional problem flags 
+
+# We want to identify plan observations that meet additional conditions involving
+# deductibles, maximum out-of-pocket limits, and cost-sharing arrangements 
+
+# We create four indicator variables that identify specific conditions 
+# - prob_5_1: Combined deductible-related amounts exceed the MOOP.
+# - prob_5_2: Combined deductible-related amounts equal the MOOP
+#             and certain cost-sharing responses are present.
+# - prob_5_3: Combined deductible-related amounts are below the MOOP
+#             and a specific combination of cost-sharing responses
+#             is present.
+# - prob_4_4: The deductible is not divisible by 5.
+
+# These flags help identify plan records that meet the researchers' additional 
+# cleaning and consistency criteria 
+
+ls2015_long <- ls2015_long %>%
+  mutate(
+    # Check whether the combined deductible amounts exceed the MOOP
+    prob_5_1 = as.integer(
+      cs27a + ddcts > cs9bx
+    ),
+    
+    # Check whether the combined deductible amounts equal the MOOP
+    # and the plan has one of the specified cost-sharing responses
+    prob_5_2 = as.integer(
+      (ddcts + cs27a == cs9bx) &
+        (
+          cs6 %in% c(1, 2) |
+            cs18 %in% c(1, 2) |
+            cs29 %in% c(1, 2, 3, 4)
+        )
+    ),
+    
+    # Check whether the combined deductible amounts are below the MOOP
+    # while the cost-sharing variables meet the specified conditions
+    prob_5_3 = as.integer(
+      (ddcts + cs27a < cs9bx) &
+        (
+          cs6 == 3 &
+            cs18 == 3 &
+            cs29 == 5 &
+            cs7a == 0 &
+            cs7b == 0 &
+            cs8a == 0 &
+            cs8b == 0 &
+            cs8c == 0
+        )
+    ),
+    
+    # Check whether the deductible is divisible by 5
+    prob_4_4 = as.integer(
+      ddcts %% 5 != 0
+    )
+  )
+
+# Check whether any of the problem flags contain missing values
+
+ls2015_long %>%
+  summarise(
+    missing_prob_4_4 = sum(is.na(prob_4_4)),
+    missing_prob_5_1 = sum(is.na(prob_5_1)),
+    missing_prob_5_2 = sum(is.na(prob_5_2)),
+    missing_prob_5_3 = sum(is.na(prob_5_3))
+  )
+
+# Step 30: Remove plan observations flagged by the cleaning rules 
+
+# We want to remove plan observations that meet any of the four problem conditions 
+# that were created in the previous step 
+
+# We plan to keep observations where none of the four problem flags = 1 
+
+ls2015_long <- ls2015_long %>%
+  filter(
+    prob_4_4 != 1,
+    prob_5_1 != 1,
+    prob_5_2 != 1,
+    prob_5_3 != 1
+  )
+
 # generate descriptive statistics table and compare to descriptives presented by Liu and Sydnor (2022)
 
