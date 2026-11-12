@@ -4,11 +4,7 @@
 
 
 ### Settings + Packages
-# Kline's command to set WD
-setwd("G:/My Drive/EDU_SYNC/Research/Active/HDHP/work")
-
-# Jenna's command to set up WD
-setwd("G:/.shortcut-targets-by-id/14oLkrWtHW1NzX87aL0DxDGo_9Ysj-XBQ/HDHP/work")
+# set WD manually
 
 #install.packages("dplyr")
 #install.packages("haven")
@@ -33,7 +29,7 @@ ls2015 <- ls2015 %>%
 # Step 3: Identify which firms offer an HDHP 
 # in the original data: 1 or 2 = firm offers HDHP 
 # we turn that into 1 = offers HDHP and 0 = does not offer HDHP 
-
+table(ls2015$hdhp)
 ls2015 <- ls2015 %>%
   mutate(
     hdhp3 = if_else(hdhp %in% c(1, 2), 1, 0)
@@ -42,6 +38,14 @@ ls2015 <- ls2015 %>%
 # Step 4: Identify what combination of plans each firm offers
 # the variables hmo, ppo, and pos tell us whether the firm offers an HMO, PPO or POS plan
 # pty = plan type combination
+
+table(ls2015$offer)
+table(ls2015$hdhp3)
+table(ls2015$hmo)
+table(ls2015$ppo)
+table(ls2015$pos)
+
+
 
 ls2015 <- ls2015 %>%
   mutate(
@@ -102,6 +106,11 @@ ls2015 <- ls2015 %>%
 # pty = 5 -> HDHP + HMO
 # pty = 6 -> HDHP + PPO 
 # pty = 7 -> HDHP + POS
+
+ls2015_test <- ls2015 |>
+  select(pty) |>
+  group_by(pty) |>
+             count()
 
 ls2015 <- ls2015 %>%
   filter(pty %in% c(5, 6, 7))
